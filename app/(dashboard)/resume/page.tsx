@@ -2,6 +2,9 @@
 
 import { FileText, Download, Briefcase, GraduationCap, Code, Award, MapPin, Calendar, LayoutGrid, FileDown, GitBranch, ZoomIn, ZoomOut, Maximize2 } from "lucide-react"
 import { useState, useRef, useEffect } from "react"
+import { PAGE_META } from "@/lib/page-meta"
+
+const meta = PAGE_META["/resume"]
 
 type ViewMode = "website" | "document" | "graph"
 
@@ -415,8 +418,8 @@ export default function ResumePage() {
             <FileText className="h-5 w-5 text-white" style={{ filter: 'drop-shadow(0 0 4px rgba(255,255,255,0.5))' }} />
           </div>
           <div>
-            <h1 className="text-xl font-semibold text-white" style={{ textShadow: '0 0 10px rgba(255,255,255,0.2)' }}>Resume</h1>
-            <p className="text-sm text-slate-500">Interactive Career Flow</p>
+            <h1 className="text-xl font-semibold text-white" style={{ textShadow: '0 0 10px rgba(255,255,255,0.2)' }}>{meta.title}</h1>
+            <p className="text-sm text-slate-500">{meta.subtitle}</p>
           </div>
         </div>
         <div className="flex items-center gap-3">

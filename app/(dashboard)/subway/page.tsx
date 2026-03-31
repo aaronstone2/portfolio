@@ -2,6 +2,9 @@
 
 import { Train, ZoomIn, ZoomOut, Maximize2 } from "lucide-react"
 import { useState, useRef, useEffect, useCallback } from "react"
+import { PAGE_META } from "@/lib/page-meta"
+
+const meta = PAGE_META["/subway"]
 
 interface Station {
   id: string
@@ -162,8 +165,8 @@ export default function SubwayPage() {
             <Train className="h-5 w-5 text-white" style={{ filter: 'drop-shadow(0 0 4px rgba(255,255,255,0.5))' }} />
           </div>
           <div>
-            <h1 className="text-xl font-semibold text-white" style={{ textShadow: '0 0 10px rgba(255,255,255,0.2)' }}>NYC Subway Map</h1>
-            <p className="text-sm text-slate-500">Interactive Node Graph</p>
+            <h1 className="text-xl font-semibold text-white" style={{ textShadow: '0 0 10px rgba(255,255,255,0.2)' }}>{meta.title}</h1>
+            <p className="text-sm text-slate-500">{meta.subtitle}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">

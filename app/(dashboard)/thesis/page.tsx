@@ -2,6 +2,9 @@
 
 import { Download, FileDown, BookOpen } from "lucide-react"
 import { useState } from "react"
+import { PAGE_META } from "@/lib/page-meta"
+
+const meta = PAGE_META["/thesis"]
 
 type ViewMode = "document" | "reader"
 
@@ -17,8 +20,8 @@ export default function ThesisPage() {
             <BookOpen className="h-5 w-5 text-white" style={{ filter: 'drop-shadow(0 0 4px rgba(255,255,255,0.5))' }} />
           </div>
           <div>
-            <h1 className="text-xl font-semibold text-white" style={{ textShadow: '0 0 10px rgba(255,255,255,0.2)' }}>Bubble Thesis</h1>
-            <p className="text-sm text-slate-500">3D VR Programming Language</p>
+            <h1 className="text-xl font-semibold text-white" style={{ textShadow: '0 0 10px rgba(255,255,255,0.2)' }}>{meta.title}</h1>
+            <p className="text-sm text-slate-500">{meta.subtitle}</p>
           </div>
         </div>
         <div className="flex items-center gap-3">

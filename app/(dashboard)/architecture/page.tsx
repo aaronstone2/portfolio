@@ -2,6 +2,9 @@
 
 import { Network, ZoomIn, ZoomOut, Maximize2, LayoutGrid, GitBranch } from "lucide-react"
 import { useState, useRef, useEffect, useCallback } from "react"
+import { PAGE_META } from "@/lib/page-meta"
+
+const meta = PAGE_META["/architecture"]
 
 type ViewMode = "website" | "graph"
 
@@ -339,8 +342,8 @@ export default function ArchitecturePage() {
             <Network className="h-5 w-5 text-white" style={{ filter: 'drop-shadow(0 0 4px rgba(255,255,255,0.5))' }} />
           </div>
           <div>
-            <h1 className="text-xl font-semibold text-white" style={{ textShadow: '0 0 10px rgba(255,255,255,0.2)' }}>Architecture</h1>
-            <p className="text-sm text-slate-500">FlowNode System Design</p>
+            <h1 className="text-xl font-semibold text-white" style={{ textShadow: '0 0 10px rgba(255,255,255,0.2)' }}>{meta.title}</h1>
+            <p className="text-sm text-slate-500">{meta.subtitle}</p>
           </div>
         </div>
         <div className="flex items-center rounded-lg border border-white/10 bg-black/50 p-1">

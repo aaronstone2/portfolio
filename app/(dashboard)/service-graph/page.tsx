@@ -1,6 +1,9 @@
 "use client"
 
 import { Activity, ExternalLink } from "lucide-react"
+import { PAGE_META } from "@/lib/page-meta"
+
+const meta = PAGE_META["/service-graph"]
 
 export default function ServiceGraphPage() {
   return (
@@ -12,8 +15,8 @@ export default function ServiceGraphPage() {
             <Activity className="h-5 w-5 text-white" style={{ filter: 'drop-shadow(0 0 4px rgba(255,255,255,0.5))' }} />
           </div>
           <div>
-            <h1 className="text-xl font-semibold text-white" style={{ textShadow: '0 0 10px rgba(255,255,255,0.2)' }}>Service Graph</h1>
-            <p className="text-sm text-slate-500">Microservice Dependency Visualizer</p>
+            <h1 className="text-xl font-semibold text-white" style={{ textShadow: '0 0 10px rgba(255,255,255,0.2)' }}>{meta.title}</h1>
+            <p className="text-sm text-slate-500">{meta.subtitle}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -34,13 +37,13 @@ export default function ServiceGraphPage() {
         <div className="absolute inset-0 flex items-center justify-center bg-background">
           <div className="text-center">
             <div className="mb-4 h-12 w-12 animate-spin rounded-full border-4 border-white/10 border-t-white mx-auto" />
-            <p className="text-sm text-slate-500 font-mono">Loading Service Graph...</p>
+            <p className="text-sm text-slate-500 font-mono">Loading {meta.title}...</p>
           </div>
         </div>
         <iframe
           src="https://flownode-ui-react.vercel.app/service-graph?embed=1"
           className="relative z-10 h-full w-full border-0"
-          title="Service Graph Visualizer"
+          title={meta.title}
           loading="lazy"
         />
       </div>

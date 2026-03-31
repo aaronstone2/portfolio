@@ -22,6 +22,7 @@ import {
   Globe,
 } from "lucide-react"
 import { useState } from "react"
+import { PAGE_META, RESUME_VIEWS } from "@/lib/page-meta"
 
 interface NavChild {
   href: string
@@ -223,32 +224,32 @@ function MiniGraphic({ type, isActive }: { type: string; isActive: boolean }) {
 }
 
 const navNodes: NavNode[] = [
-  { href: "/", label: "Home", icon: Home, graphic: "home" },
+  { href: "/", label: PAGE_META["/"].title, icon: Home, graphic: PAGE_META["/"].graphic },
   {
-    href: "/flownode", label: "FlowNode", icon: GitBranch, graphic: "flownode",
+    href: "/flownode", label: PAGE_META["/flownode"].title, icon: GitBranch, graphic: PAGE_META["/flownode"].graphic,
     children: [
-      { href: "/architecture", label: "Architecture", icon: Network, graphic: "architecture" },
-      { href: "/service-graph", label: "Service Graph", icon: Activity, graphic: "service-graph" },
+      { href: "/architecture", label: PAGE_META["/architecture"].title, icon: Network, graphic: PAGE_META["/architecture"].graphic },
+      { href: "/service-graph", label: PAGE_META["/service-graph"].title, icon: Activity, graphic: PAGE_META["/service-graph"].graphic },
     ]
   },
   {
-    href: "/resume", label: "Resume", icon: FileText, graphic: "resume",
+    href: "/resume", label: PAGE_META["/resume"].title, icon: FileText, graphic: PAGE_META["/resume"].graphic,
     children: [
-      { href: "/resume?view=website", label: "Timeline", icon: Clock, graphic: "timeline" },
-      { href: "/resume?view=document", label: "Document", icon: FileDown, graphic: "document" },
-      { href: "/resume?view=graph", label: "Node Graph", icon: Share2, graphic: "node-graph" },
+      { href: "/resume?view=website", label: RESUME_VIEWS.website.label, icon: Clock, graphic: RESUME_VIEWS.website.graphic },
+      { href: "/resume?view=document", label: RESUME_VIEWS.document.label, icon: FileDown, graphic: RESUME_VIEWS.document.graphic },
+      { href: "/resume?view=graph", label: RESUME_VIEWS.graph.label, icon: Share2, graphic: RESUME_VIEWS.graph.graphic },
     ]
   },
   {
-    href: "/projects", label: "Projects", icon: FolderKanban, graphic: "projects",
+    href: "/projects", label: PAGE_META["/projects"].title, icon: FolderKanban, graphic: PAGE_META["/projects"].graphic,
     children: [
-      { href: "/flownode", label: "FlowNode", icon: GitBranch, graphic: "flownode" },
-      { href: "/service-graph", label: "Service Graph", icon: Activity, graphic: "service-graph" },
-      { href: "/thesis", label: "Bubble / Thesis", icon: BookOpen, graphic: "thesis" },
-      { href: "/subway", label: "Subway Map", icon: Train, graphic: "subway" },
+      { href: "/flownode", label: PAGE_META["/flownode"].title, icon: GitBranch, graphic: PAGE_META["/flownode"].graphic },
+      { href: "/service-graph", label: PAGE_META["/service-graph"].title, icon: Activity, graphic: PAGE_META["/service-graph"].graphic },
+      { href: "/thesis", label: PAGE_META["/thesis"].title, icon: BookOpen, graphic: PAGE_META["/thesis"].graphic },
+      { href: "/subway", label: PAGE_META["/subway"].title, icon: Train, graphic: PAGE_META["/subway"].graphic },
     ]
   },
-  { href: "/contact", label: "Contact", icon: Mail, graphic: "contact" },
+  { href: "/contact", label: PAGE_META["/contact"].title, icon: Mail, graphic: PAGE_META["/contact"].graphic },
 ]
 
 function SubNode({ child, isActive, onNav }: { child: NavChild; isActive: boolean; onNav: () => void }) {
