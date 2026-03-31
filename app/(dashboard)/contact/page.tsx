@@ -6,87 +6,57 @@ const contactInfo = [
     label: "Email",
     value: "aaron@bubble.graphics",
     href: "mailto:aaron@bubble.graphics",
-    color: "blue" as const,
   },
   {
     icon: Phone,
     label: "Phone",
     value: "857-231-1060",
-    href: "tel:857-231-1060",
-    color: "purple" as const,
+    href: "tel:+18572311060",
   },
   {
     icon: Github,
     label: "GitHub",
     value: "github.com/aaronstone2",
     href: "https://github.com/aaronstone2",
-    color: "cyan" as const,
   },
   {
     icon: MapPin,
     label: "Location",
-    value: "New York City",
+    value: "NYC Metro",
     href: null,
-    color: "blue" as const,
   },
 ]
-
-const colorClasses = {
-  blue: {
-    border: "neon-border-blue",
-    text: "neon-text-blue",
-    bg: "bg-primary/10",
-    icon: "text-primary",
-  },
-  purple: {
-    border: "neon-border-purple",
-    text: "neon-text-purple",
-    bg: "bg-secondary/10",
-    icon: "text-secondary",
-  },
-  cyan: {
-    border: "neon-border-cyan",
-    text: "neon-text-cyan",
-    bg: "bg-accent/10",
-    icon: "text-accent",
-  },
-}
 
 export default function ContactPage() {
   return (
     <div className="min-h-screen p-6 md:p-10">
       {/* Header */}
       <section className="mb-12 pt-12 md:pt-0">
-        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-4 py-1.5">
-          <span className="h-2 w-2 rounded-full bg-accent animate-pulse" />
-          <span className="text-sm font-mono text-muted-foreground">
+        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5">
+          <span className="h-2 w-2 rounded-full bg-white animate-pulse" style={{ boxShadow: '0 0 8px rgba(255,255,255,0.6)' }} />
+          <span className="text-sm font-mono text-slate-400">
             Let&apos;s Connect
           </span>
         </div>
 
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-          <span className="neon-text-cyan">Contact</span>
+          <span className="text-white" style={{ textShadow: '0 0 20px rgba(255,255,255,0.2)' }}>Contact</span>
         </h1>
 
-        <p className="text-muted-foreground max-w-2xl">
-          I&apos;m currently exploring opportunities in NYC fintech and tech sectors.
-          Feel free to reach out for collaborations, opportunities, or just to
-          say hello.
+        <p className="text-slate-400 max-w-2xl">
+          Currently exploring opportunities in NYC fintech and tech. Open to Solutions Engineer, Presales, PM, TPM, and SWE roles.
         </p>
       </section>
 
       {/* Contact Cards */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-12">
         {contactInfo.map((item) => {
-          const colors = colorClasses[item.color]
           const Wrapper = item.href ? "a" : "div"
           const wrapperProps = item.href
             ? {
                 href: item.href,
-                target: item.href.startsWith("http") ? "_blank" : undefined,
-                rel: item.href.startsWith("http")
-                  ? "noopener noreferrer"
-                  : undefined,
+                target: item.href.startsWith("http") ? "_blank" as const : undefined,
+                rel: item.href.startsWith("http") ? "noopener noreferrer" : undefined,
               }
             : {}
 
@@ -94,24 +64,22 @@ export default function ContactPage() {
             <Wrapper
               key={item.label}
               {...wrapperProps}
-              className={`group rounded-xl bg-card p-6 transition-all duration-300 ${
-                item.href ? "hover:scale-[1.02] cursor-pointer" : ""
-              } ${colors.border}`}
+              className={`group rounded-xl bg-card p-6 border border-white/10 transition-all duration-300 ${
+                item.href ? "hover:scale-[1.08] active:scale-[1.15] cursor-pointer hover:border-white/25" : ""
+              }`}
             >
-              <div
-                className={`inline-flex rounded-lg ${colors.bg} p-3 mb-4`}
-              >
-                <item.icon className={`h-6 w-6 ${colors.icon}`} />
+              <div className="inline-flex rounded-lg bg-white/5 p-3 mb-4">
+                <item.icon className="h-6 w-6 text-white" style={{ filter: 'drop-shadow(0 0 6px rgba(255,255,255,0.3))' }} />
               </div>
 
-              <div className="text-sm font-mono text-muted-foreground mb-1">
+              <div className="text-sm font-mono text-slate-500 mb-1">
                 {item.label}
               </div>
 
               <div className="flex items-center gap-2">
-                <span className="text-foreground font-medium">{item.value}</span>
+                <span className="text-white font-medium">{item.value}</span>
                 {item.href && (
-                  <ExternalLink className="h-4 w-4 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+                  <ExternalLink className="h-4 w-4 text-slate-500 opacity-0 transition-opacity group-hover:opacity-100" />
                 )}
               </div>
             </Wrapper>
@@ -121,50 +89,48 @@ export default function ContactPage() {
 
       {/* Get in Touch Section */}
       <section className="max-w-xl">
-        <div className="rounded-xl border border-border bg-card p-8">
-          <h2 className="text-lg font-semibold mb-4 text-foreground">
-            <span className="neon-text-purple">//</span> Get in Touch
+        <div className="rounded-xl border border-white/10 bg-card p-8">
+          <h2 className="text-lg font-semibold mb-4 text-white">
+            <span style={{ textShadow: '0 0 10px rgba(255,255,255,0.3)' }}>//</span> Get in Touch
           </h2>
 
-          <p className="text-muted-foreground mb-6">
-            The best way to reach me is via email. I typically respond within
-            24-48 hours.
+          <p className="text-slate-400 mb-6">
+            The best way to reach me is via email. I typically respond within 24 hours.
           </p>
 
           <a
             href="mailto:aaron@bubble.graphics"
-            className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-all hover:scale-105 neon-glow-blue"
+            className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-medium text-black bg-white transition-all duration-300 hover:scale-110 active:scale-[1.2]"
+            style={{ boxShadow: '0 0 20px rgba(255,255,255,0.2)' }}
           >
             <Mail className="h-4 w-4" />
             Send Email
           </a>
 
-          <div className="mt-8 pt-6 border-t border-border">
-            <h3 className="text-sm font-mono text-muted-foreground mb-3">
+          <div className="mt-8 pt-6 border-t border-white/10">
+            <h3 className="text-sm font-mono text-slate-500 mb-3">
               Connect on other platforms:
             </h3>
             <div className="flex gap-3">
               <a
+                href="https://linkedin.com/in/aaron-stone-2b6994141"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-lg border border-white/10 p-3 transition-all duration-300 hover:scale-110 hover:border-white/25"
+              >
+                <svg className="h-5 w-5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </a>
+              <a
                 href="https://github.com/aaronstone2"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-lg bg-card border border-border p-3 transition-colors hover:bg-muted hover:border-primary/30"
+                className="rounded-lg border border-white/10 p-3 transition-all duration-300 hover:scale-110 hover:border-white/25"
               >
-                <Github className="h-5 w-5 text-foreground" />
+                <Github className="h-5 w-5 text-white" />
               </a>
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Footer Note */}
-      <section className="mt-12 text-center">
-        <p className="text-sm text-muted-foreground font-mono">
-          <span className="neon-text-cyan">{">"}</span> Built with Next.js,
-          Tailwind CSS, and a lot of{" "}
-          <span className="neon-text-purple">caffeine</span>{" "}
-          <span className="neon-text-cyan">{"<"}</span>
-        </p>
       </section>
     </div>
   )
