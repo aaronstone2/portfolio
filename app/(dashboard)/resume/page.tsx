@@ -110,6 +110,10 @@ function WebsiteView() {
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
   const [hoveredItem, setHoveredItem] = useState<number | null>(null)
   const [selectedItem, setSelectedItem] = useState<number | null>(null)
+  const [clickedItem, setClickedItem] = useState<number | null>(null)
+  const [draggingCard, setDraggingCard] = useState<number | null>(null)
+  const [cardDragStart, setCardDragStart] = useState({ x: 0, y: 0 })
+  const [cardOffsets, setCardOffsets] = useState<Record<number, {x: number, y: number}>>({})
   const containerRef = useRef<HTMLDivElement>(null)
 
   const allItems = [...experience, ...education]
@@ -121,15 +125,39 @@ function WebsiteView() {
     setDragStart({ x: e.clientX - pan.x, y: e.clientY - pan.y })
   }
 
+  const handleCardMouseDown = (e: React.MouseEvent, itemId: number, baseX: number, baseY: number) => {
+    e.stopPropagation()
+    const offset = cardOffsets[itemId] || { x: 0, y: 0 }
+    setDraggingCard(itemId)
+    setCardDragStart({ x: e.clientX / zoom - (baseX + offset.x), y: e.clientY / zoom - (baseY + offset.y) })
+  }
+
+  const handleCardClick = (itemId: number) => {
+    if (draggingCard) return
+    setClickedItem(itemId)
+    setTimeout(() => setClickedItem(null), 300)
+    setSelectedItem(prev => prev === itemId ? null : itemId)
+  }
+
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      if (isDragging) setPan({ x: e.clientX - dragStart.x, y: e.clientY - dragStart.y })
+      if (draggingCard !== null) {
+        setCardOffsets(prev => ({
+          ...prev,
+          [draggingCard]: {
+            x: e.clientX / zoom - cardDragStart.x,
+            y: e.clientY / zoom - cardDragStart.y,
+          }
+        }))
+      } else if (isDragging) {
+        setPan({ x: e.clientX - dragStart.x, y: e.clientY - dragStart.y })
+      }
     }
-    const handleMouseUp = () => setIsDragging(false)
+    const handleMouseUp = () => { setIsDragging(false); setDraggingCard(null) }
     window.addEventListener("mousemove", handleMouseMove)
     window.addEventListener("mouseup", handleMouseUp)
     return () => { window.removeEventListener("mousemove", handleMouseMove); window.removeEventListener("mouseup", handleMouseUp) }
-  }, [isDragging, dragStart])
+  }, [isDragging, dragStart, draggingCard, cardDragStart, zoom])
 
   const handleWheel = (e: React.WheelEvent) => {
     e.preventDefault()
@@ -208,12 +236,22 @@ function WebsiteView() {
 
           {/* Cards */}
           {timelineItems.map((item, i) => {
-            const x = 60 + i * (cardWidth + cardGap)
+            const baseX = 60 + i * (cardWidth + cardGap)
             const isAbove = i % 2 === 0
-            const cardY = isAbove ? timelineY - 260 : timelineY + 40
+            const baseCardY = isAbove ? timelineY - 260 : timelineY + 40
+            const offset = cardOffsets[item.id] || { x: 0, y: 0 }
+            const x = baseX + offset.x
+            const cardY = baseCardY + offset.y
             const color = roleColors[item.id] || '#3b82f6'
             const isHovered = hoveredItem === item.id
             const isSelected = selectedItem === item.id
+            const isClicked = clickedItem === item.id
+            const isDragged = draggingCard === item.id
+
+            let scale = 1
+            if (isClicked) scale = 1.25
+            else if (isDragged) scale = 1.1
+            else if (isHovered) scale = 1.08
 
             return (
               <div key={item.id}>
@@ -224,10 +262,10 @@ function WebsiteView() {
                     left: x + cardWidth / 2,
                     top: isAbove ? cardY + 230 : timelineY + 14,
                     width: 2,
-                    height: isAbove ? timelineY - cardY - 230 + 10 : cardY - timelineY - 14,
+                    height: Math.max(0, isAbove ? timelineY - cardY - 230 + 10 : cardY - timelineY - 14),
                     background: color,
                     opacity: isHovered || isSelected ? 1 : 0.3,
-                    transition: "opacity 0.3s",
+                    transition: isDragged ? "none" : "opacity 0.3s",
                   }}
                 />
 
@@ -257,14 +295,16 @@ function WebsiteView() {
                     left: x,
                     top: cardY,
                     width: cardWidth,
-                    cursor: "pointer",
-                    transition: "all 0.3s",
-                    transform: isHovered ? "scale(1.15)" : "scale(1)",
-                    zIndex: isHovered || isSelected ? 10 : 1,
+                    cursor: isDragged ? "grabbing" : "grab",
+                    transition: isDragged ? "none" : "all 0.3s",
+                    transform: `scale(${scale})`,
+                    zIndex: isDragged ? 100 : isHovered || isSelected || isClicked ? 10 : 1,
+                    boxShadow: isClicked ? '0 0 40px rgba(255,255,255,0.3)' : 'none',
                   }}
                   onMouseEnter={() => setHoveredItem(item.id)}
                   onMouseLeave={() => setHoveredItem(null)}
-                  onClick={() => setSelectedItem(isSelected ? null : item.id)}
+                  onMouseDown={(e) => handleCardMouseDown(e, item.id, baseX, baseCardY)}
+                  onClick={() => handleCardClick(item.id)}
                 >
                   <div
                     className="rounded-lg border bg-card/90 backdrop-blur-sm p-4"

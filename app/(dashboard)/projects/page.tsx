@@ -77,7 +77,7 @@ export default function ProjectsPage() {
         </div>
 
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-          <span className="neon-text-blue">Projects</span>
+          <span className="text-white" style={{ textShadow: '0 0 20px rgba(255,255,255,0.2)' }}>Projects</span>
         </h1>
 
         <p className="text-muted-foreground max-w-2xl">
@@ -93,11 +93,12 @@ export default function ProjectsPage() {
           return (
             <article
               key={project.title}
-              className={`group relative flex flex-col rounded-xl bg-card p-6 transition-all duration-300 hover:scale-[1.02] ${colors.border}`}
+              className={`group relative flex flex-col rounded-xl bg-card p-6 transition-all duration-300 hover:scale-[1.08] active:scale-[1.15] cursor-pointer ${colors.border}`}
+              style={{ transition: 'all 0.3s ease' }}
             >
               {/* Featured badge */}
               {project.featured && (
-                <div className="absolute -top-3 -right-3 rounded-full bg-primary/20 px-3 py-1 text-xs font-mono font-medium text-primary neon-border-blue">
+                <div className="absolute -top-3 -right-3 rounded-full bg-white/10 px-3 py-1 text-xs font-mono font-medium text-white border border-white/20">
                   Featured
                 </div>
               )}
@@ -156,7 +157,7 @@ export default function ProjectsPage() {
       {/* Additional Info */}
       <section className="mt-16 rounded-xl border border-border bg-card/50 p-8">
         <h2 className="text-lg font-semibold mb-4 text-foreground">
-          <span className="neon-text-purple">//</span> Open Source Contributions
+          <span className="text-white" style={{ textShadow: '0 0 10px rgba(255,255,255,0.3)' }}>//</span> Open Source Contributions
         </h2>
         <p className="text-muted-foreground mb-4">
           Beyond personal projects, I actively contribute to open source
@@ -167,7 +168,7 @@ export default function ProjectsPage() {
           href="https://github.com/aaronstone2"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-lg bg-card px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted neon-border-blue"
+          className="inline-flex items-center gap-2 rounded-lg bg-card px-4 py-2 text-sm font-medium text-foreground transition-all hover:bg-muted hover:scale-105 active:scale-110 border border-white/10"
         >
           <Github className="h-4 w-4" />
           View GitHub Profile
