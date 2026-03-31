@@ -70,12 +70,12 @@ export function Sidebar() {
               className="flex items-center gap-2"
               onClick={() => setMobileMenuOpen(false)}
             >
-              <div className="h-10 w-10 rounded-full p-[2px] transition-all duration-300 hover:scale-[1.4] cursor-pointer" style={{ background: 'linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045, #833ab4)', backgroundSize: '300% 300%', animation: 'igGradient 3s ease infinite' }}>
+              <div className="h-12 w-12 rounded-full p-[2px] transition-all duration-300 hover:scale-[1.5] cursor-pointer" style={{ background: 'rgba(255,255,255,0.2)', boxShadow: '0 0 15px rgba(255,255,255,0.15)', animation: 'sidebarPulse 2s ease-in-out infinite' }}>
                 <div className="h-full w-full rounded-full overflow-hidden border-[2px] border-[#0a0a1a]">
                   <img src="/aaron-photo.jpg" alt="Aaron Stone" className="h-full w-full object-cover" />
                 </div>
               </div>
-              <style dangerouslySetInnerHTML={{ __html: `@keyframes igGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }` }} />
+              <style dangerouslySetInnerHTML={{ __html: `@keyframes sidebarPulse { 0%, 100% { box-shadow: 0 0 15px rgba(255,255,255,0.15); } 50% { box-shadow: 0 0 30px rgba(255,255,255,0.3); } }` }} />
               <span className="font-mono text-lg font-semibold tracking-tight text-sidebar-foreground">
                 AARON.DEV
               </span>

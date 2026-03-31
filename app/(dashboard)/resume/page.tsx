@@ -150,6 +150,7 @@ function WebsiteView() {
 
   return (
     <div className="flex-1 flex flex-col overflow-hidden">
+      <style dangerouslySetInnerHTML={{ __html: `@keyframes dotPulse { 0%, 100% { box-shadow: 0 0 25px rgba(255,255,255,0.5); } 50% { box-shadow: 0 0 45px rgba(255,255,255,0.8), 0 0 80px rgba(255,255,255,0.3); } }` }} />
       {/* Zoom controls */}
       <div className="flex items-center justify-between border-b border-border bg-card/50 px-4 py-2">
         <div className="flex items-center gap-3">
@@ -234,16 +235,17 @@ function WebsiteView() {
                 <div
                   style={{
                     position: "absolute",
-                    left: x + cardWidth / 2 - 8,
-                    top: timelineY + 4,
-                    width: 16,
-                    height: 16,
+                    left: x + cardWidth / 2 - 10,
+                    top: timelineY + 2,
+                    width: 20,
+                    height: 20,
                     borderRadius: "50%",
-                    border: `3px solid ${color}`,
-                    background: isHovered || isSelected ? color : "var(--background, #0a0a1a)",
-                    boxShadow: isHovered || isSelected ? `0 0 15px ${color}` : "none",
+                    border: `3px solid ${isHovered || isSelected ? 'white' : color}`,
+                    background: isHovered || isSelected ? 'white' : "var(--background, #0a0a1a)",
+                    boxShadow: isHovered || isSelected ? `0 0 25px rgba(255,255,255,0.5), 0 0 50px ${color}66` : "none",
                     transition: "all 0.3s",
                     zIndex: 5,
+                    animation: isHovered || isSelected ? 'dotPulse 1.5s ease-in-out infinite' : 'none',
                   }}
                 />
 
@@ -257,7 +259,7 @@ function WebsiteView() {
                     width: cardWidth,
                     cursor: "pointer",
                     transition: "all 0.3s",
-                    transform: isHovered ? "scale(1.03)" : "scale(1)",
+                    transform: isHovered ? "scale(1.15)" : "scale(1)",
                     zIndex: isHovered || isSelected ? 10 : 1,
                   }}
                   onMouseEnter={() => setHoveredItem(item.id)}

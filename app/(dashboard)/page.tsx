@@ -99,12 +99,12 @@ export default function HomePage() {
             </span>
           </div>
 
-          <div className="mb-6 h-48 w-48 rounded-full p-[3px] transition-all duration-300 hover:scale-[1.25] cursor-pointer" style={{ background: 'linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045, #833ab4)', backgroundSize: '300% 300%', animation: 'igGradient 3s ease infinite' }}>
+          <div className="mb-8 h-64 w-64 rounded-full p-[3px] transition-all duration-300 hover:scale-[1.3] cursor-pointer" style={{ background: 'rgba(255,255,255,0.15)', boxShadow: '0 0 30px rgba(255,255,255,0.15), 0 0 60px rgba(255,255,255,0.05)', animation: 'pulseGlow 2s ease-in-out infinite' }}>
             <div className="h-full w-full rounded-full overflow-hidden border-[3px] border-black">
               <img src="/aaron-photo.jpg" alt="Aaron Stone" className="h-full w-full object-cover" />
             </div>
           </div>
-          <style dangerouslySetInnerHTML={{ __html: `@keyframes igGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }` }} />
+          <style dangerouslySetInnerHTML={{ __html: `@keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 30px rgba(255,255,255,0.15), 0 0 60px rgba(255,255,255,0.05); } 50% { box-shadow: 0 0 50px rgba(255,255,255,0.3), 0 0 100px rgba(255,255,255,0.1); } }` }} />
 
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4">
             <span className="text-white" style={{ textShadow: '0 0 30px rgba(255,255,255,0.2)' }}>Aaron Stone</span>
