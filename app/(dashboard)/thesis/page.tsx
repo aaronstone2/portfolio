@@ -63,7 +63,7 @@ export default function ThesisPage() {
       {viewMode === "document" && (
         <div className="flex-1">
           <iframe
-            src="/StoneThesis2021.pdf"
+            src="/StoneThesis2021.pdf#view=FitH&pagemode=none&toolbar=1&navpanes=0"
             className="h-full w-full border-0"
             title="Bubble Thesis PDF"
           />
