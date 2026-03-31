@@ -332,8 +332,17 @@ export default function ArchitecturePage() {
 
   return (
     <div className="flex h-screen flex-col overflow-hidden">
-      {/* Minimal view switcher */}
-      <div className="flex items-center px-4 py-2 border-b border-white/5">
+      {/* Snackbar header */}
+      <header className="flex items-center justify-between border-b border-white/10 bg-card/50 px-6 py-3">
+        <div className="flex items-center gap-3">
+          <div className="rounded-lg bg-white/5 p-2 border border-white/10">
+            <Network className="h-5 w-5 text-white" style={{ filter: 'drop-shadow(0 0 4px rgba(255,255,255,0.5))' }} />
+          </div>
+          <div>
+            <h1 className="text-xl font-semibold text-white" style={{ textShadow: '0 0 10px rgba(255,255,255,0.2)' }}>Architecture</h1>
+            <p className="text-sm text-slate-500">FlowNode System Design</p>
+          </div>
+        </div>
         <div className="flex items-center rounded-lg border border-white/10 bg-black/50 p-1">
           {viewModes.map((mode) => (
             <button
@@ -349,7 +358,7 @@ export default function ArchitecturePage() {
             </button>
           ))}
         </div>
-      </div>
+      </header>
 
       {viewMode === "website" ? (
         <div className="flex-1 overflow-hidden">
