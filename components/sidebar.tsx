@@ -64,19 +64,19 @@ export function Sidebar() {
       >
         <div className="flex h-full flex-col">
           {/* Logo */}
-          <div className="flex h-16 items-center border-b border-sidebar-border px-6">
+          <div className="flex items-center border-b border-sidebar-border px-5 py-5">
             <Link
               href="/"
-              className="flex items-center gap-2"
+              className="flex items-center gap-3"
               onClick={() => setMobileMenuOpen(false)}
             >
-              <div className="h-12 w-12 rounded-full p-[2px] transition-all duration-300 hover:scale-[1.5] cursor-pointer" style={{ background: 'rgba(255,255,255,0.2)', boxShadow: '0 0 15px rgba(255,255,255,0.15)', animation: 'sidebarPulse 2s ease-in-out infinite' }}>
+              <div className="h-16 w-16 rounded-full p-[2px] transition-all duration-300 hover:scale-[1.6] cursor-pointer" style={{ background: 'rgba(255,255,255,0.25)', boxShadow: '0 0 20px rgba(255,255,255,0.25), 0 0 40px rgba(255,255,255,0.08)', animation: 'sidebarPulse 2s ease-in-out infinite' }}>
                 <div className="h-full w-full rounded-full overflow-hidden border-[2px] border-[#0a0a1a]">
                   <img src="/aaron-photo.jpg" alt="Aaron Stone" className="h-full w-full object-cover" />
                 </div>
               </div>
-              <style dangerouslySetInnerHTML={{ __html: `@keyframes sidebarPulse { 0%, 100% { box-shadow: 0 0 15px rgba(255,255,255,0.15); } 50% { box-shadow: 0 0 30px rgba(255,255,255,0.3); } }` }} />
-              <span className="font-mono text-lg font-semibold tracking-tight text-sidebar-foreground">
+              <style dangerouslySetInnerHTML={{ __html: `@keyframes sidebarPulse { 0%, 100% { box-shadow: 0 0 20px rgba(255,255,255,0.25), 0 0 40px rgba(255,255,255,0.08); } 50% { box-shadow: 0 0 40px rgba(255,255,255,0.45), 0 0 70px rgba(255,255,255,0.15); } }` }} />
+              <span className="font-mono text-xl font-bold tracking-tight text-white transition-all duration-300 hover:scale-110 cursor-pointer" style={{ textShadow: '0 0 15px rgba(255,255,255,0.3)' }}>
                 AARON.DEV
               </span>
             </Link>

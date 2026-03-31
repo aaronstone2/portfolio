@@ -99,12 +99,14 @@ export default function HomePage() {
             </span>
           </div>
 
-          <div className="mb-8 h-64 w-64 rounded-full p-[3px] transition-all duration-300 hover:scale-[1.3] cursor-pointer" style={{ background: 'rgba(255,255,255,0.15)', boxShadow: '0 0 30px rgba(255,255,255,0.15), 0 0 60px rgba(255,255,255,0.05)', animation: 'pulseGlow 2s ease-in-out infinite' }}>
-            <div className="h-full w-full rounded-full overflow-hidden border-[3px] border-black">
-              <img src="/aaron-photo.jpg" alt="Aaron Stone" className="h-full w-full object-cover" />
+          <div className="mt-8 mb-10 flex justify-center" style={{ padding: '40px' }}>
+            <div className="h-64 w-64 rounded-full p-[3px] transition-all duration-300 hover:scale-[1.35] cursor-pointer" style={{ background: 'rgba(255,255,255,0.25)', boxShadow: '0 0 35px rgba(255,255,255,0.25), 0 0 70px rgba(255,255,255,0.08)', animation: 'pulseGlow 2s ease-in-out infinite' }}>
+              <div className="h-full w-full rounded-full overflow-hidden border-[3px] border-black">
+                <img src="/aaron-photo.jpg" alt="Aaron Stone" className="h-full w-full object-cover" />
+              </div>
             </div>
           </div>
-          <style dangerouslySetInnerHTML={{ __html: `@keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 30px rgba(255,255,255,0.15), 0 0 60px rgba(255,255,255,0.05); } 50% { box-shadow: 0 0 50px rgba(255,255,255,0.3), 0 0 100px rgba(255,255,255,0.1); } }` }} />
+          <style dangerouslySetInnerHTML={{ __html: `@keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 35px rgba(255,255,255,0.25), 0 0 70px rgba(255,255,255,0.08); } 50% { box-shadow: 0 0 60px rgba(255,255,255,0.45), 0 0 120px rgba(255,255,255,0.15); } }` }} />
 
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4">
             <span className="text-white" style={{ textShadow: '0 0 30px rgba(255,255,255,0.2)' }}>Aaron Stone</span>
