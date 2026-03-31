@@ -70,10 +70,8 @@ export function Sidebar() {
               className="flex items-center gap-2"
               onClick={() => setMobileMenuOpen(false)}
             >
-              <div className="h-8 w-8 rounded-lg bg-primary/20 neon-border-blue flex items-center justify-center">
-                <span className="font-mono text-sm font-bold neon-text-blue">
-                  AS
-                </span>
+              <div className="h-8 w-8 overflow-hidden rounded-full border border-primary/40">
+                <img src="/aaron-photo.jpg" alt="Aaron Stone" className="h-full w-full object-cover" />
               </div>
               <span className="font-mono text-lg font-semibold tracking-tight text-sidebar-foreground">
                 AARON.DEV
