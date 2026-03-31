@@ -1,7 +1,9 @@
 "use client"
 
-import { Network, ZoomIn, ZoomOut, Maximize2 } from "lucide-react"
+import { Network, ZoomIn, ZoomOut, Maximize2, LayoutGrid, GitBranch } from "lucide-react"
 import { useState, useRef, useEffect, useCallback } from "react"
+
+type ViewMode = "website" | "graph"
 
 interface Node {
   id: string
@@ -59,7 +61,7 @@ const nodeColors = {
   external: { bg: "bg-amber-500/20", border: "border-amber-500", text: "text-amber-400", glow: "rgba(245, 158, 11, 0.6)" },
 }
 
-export default function ArchitecturePage() {
+function ArchitectureCanvas() {
   const [zoom, setZoom] = useState(1)
   const [pan, setPan] = useState({ x: 0, y: 0 })
   const [isDragging, setIsDragging] = useState(false)
@@ -105,47 +107,31 @@ export default function ArchitecturePage() {
   }
 
   return (
-    <div className="flex h-screen flex-col overflow-hidden">
-      {/* Header */}
-      <header className="flex items-center justify-between border-b border-border bg-card/50 px-6 py-4">
-        <div className="flex items-center gap-3">
-          <div className="rounded-lg bg-accent/10 p-2 neon-border-cyan">
-            <Network className="h-5 w-5 text-accent" />
-          </div>
-          <div>
-            <h1 className="text-xl font-semibold text-foreground">
-              FlowNode System Architecture
-            </h1>
-            <p className="text-sm text-muted-foreground">
-              Interactive Node Graph Visualization
-            </p>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setZoom(z => Math.max(0.5, z - 0.1))}
-            className="rounded-lg bg-card p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-          >
-            <ZoomOut className="h-4 w-4" />
-          </button>
-          <span className="min-w-[4rem] text-center text-sm text-muted-foreground">
-            {Math.round(zoom * 100)}%
-          </span>
-          <button
-            onClick={() => setZoom(z => Math.min(2, z + 0.1))}
-            className="rounded-lg bg-card p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-          >
-            <ZoomIn className="h-4 w-4" />
-          </button>
-          <button
-            onClick={resetView}
-            className="ml-2 rounded-lg bg-accent/10 p-2 text-accent transition-colors hover:bg-accent/20 neon-border-cyan"
-          >
-            <Maximize2 className="h-4 w-4" />
-          </button>
-        </div>
-      </header>
+    <div className="flex h-full flex-col overflow-hidden">
+      {/* Zoom Controls */}
+      <div className="flex items-center justify-end gap-2 border-b border-border bg-card/50 px-4 py-2">
+        <button
+          onClick={() => setZoom(z => Math.max(0.5, z - 0.1))}
+          className="rounded-lg bg-card p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+        >
+          <ZoomOut className="h-4 w-4" />
+        </button>
+        <span className="min-w-[4rem] text-center text-sm text-muted-foreground">
+          {Math.round(zoom * 100)}%
+        </span>
+        <button
+          onClick={() => setZoom(z => Math.min(2, z + 0.1))}
+          className="rounded-lg bg-card p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+        >
+          <ZoomIn className="h-4 w-4" />
+        </button>
+        <button
+          onClick={resetView}
+          className="ml-2 rounded-lg bg-accent/10 p-2 text-accent transition-colors hover:bg-accent/20 neon-border-cyan"
+        >
+          <Maximize2 className="h-4 w-4" />
+        </button>
+      </div>
 
       {/* Graph Container */}
       <div 
@@ -283,6 +269,94 @@ export default function ArchitecturePage() {
             </div>
           </div>
         )}
+      </div>
+    </div>
+  )
+}
+
+export default function ArchitecturePage() {
+  const [viewMode, setViewMode] = useState<ViewMode>("website")
+
+  const viewModes = [
+    { id: "website" as ViewMode, label: "Interactive", icon: LayoutGrid },
+    { id: "graph" as ViewMode, label: "Node Graph", icon: GitBranch },
+  ]
+
+  if (viewMode === "website") {
+    return (
+      <div className="flex h-screen flex-col overflow-hidden">
+        {/* Tab bar overlaid on the existing header area */}
+        <div className="flex items-center justify-between border-b border-border bg-card/50 px-6 py-3">
+          <div className="flex items-center gap-3">
+            <div className="rounded-lg bg-accent/10 p-2 neon-border-cyan">
+              <Network className="h-5 w-5 text-accent" />
+            </div>
+            <div>
+              <h1 className="text-xl font-semibold text-foreground">FlowNode System Architecture</h1>
+              <p className="text-sm text-muted-foreground">Interactive Node Graph Visualization</p>
+            </div>
+          </div>
+          <div className="flex items-center rounded-lg border border-border bg-card p-1">
+            {viewModes.map((mode) => (
+              <button
+                key={mode.id}
+                onClick={() => setViewMode(mode.id)}
+                className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all ${
+                  viewMode === mode.id ? "bg-accent/20 text-accent shadow-sm" : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <mode.icon className="h-3.5 w-3.5" />
+                {mode.label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="flex-1 overflow-hidden">
+          <ArchitectureCanvas />
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="flex h-screen flex-col overflow-hidden">
+      <div className="flex items-center justify-between border-b border-border bg-card/50 px-6 py-3">
+        <div className="flex items-center gap-3">
+          <div className="rounded-lg bg-accent/10 p-2 neon-border-cyan">
+            <Network className="h-5 w-5 text-accent" />
+          </div>
+          <div>
+            <h1 className="text-xl font-semibold text-foreground">FlowNode System Architecture</h1>
+            <p className="text-sm text-muted-foreground">Interactive Node Graph Visualization</p>
+          </div>
+        </div>
+        <div className="flex items-center rounded-lg border border-border bg-card p-1">
+          {viewModes.map((mode) => (
+            <button
+              key={mode.id}
+              onClick={() => setViewMode(mode.id)}
+              className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all ${
+                viewMode === mode.id ? "bg-accent/20 text-accent shadow-sm" : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <mode.icon className="h-3.5 w-3.5" />
+              {mode.label}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className="relative flex-1">
+        <div className="absolute inset-0 flex items-center justify-center bg-background">
+          <div className="text-center">
+            <div className="mb-4 h-12 w-12 animate-spin rounded-full border-4 border-accent/20 border-t-accent mx-auto" />
+            <p className="text-sm text-muted-foreground font-mono">Loading Architecture Graph...</p>
+          </div>
+        </div>
+        <iframe
+          src="https://flownode-ui-react.vercel.app/architecture"
+          className="relative z-10 h-full w-full border-0"
+          title="Architecture Node Graph"
+        />
       </div>
     </div>
   )
