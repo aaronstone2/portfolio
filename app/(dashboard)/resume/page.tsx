@@ -401,54 +401,42 @@ export default function ResumePage() {
   const [viewMode, setViewMode] = useState<ViewMode>("website")
 
   const viewModes = [
-    { id: "website" as ViewMode, label: "Website", icon: LayoutGrid },
+    { id: "website" as ViewMode, label: "Timeline", icon: LayoutGrid },
     { id: "document" as ViewMode, label: "Document", icon: FileDown },
     { id: "graph" as ViewMode, label: "Node Graph", icon: GitBranch },
   ]
 
   return (
     <div className="flex h-screen flex-col overflow-hidden">
-      {/* Header */}
-      <header className="flex items-center justify-between border-b border-border bg-card/50 px-6 py-4">
-        <div className="flex items-center gap-3">
-          <div className="rounded-lg bg-secondary/10 p-2 neon-border-purple">
-            <FileText className="h-5 w-5 text-secondary" />
-          </div>
-          <div>
-            <h1 className="text-xl font-semibold text-foreground">Interactive Resume</h1>
-            <p className="text-sm text-muted-foreground">Aaron Stone - Software Engineer</p>
-          </div>
+      {/* Minimal view switcher — no snackbar */}
+      <div className="flex items-center justify-between px-4 py-2 border-b border-white/5">
+        <div className="flex items-center rounded-lg border border-white/10 bg-black/50 p-1">
+          {viewModes.map((mode) => (
+            <button
+              key={mode.id}
+              onClick={() => setViewMode(mode.id)}
+              className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all duration-200 hover:scale-[1.05] ${
+                viewMode === mode.id
+                  ? "bg-white/10 text-white"
+                  : "text-slate-600 hover:text-white"
+              }`}
+              style={viewMode === mode.id ? { boxShadow: '0 0 10px rgba(255,255,255,0.1)', textShadow: '0 0 8px rgba(255,255,255,0.3)' } : {}}
+            >
+              <mode.icon className="h-3.5 w-3.5" />
+              {mode.label}
+            </button>
+          ))}
         </div>
 
-        <div className="flex items-center gap-3">
-          {/* View Mode Tabs */}
-          <div className="flex items-center rounded-lg border border-border bg-card p-1">
-            {viewModes.map((mode) => (
-              <button
-                key={mode.id}
-                onClick={() => setViewMode(mode.id)}
-                className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all ${
-                  viewMode === mode.id
-                    ? "bg-secondary/20 text-secondary shadow-sm"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                <mode.icon className="h-3.5 w-3.5" />
-                {mode.label}
-              </button>
-            ))}
-          </div>
-
-          <a
-            href="/AaronStone_Resume.pdf"
-            download
-            className="flex items-center gap-2 rounded-lg bg-secondary/10 px-4 py-2 text-sm font-medium text-secondary transition-colors hover:bg-secondary/20 neon-border-purple"
-          >
-            <Download className="h-4 w-4" />
-            PDF
-          </a>
-        </div>
-      </header>
+        <a
+          href="/AaronStone_Resume.pdf"
+          download
+          className="flex items-center gap-2 rounded-lg bg-white/5 border border-white/10 px-3 py-1.5 text-xs font-medium text-slate-400 transition-all hover:text-white hover:scale-[1.05] hover:bg-white/10"
+        >
+          <Download className="h-3.5 w-3.5" />
+          PDF
+        </a>
+      </div>
 
       {/* Content */}
       {viewMode === "website" && <WebsiteView />}
@@ -466,10 +454,10 @@ export default function ResumePage() {
 
       {viewMode === "graph" && (
         <div className="relative flex-1">
-          <div className="absolute inset-0 flex items-center justify-center bg-background">
+          <div className="absolute inset-0 flex items-center justify-center" style={{ background: '#000' }}>
             <div className="text-center">
-              <div className="mb-4 h-12 w-12 animate-spin rounded-full border-4 border-secondary/20 border-t-secondary mx-auto" />
-              <p className="text-sm text-muted-foreground font-mono">Loading Resume Graph...</p>
+              <div className="mb-4 h-12 w-12 animate-spin rounded-full border-4 border-white/10 border-t-white mx-auto" />
+              <p className="text-sm text-slate-500 font-mono">Loading Resume Graph...</p>
             </div>
           </div>
           <iframe

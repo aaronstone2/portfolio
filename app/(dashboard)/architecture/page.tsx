@@ -330,62 +330,19 @@ export default function ArchitecturePage() {
     { id: "graph" as ViewMode, label: "Node Graph", icon: GitBranch },
   ]
 
-  if (viewMode === "website") {
-    return (
-      <div className="flex h-screen flex-col overflow-hidden">
-        {/* Tab bar overlaid on the existing header area */}
-        <div className="flex items-center justify-between border-b border-border bg-card/50 px-6 py-3">
-          <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-white/5 p-2 border border-white/10">
-              <Network className="h-5 w-5 text-white" />
-            </div>
-            <div>
-              <h1 className="text-xl font-semibold text-foreground">FlowNode System Architecture</h1>
-              <p className="text-sm text-muted-foreground">Interactive Node Graph Visualization</p>
-            </div>
-          </div>
-          <div className="flex items-center rounded-lg border border-border bg-card p-1">
-            {viewModes.map((mode) => (
-              <button
-                key={mode.id}
-                onClick={() => setViewMode(mode.id)}
-                className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all ${
-                  viewMode === mode.id ? "bg-accent/20 text-white shadow-sm" : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                <mode.icon className="h-3.5 w-3.5" />
-                {mode.label}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div className="flex-1 overflow-hidden">
-          <ArchitectureCanvas />
-        </div>
-      </div>
-    )
-  }
-
   return (
     <div className="flex h-screen flex-col overflow-hidden">
-      <div className="flex items-center justify-between border-b border-border bg-card/50 px-6 py-3">
-        <div className="flex items-center gap-3">
-          <div className="rounded-lg bg-white/5 p-2 border border-white/10">
-            <Network className="h-5 w-5 text-white" />
-          </div>
-          <div>
-            <h1 className="text-xl font-semibold text-foreground">FlowNode System Architecture</h1>
-            <p className="text-sm text-muted-foreground">Interactive Node Graph Visualization</p>
-          </div>
-        </div>
-        <div className="flex items-center rounded-lg border border-border bg-card p-1">
+      {/* Minimal view switcher */}
+      <div className="flex items-center px-4 py-2 border-b border-white/5">
+        <div className="flex items-center rounded-lg border border-white/10 bg-black/50 p-1">
           {viewModes.map((mode) => (
             <button
               key={mode.id}
               onClick={() => setViewMode(mode.id)}
-              className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all ${
-                viewMode === mode.id ? "bg-accent/20 text-white shadow-sm" : "text-muted-foreground hover:text-foreground"
+              className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all duration-200 hover:scale-[1.05] ${
+                viewMode === mode.id ? "bg-white/10 text-white" : "text-slate-600 hover:text-white"
               }`}
+              style={viewMode === mode.id ? { boxShadow: '0 0 10px rgba(255,255,255,0.1)', textShadow: '0 0 8px rgba(255,255,255,0.3)' } : {}}
             >
               <mode.icon className="h-3.5 w-3.5" />
               {mode.label}
@@ -393,19 +350,26 @@ export default function ArchitecturePage() {
           ))}
         </div>
       </div>
-      <div className="relative flex-1">
-        <div className="absolute inset-0 flex items-center justify-center bg-background">
-          <div className="text-center">
-            <div className="mb-4 h-12 w-12 animate-spin rounded-full border-4 border-accent/20 border-t-accent mx-auto" />
-            <p className="text-sm text-muted-foreground font-mono">Loading Architecture Graph...</p>
-          </div>
+
+      {viewMode === "website" ? (
+        <div className="flex-1 overflow-hidden">
+          <ArchitectureCanvas />
         </div>
-        <iframe
-          src="https://flownode-ui-react.vercel.app/architecture"
-          className="relative z-10 h-full w-full border-0"
-          title="Architecture Node Graph"
-        />
-      </div>
+      ) : (
+        <div className="relative flex-1">
+          <div className="absolute inset-0 flex items-center justify-center" style={{ background: '#000' }}>
+            <div className="text-center">
+              <div className="mb-4 h-12 w-12 animate-spin rounded-full border-4 border-white/10 border-t-white mx-auto" />
+              <p className="text-sm text-slate-500 font-mono">Loading Architecture Graph...</p>
+            </div>
+          </div>
+          <iframe
+            src="https://flownode-ui-react.vercel.app/architecture"
+            className="relative z-10 h-full w-full border-0"
+            title="Architecture Node Graph"
+          />
+        </div>
+      )}
     </div>
   )
 }
