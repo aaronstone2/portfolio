@@ -6,55 +6,98 @@ import { useState } from "react"
 const experience = [
   {
     id: 1,
-    title: "Senior Software Engineer",
-    company: "Bubble Holographic Systems",
-    location: "New York, NY",
-    period: "2022 - Present",
-    description: "Leading development of holographic display systems and real-time 3D rendering pipelines. Building distributed systems for high-performance graphics processing.",
-    skills: ["React", "TypeScript", "WebGL", "Node.js", "AWS", "GraphQL"],
+    title: "Software Engineer — DevX Team",
+    company: "Tulip Interfaces",
+    location: "Boston, MA",
+    period: "Jan 2026 – Present",
+    bullets: [
+      "Built load testing infrastructure for full platform using K6 and Ironhorse",
+      "Designed data generation system modeled on real customer usage patterns",
+      "Rebuilt API client and test suites"
+    ],
+    skills: ["JavaScript", "TypeScript", "K6", "Node.js"],
     type: "work"
   },
   {
     id: 2,
-    title: "Software Engineer",
-    company: "FinTech Startup",
+    title: "TPM / Software Engineer",
+    company: "Tulip Interfaces",
     location: "Boston, MA",
-    period: "2020 - 2022",
-    description: "Developed trading algorithms and real-time data visualization dashboards. Built microservices architecture handling millions of transactions daily.",
-    skills: ["Python", "React", "PostgreSQL", "Redis", "Docker", "Kubernetes"],
+    period: "Jul – Dec 2025",
+    bullets: [
+      "Built FlowNode — visual DAG automation builder with drag-and-drop nodes",
+      "Integrated Jira, Slack, Google Sheets via REST APIs",
+      "Managed LTS 15 release lifecycle and documentation system"
+    ],
+    skills: ["React", "TypeScript", "ReactFlow", "D3.js", "MUI", "Jira API", "Slack API"],
     type: "work"
   },
   {
     id: 3,
-    title: "Full Stack Developer",
-    company: "Tech Agency",
+    title: "Technical Support Engineer — Senior Escalation",
+    company: "Tulip Interfaces",
+    location: "Boston, MA",
+    period: "Oct 2023 – 2026",
+    bullets: [
+      "Engineering liaison for $10M–20M+ ARR enterprise customer clusters",
+      "Led RCA investigations for Generac, Milwaukee Tool, DMG Mori, Tiffany & Co.",
+      "Reduced churn risk during company growth from $20M to $70M ARR"
+    ],
+    skills: ["MongoDB", "JavaScript", "mongosh", "Loki", "debugging"],
+    type: "work"
+  },
+  {
+    id: 4,
+    title: "Customer Support Engineer I → II",
+    company: "Tulip Interfaces",
+    location: "Boston, MA",
+    period: "Nov 2021 – Oct 2023",
+    bullets: [
+      "Team grew from 3 to 8 engineers",
+      "Promoted to highest escalation tier"
+    ],
+    skills: ["Zendesk", "Jira", "Technical Troubleshooting"],
+    type: "work"
+  },
+  {
+    id: 5,
+    title: "Founder & CEO — Head of Product & Design",
+    company: "Bubble Holographic Systems",
     location: "Remote",
-    period: "2018 - 2020",
-    description: "Built custom web applications for enterprise clients. Specialized in complex data workflows and API integrations.",
-    skills: ["JavaScript", "Vue.js", "Node.js", "MongoDB", "REST APIs"],
+    period: "2017 – Present",
+    bullets: [
+      "3D visual programming language and creative marketplace",
+      "Authored 78-page Honors Thesis at Brandeis University",
+      "Lead product vision, design system, and technical architecture"
+    ],
+    skills: ["3D Graphics", "Visual Programming", "Product Design"],
     type: "work"
   },
 ]
 
 const education = [
   {
-    id: 4,
+    id: 6,
     title: "B.S. Computer Science",
-    company: "Massachusetts Institute of Technology",
-    location: "Cambridge, MA",
-    period: "2014 - 2018",
-    description: "Focus on distributed systems, algorithms, and computer graphics. Dean's List, Senior thesis on real-time rendering optimization.",
-    skills: ["Algorithms", "Data Structures", "Computer Graphics", "Distributed Systems"],
+    company: "Brandeis University",
+    location: "Waltham, MA",
+    period: "2017 – 2021",
+    bullets: [
+      "Honors Thesis: \"Bubble: An Interface for Programming in 3D Virtual Reality Environments\"",
+      "Advisors: Harry Mairson, Timothy Hickey, Antonella Di Lillo",
+      "SAT: 2300 (99th percentile)"
+    ],
+    skills: ["Computer Science", "Honors Thesis", "VR/3D Programming"],
     type: "education"
   }
 ]
 
 const skills = {
-  languages: ["TypeScript", "JavaScript", "Python", "Go", "Rust", "SQL"],
-  frontend: ["React", "Next.js", "Vue.js", "WebGL", "Three.js", "Tailwind CSS"],
-  backend: ["Node.js", "Express", "FastAPI", "GraphQL", "REST APIs"],
-  infrastructure: ["AWS", "Docker", "Kubernetes", "Terraform", "CI/CD"],
-  databases: ["PostgreSQL", "MongoDB", "Redis", "DynamoDB"],
+  languages: ["TypeScript", "JavaScript", "Python", "SQL", "mongosh"],
+  frontend: ["React", "Next.js", "ReactFlow", "D3.js", "MUI", "Tailwind CSS"],
+  backend: ["Node.js", "REST APIs", "Jira API", "Slack API", "Google Sheets API"],
+  infrastructure: ["K6", "Ironhorse", "Docker", "CI/CD", "Load Testing"],
+  databases: ["MongoDB", "PostgreSQL", "Loki"],
 }
 
 export default function ResumePage() {
@@ -127,7 +170,7 @@ export default function ResumePage() {
                 <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-primary via-secondary to-accent" />
                 
                 <div className="space-y-6">
-                  {experience.map((item, index) => (
+                  {experience.map((item) => (
                     <div
                       key={item.id}
                       className={`relative pl-16 transition-all duration-300 ${
@@ -165,7 +208,14 @@ export default function ResumePage() {
                           </div>
                         </div>
                         
-                        <p className="mb-4 text-sm text-muted-foreground">{item.description}</p>
+                        <ul className="mb-4 space-y-1 text-sm text-muted-foreground">
+                          {item.bullets.map((bullet, idx) => (
+                            <li key={idx} className="flex items-start gap-2">
+                              <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary/50" />
+                              {bullet}
+                            </li>
+                          ))}
+                        </ul>
                         
                         <div className="flex flex-wrap gap-2">
                           {item.skills.map((skill) => (
@@ -231,7 +281,14 @@ export default function ResumePage() {
                         </div>
                       </div>
                       
-                      <p className="mb-4 text-sm text-muted-foreground">{item.description}</p>
+                      <ul className="mb-4 space-y-1 text-sm text-muted-foreground">
+                        {item.bullets.map((bullet, idx) => (
+                          <li key={idx} className="flex items-start gap-2">
+                            <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-secondary/50" />
+                            {bullet}
+                          </li>
+                        ))}
+                      </ul>
                       
                       <div className="flex flex-wrap gap-2">
                         {item.skills.map((skill) => (
@@ -279,27 +336,26 @@ export default function ResumePage() {
               ))}
             </div>
 
-            {/* Certifications */}
+            {/* Contact Info */}
             <div className="mt-8">
               <div className="mb-6 flex items-center gap-2">
                 <Award className="h-5 w-5 text-primary" />
-                <h2 className="text-lg font-semibold text-foreground">Certifications</h2>
+                <h2 className="text-lg font-semibold text-foreground">Contact</h2>
               </div>
               
               <div className="grid gap-4 md:grid-cols-3">
-                {[
-                  "AWS Solutions Architect",
-                  "Kubernetes Administrator",
-                  "GraphQL Certified Developer"
-                ].map((cert) => (
-                  <div
-                    key={cert}
-                    className="rounded-lg border border-border bg-card/50 p-4 text-center transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_20px_rgba(59,130,246,0.2)]"
-                  >
-                    <Award className="mx-auto mb-2 h-8 w-8 text-primary" />
-                    <p className="text-sm font-medium text-foreground">{cert}</p>
-                  </div>
-                ))}
+                <div className="rounded-lg border border-border bg-card/50 p-4 text-center transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_20px_rgba(59,130,246,0.2)]">
+                  <p className="text-sm font-medium text-foreground">aaron@bubble.graphics</p>
+                  <p className="text-xs text-muted-foreground">Email</p>
+                </div>
+                <div className="rounded-lg border border-border bg-card/50 p-4 text-center transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_20px_rgba(59,130,246,0.2)]">
+                  <p className="text-sm font-medium text-foreground">857-231-1060</p>
+                  <p className="text-xs text-muted-foreground">Phone</p>
+                </div>
+                <div className="rounded-lg border border-border bg-card/50 p-4 text-center transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_20px_rgba(59,130,246,0.2)]">
+                  <p className="text-sm font-medium text-foreground">NYC Metro</p>
+                  <p className="text-xs text-muted-foreground">Location</p>
+                </div>
               </div>
             </div>
           </div>
