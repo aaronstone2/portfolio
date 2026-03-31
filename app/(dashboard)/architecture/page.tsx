@@ -240,9 +240,9 @@ function ArchitectureCanvas() {
                 data-node
                 className={`absolute flex cursor-grab active:cursor-grabbing flex-col items-center justify-center rounded-lg border-2 px-4 py-2 ${colors.bg} ${colors.border} ${colors.text}`}
                 style={{
-                  left: pos.x - 60,
+                  left: pos.x - (isSelected ? 120 : 60),
                   top: pos.y - 20,
-                  width: 120,
+                  width: isSelected ? 240 : 120,
                   boxShadow: isClicked
                     ? `0 0 40px rgba(255,255,255,0.5), 0 0 80px ${colors.glow}`
                     : isHovered || isSelected ? `0 0 20px ${colors.glow}` : "none",
@@ -255,65 +255,64 @@ function ArchitectureCanvas() {
                 onMouseDown={(e) => handleNodeMouseDown(e, node.id)}
                 onClick={() => handleNodeClick(node)}
               >
-                <span className="text-center text-xs font-semibold leading-tight select-none">{node.label}</span>
+                {/* Node header */}
+                <div className="text-center text-xs font-semibold leading-tight select-none">{node.label}</div>
+                <div className="text-center text-[9px] opacity-60 mt-0.5 select-none">{node.type}</div>
+
+                {/* Expanded subnodes on select */}
+                {isSelected && (
+                  <div className="mt-2 pt-2 w-full" style={{ borderTop: `1px solid ${colors.glow}44`, minWidth: 200 }}>
+                    <p className="text-[10px] opacity-70 mb-2 leading-relaxed">{node.description}</p>
+
+                    {/* Connection subnodes */}
+                    {edges.filter(e => e.from === node.id || e.to === node.id).map((edge, i) => {
+                      const connectedId = edge.from === node.id ? edge.to : edge.from
+                      const connectedNode = nodes.find(n => n.id === connectedId)
+                      const connColors = connectedNode ? nodeColors[connectedNode.type] : colors
+                      const direction = edge.from === node.id ? "→" : "←"
+                      return (
+                        <div
+                          key={i}
+                          className={`flex items-center gap-1.5 rounded px-2 py-1 mb-1 cursor-pointer transition-all duration-200 hover:scale-105 ${connColors.bg}`}
+                          style={{ border: `1px solid ${connColors.glow}33` }}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            const target = nodes.find(n => n.id === connectedId)
+                            if (target) {
+                              setSelectedNode(target)
+                              setClickedNode(target.id)
+                              setTimeout(() => setClickedNode(null), 300)
+                            }
+                          }}
+                        >
+                          <span className="text-[10px] opacity-50">{direction}</span>
+                          <span className={`text-[10px] font-medium ${connColors.text}`}>{connectedNode?.label}</span>
+                          {edge.label && <span className="text-[9px] opacity-40 ml-auto">{edge.label}</span>}
+                        </div>
+                      )
+                    })}
+                  </div>
+                )}
               </div>
             )
           })}
         </div>
 
         {/* Legend */}
-        <div className="absolute bottom-4 left-4 rounded-lg border border-border bg-card/90 p-4 backdrop-blur-sm">
-          <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Legend</h3>
-          <div className="space-y-2">
+        <div className="absolute bottom-4 left-4 rounded-lg border border-white/10 bg-card/90 p-3 backdrop-blur-sm">
+          <h3 className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Legend</h3>
+          <div className="grid grid-cols-2 gap-x-4 gap-y-1">
             {Object.entries(nodeColors).map(([type, colors]) => (
-              <div key={type} className="flex items-center gap-2">
-                <div className={`h-3 w-3 rounded border ${colors.bg} ${colors.border}`} />
-                <span className="text-xs capitalize text-muted-foreground">{type}</span>
+              <div key={type} className="flex items-center gap-1.5">
+                <div className={`h-2.5 w-2.5 rounded border ${colors.bg} ${colors.border}`} />
+                <span className="text-[10px] capitalize text-muted-foreground">{type}</span>
               </div>
             ))}
           </div>
-        </div>
-
-        {/* Node Details Panel */}
-        {selectedNode && (
-          <div className="absolute right-4 top-4 w-80 rounded-lg border border-border bg-card/95 p-5 backdrop-blur-sm">
-            <div className="mb-4 flex items-start justify-between">
-              <div>
-                <h3 className={`text-lg font-semibold ${nodeColors[selectedNode.type].text}`}>
-                  {selectedNode.label}
-                </h3>
-                <span className="text-xs uppercase tracking-wider text-muted-foreground">
-                  {selectedNode.type}
-                </span>
-              </div>
-              <button
-                onClick={() => setSelectedNode(null)}
-                className="text-muted-foreground hover:text-foreground"
-              >
-                x
-              </button>
-            </div>
-            <p className="text-sm text-muted-foreground">{selectedNode.description}</p>
-            
-            <div className="mt-4 border-t border-border pt-4">
-              <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Connections</h4>
-              <div className="space-y-1">
-                {edges.filter(e => e.from === selectedNode.id || e.to === selectedNode.id).map((edge, i) => {
-                  const connectedId = edge.from === selectedNode.id ? edge.to : edge.from
-                  const connectedNode = nodes.find(n => n.id === connectedId)
-                  const direction = edge.from === selectedNode.id ? "to" : "from"
-                  return (
-                    <div key={i} className="flex items-center gap-2 text-xs text-muted-foreground">
-                      <span className="text-accent">{direction === "to" ? "→" : "←"}</span>
-                      <span>{connectedNode?.label}</span>
-                      {edge.label && <span className="text-muted-foreground/50">({edge.label})</span>}
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
+          <div className="mt-2 pt-2 border-t border-white/10 text-[9px] text-muted-foreground">
+            Click to expand · Drag to move
           </div>
-        )}
+        </div>
       </div>
     </div>
   )
