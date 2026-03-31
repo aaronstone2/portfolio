@@ -454,11 +454,12 @@ export default function ResumePage() {
       {viewMode === "website" && <WebsiteView />}
 
       {viewMode === "document" && (
-        <div className="flex-1 bg-background">
+        <div className="flex-1" style={{ background: '#000000' }}>
           <iframe
             src="/Aaron_Stone_Resume.html"
             className="h-full w-full border-0"
             title="Resume Document"
+            style={{ background: '#000000' }}
           />
         </div>
       )}
