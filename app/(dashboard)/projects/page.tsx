@@ -4,63 +4,73 @@ const projects = [
   {
     title: "FlowNode",
     description:
-      "A visual node graph automation builder that enables users to create complex DAG workflows through an intuitive drag-and-drop interface. Features real-time validation, execution monitoring, and seamless integration with external services.",
-    techStack: ["React", "TypeScript", "D3.js", "Node.js", "PostgreSQL"],
+      "Visual DAG workflow automation builder with 20+ custom node types, animated edges, drag-and-drop canvas, and real-time data flow visualization. Built for orchestrating Jira, Slack, and Google Sheets workflows.",
+    techStack: ["React", "ReactFlow", "TypeScript", "Vite", "MUI", "D3.js", "Node.js"],
     link: "/flownode",
-    github: "https://github.com/aaronstone2",
+    github: "https://github.com/aaronstone2/flownode",
     color: "blue" as const,
-    featured: true,
-  },
-  {
-    title: "Bubble Holographic Systems",
-    description:
-      "Advanced holographic visualization platform for 3D data representation. Implements WebGL shaders for real-time rendering and spatial computing interfaces for immersive data exploration.",
-    techStack: ["Three.js", "WebGL", "React", "GLSL", "WebXR"],
-    link: "https://bubble.graphics",
-    github: "https://github.com/aaronstone2",
-    color: "purple" as const,
     featured: true,
   },
   {
     title: "Service Graph Visualizer",
     description:
-      "Microservice dependency mapping and analysis tool with interactive graph UI. Features CLI analyzer, REST API server, and React UI with drag-and-drop service nodes, toxic injection, and load test visualization.",
-    techStack: ["React", "ReactFlow", "Node.js", "Drizzle ORM", "EdgeDB", "NX"],
+      "Microservice dependency mapping and chaos engineering tool. Drag-and-drop service nodes, toxic injection simulation, K6 load test visualization, and real-time dependency graph analysis across a full microservice architecture.",
+    techStack: ["React", "ReactFlow", "Node.js", "Drizzle ORM", "EdgeDB", "NX Monorepo"],
     link: "/service-graph",
-    github: "https://github.com/aaronstone2",
+    github: "https://github.com/aaronstone2/kraken-unchained",
     color: "cyan" as const,
+    featured: true,
+  },
+  {
+    title: "Bubble Programming Language",
+    description:
+      "3D visual programming language where code structures are navigable spheres in virtual reality. Features recursive namespaces (Bubbles), visual type checking, Wave Graphs for control flow, and a drag-and-drop code library. Documented in a 78-page Honors Thesis.",
+    techStack: ["3D Graphics", "VR", "Visual Programming", "Language Design", "Scene Graphs"],
+    link: "/thesis",
+    github: null,
+    color: "purple" as const,
     featured: true,
   },
   {
     title: "Metro Graph",
     description:
-      "Interactive transit network visualization tool that maps urban transportation systems. Features real-time updates, route optimization algorithms, and accessibility analysis for city planners.",
-    techStack: ["Python", "NetworkX", "FastAPI", "React", "MapboxGL"],
-    link: "#",
-    github: "https://github.com/aaronstone2",
+      "Interactive 2D flow graph system for visualizing connected data. Same design philosophy as Bubble — node-based, zoomable, with drag-and-drop composition. Smaller-scope project demonstrating the visual programming paradigm.",
+    techStack: ["React", "D3.js", "TypeScript", "Graph Algorithms"],
+    link: null,
+    github: null,
     color: "cyan" as const,
+    featured: false,
+  },
+  {
+    title: "Portfolio Site",
+    description:
+      "This site — built with Next.js 16, featuring interactive architecture graphs, horizontal zoomable career timeline, draggable nodes, multi-view content tabs, and a white-glow cyberpunk aesthetic.",
+    techStack: ["Next.js", "React", "Tailwind CSS", "Vercel", "TypeScript"],
+    link: "/",
+    github: "https://github.com/aaronstone2/v0-portfolio",
+    color: "blue" as const,
     featured: false,
   },
 ]
 
 const colorClasses = {
   blue: {
-    border: "neon-border-blue",
-    text: "neon-text-blue",
-    bg: "bg-primary/10",
-    tag: "border-primary/30 text-primary",
+    border: "border border-white/10 hover:border-white/25",
+    text: "text-white",
+    bg: "bg-white/5",
+    tag: "border-white/15 text-slate-300",
   },
   purple: {
-    border: "neon-border-purple",
-    text: "neon-text-purple",
-    bg: "bg-secondary/10",
-    tag: "border-secondary/30 text-secondary",
+    border: "border border-white/10 hover:border-white/25",
+    text: "text-white",
+    bg: "bg-white/5",
+    tag: "border-white/15 text-slate-300",
   },
   cyan: {
-    border: "neon-border-cyan",
-    text: "neon-text-cyan",
-    bg: "bg-accent/10",
-    tag: "border-accent/30 text-accent",
+    border: "border border-white/10 hover:border-white/25",
+    text: "text-white",
+    bg: "bg-white/5",
+    tag: "border-white/15 text-slate-300",
   },
 }
 
@@ -69,8 +79,8 @@ export default function ProjectsPage() {
     <div className="min-h-screen p-6 md:p-10">
       {/* Header */}
       <section className="mb-12 pt-12 md:pt-0">
-        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5">
-          <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5">
+          <span className="h-2 w-2 rounded-full bg-white animate-pulse" style={{ boxShadow: '0 0 8px rgba(255,255,255,0.6)' }} />
           <span className="text-sm font-mono text-muted-foreground">
             Featured Work
           </span>
@@ -126,23 +136,30 @@ export default function ProjectsPage() {
               </div>
 
               {/* Links */}
-              <div className="mt-6 flex items-center gap-3 pt-4 border-t border-border">
-                <a
-                  href={project.link}
-                  className="flex items-center gap-2 text-sm font-medium text-foreground transition-colors hover:text-primary"
-                >
-                  <ExternalLink className="h-4 w-4" />
-                  View Project
-                </a>
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  <Github className="h-4 w-4" />
-                  Source
-                </a>
+              <div className="mt-6 flex items-center gap-3 pt-4 border-t border-white/10">
+                {project.link && (
+                  <a
+                    href={project.link}
+                    className="flex items-center gap-2 text-sm font-medium text-slate-300 transition-all hover:text-white hover:scale-105"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    View Project
+                  </a>
+                )}
+                {project.github && (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-sm font-medium text-slate-500 transition-all hover:text-white hover:scale-105"
+                  >
+                    <Github className="h-4 w-4" />
+                    Source
+                  </a>
+                )}
+                {!project.link && !project.github && (
+                  <span className="text-sm text-slate-600 italic">Coming soon</span>
+                )}
               </div>
 
               {/* Hover glow effect */}
