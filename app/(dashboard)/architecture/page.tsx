@@ -68,24 +68,56 @@ function ArchitectureCanvas() {
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
   const [selectedNode, setSelectedNode] = useState<Node | null>(null)
   const [hoveredNode, setHoveredNode] = useState<string | null>(null)
+  const [clickedNode, setClickedNode] = useState<string | null>(null)
+  const [nodePositions, setNodePositions] = useState<Record<string, {x: number, y: number}>>(
+    Object.fromEntries(nodes.map(n => [n.id, { x: n.x, y: n.y }]))
+  )
+  const [draggingNode, setDraggingNode] = useState<string | null>(null)
+  const [nodeDragStart, setNodeDragStart] = useState({ x: 0, y: 0 })
   const containerRef = useRef<HTMLDivElement>(null)
 
   const handleMouseDown = (e: React.MouseEvent) => {
-    if (e.target === containerRef.current || (e.target as HTMLElement).tagName === "svg") {
-      setIsDragging(true)
-      setDragStart({ x: e.clientX - pan.x, y: e.clientY - pan.y })
-    }
+    if ((e.target as HTMLElement).closest('[data-node]')) return
+    setIsDragging(true)
+    setDragStart({ x: e.clientX - pan.x, y: e.clientY - pan.y })
+  }
+
+  const handleNodeMouseDown = (e: React.MouseEvent, nodeId: string) => {
+    e.stopPropagation()
+    const pos = nodePositions[nodeId]
+    setDraggingNode(nodeId)
+    setNodeDragStart({ x: e.clientX / zoom - pos.x, y: e.clientY / zoom - pos.y })
   }
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
-    if (isDragging) {
+    if (draggingNode) {
+      setNodePositions(prev => ({
+        ...prev,
+        [draggingNode]: {
+          x: e.clientX / zoom - nodeDragStart.x,
+          y: e.clientY / zoom - nodeDragStart.y,
+        }
+      }))
+    } else if (isDragging) {
       setPan({ x: e.clientX - dragStart.x, y: e.clientY - dragStart.y })
     }
-  }, [isDragging, dragStart])
+  }, [isDragging, dragStart, draggingNode, nodeDragStart, zoom])
 
   const handleMouseUp = useCallback(() => {
+    if (draggingNode) {
+      setDraggingNode(null)
+    }
     setIsDragging(false)
-  }, [])
+  }, [draggingNode])
+
+  const handleNodeClick = (node: Node) => {
+    if (draggingNode) return
+    // Bulge effect
+    setClickedNode(node.id)
+    setTimeout(() => setClickedNode(null), 300)
+    // Toggle selection
+    setSelectedNode(prev => prev?.id === node.id ? null : node)
+  }
 
   useEffect(() => {
     window.addEventListener("mousemove", handleMouseMove)
@@ -99,11 +131,11 @@ function ArchitectureCanvas() {
   const resetView = () => {
     setZoom(1)
     setPan({ x: 0, y: 0 })
+    setNodePositions(Object.fromEntries(nodes.map(n => [n.id, { x: n.x, y: n.y }])))
   }
 
   const getNodePosition = (nodeId: string) => {
-    const node = nodes.find(n => n.id === nodeId)
-    return node ? { x: node.x, y: node.y } : { x: 0, y: 0 }
+    return nodePositions[nodeId] || { x: 0, y: 0 }
   }
 
   return (
@@ -164,7 +196,7 @@ function ArchitectureCanvas() {
                   y1={from.y + 25}
                   x2={to.x}
                   y2={to.y - 25}
-                  stroke={isHighlighted ? "rgba(6, 182, 212, 0.8)" : "rgba(100, 116, 139, 0.3)"}
+                  stroke={isHighlighted ? "rgba(255, 255, 255, 0.6)" : "rgba(100, 116, 139, 0.3)"}
                   strokeWidth={isHighlighted ? 2 : 1}
                   markerEnd="url(#arrowhead)"
                   className="transition-all duration-300"
@@ -174,7 +206,7 @@ function ArchitectureCanvas() {
                     x={midX}
                     y={midY}
                     textAnchor="middle"
-                    className={`fill-current text-[10px] font-mono transition-all duration-300 ${isHighlighted ? "text-accent" : "text-muted-foreground/50"}`}
+                    className={`fill-current text-[10px] font-mono transition-all duration-300 ${isHighlighted ? "text-white" : "text-muted-foreground/50"}`}
                   >
                     {edge.label}
                   </text>
@@ -191,26 +223,39 @@ function ArchitectureCanvas() {
         >
           {nodes.map((node) => {
             const colors = nodeColors[node.type]
+            const pos = nodePositions[node.id] || { x: node.x, y: node.y }
             const isHovered = hoveredNode === node.id
             const isSelected = selectedNode?.id === node.id
+            const isClicked = clickedNode === node.id
+            const isDragged = draggingNode === node.id
             
+            let scale = 1
+            if (isClicked) scale = 1.35
+            else if (isDragged) scale = 1.15
+            else if (isHovered) scale = 1.1
+
             return (
               <div
                 key={node.id}
-                className={`absolute flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 px-4 py-2 transition-all duration-300 ${colors.bg} ${colors.border} ${colors.text}`}
+                data-node
+                className={`absolute flex cursor-grab active:cursor-grabbing flex-col items-center justify-center rounded-lg border-2 px-4 py-2 ${colors.bg} ${colors.border} ${colors.text}`}
                 style={{
-                  left: node.x - 60,
-                  top: node.y - 20,
+                  left: pos.x - 60,
+                  top: pos.y - 20,
                   width: 120,
-                  boxShadow: isHovered || isSelected ? `0 0 20px ${colors.glow}` : "none",
-                  transform: isHovered ? "scale(1.1)" : "scale(1)",
-                  zIndex: isHovered ? 10 : 1,
+                  boxShadow: isClicked
+                    ? `0 0 40px rgba(255,255,255,0.5), 0 0 80px ${colors.glow}`
+                    : isHovered || isSelected ? `0 0 20px ${colors.glow}` : "none",
+                  transform: `scale(${scale})`,
+                  transition: isDragged ? 'none' : 'all 0.3s',
+                  zIndex: isDragged ? 100 : isHovered || isClicked ? 10 : 1,
                 }}
                 onMouseEnter={() => setHoveredNode(node.id)}
                 onMouseLeave={() => setHoveredNode(null)}
-                onClick={() => setSelectedNode(isSelected ? null : node)}
+                onMouseDown={(e) => handleNodeMouseDown(e, node.id)}
+                onClick={() => handleNodeClick(node)}
               >
-                <span className="text-center text-xs font-semibold leading-tight">{node.label}</span>
+                <span className="text-center text-xs font-semibold leading-tight select-none">{node.label}</span>
               </div>
             )
           })}
