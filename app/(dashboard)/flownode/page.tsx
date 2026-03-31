@@ -8,7 +8,7 @@ export default function FlowNodePage() {
         </div>
       </div>
       <iframe
-        src="https://flownode-ui-react.vercel.app/"
+        src="https://flownode-ui-react.vercel.app/?embed=1"
         className="relative z-10 h-full w-full border-0"
         title="FlowNode DAG Builder"
         loading="lazy"
