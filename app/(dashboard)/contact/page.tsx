@@ -119,53 +119,8 @@ export default function ContactPage() {
         })}
       </div>
 
-      {/* Status Section */}
-      <section className="grid gap-6 md:grid-cols-2">
-        {/* Current Status */}
-        <div className="rounded-xl border border-border bg-card p-8">
-          <h2 className="text-lg font-semibold mb-4 text-foreground">
-            <span className="neon-text-blue">//</span> Current Status
-          </h2>
-
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="h-3 w-3 rounded-full bg-accent animate-pulse neon-glow-cyan" />
-              <span className="text-foreground font-medium">
-                Open to Work
-              </span>
-            </div>
-
-            <p className="text-muted-foreground">
-              Actively seeking full-time software engineering roles in fintech,
-              developer tools, and data visualization. Particularly interested
-              in positions that leverage my experience with visual programming
-              interfaces.
-            </p>
-
-            <div className="pt-4 border-t border-border">
-              <h3 className="text-sm font-mono text-muted-foreground mb-2">
-                Preferred Roles:
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  "Senior Software Engineer",
-                  "Staff Engineer",
-                  "Tech Lead",
-                  "Founding Engineer",
-                ].map((role) => (
-                  <span
-                    key={role}
-                    className="rounded-md border border-primary/30 bg-primary/5 px-2 py-1 text-xs font-medium text-primary"
-                  >
-                    {role}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Quick Message */}
+      {/* Get in Touch Section */}
+      <section className="max-w-xl">
         <div className="rounded-xl border border-border bg-card p-8">
           <h2 className="text-lg font-semibold mb-4 text-foreground">
             <span className="neon-text-purple">//</span> Get in Touch
