@@ -62,22 +62,22 @@ const projectLinks = [
 
 const colorClasses = {
   blue: {
-    border: "neon-border-blue",
-    text: "neon-text-blue",
-    glow: "group-hover:neon-glow-blue",
-    bg: "bg-primary/10",
+    border: "border border-white/10 hover:border-white/25",
+    text: "text-slate-300",
+    glow: "",
+    bg: "bg-white/5",
   },
   purple: {
-    border: "neon-border-purple",
-    text: "neon-text-purple",
-    glow: "group-hover:neon-glow-purple",
-    bg: "bg-secondary/10",
+    border: "border border-white/10 hover:border-white/25",
+    text: "text-slate-300",
+    glow: "",
+    bg: "bg-white/5",
   },
   cyan: {
-    border: "neon-border-cyan",
-    text: "neon-text-cyan",
-    glow: "group-hover:neon-glow-cyan",
-    bg: "bg-accent/10",
+    border: "border border-white/10 hover:border-white/25",
+    text: "text-slate-300",
+    glow: "",
+    bg: "bg-white/5",
   },
 }
 
@@ -92,24 +92,26 @@ export default function HomePage() {
         </div>
 
         <div className="relative">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5">
-            <span className="h-2 w-2 rounded-full bg-accent animate-pulse" />
-            <span className="text-sm font-mono text-muted-foreground">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5">
+            <span className="h-2 w-2 rounded-full bg-white animate-pulse" style={{ boxShadow: '0 0 8px rgba(255,255,255,0.6)' }} />
+            <span className="text-sm font-mono text-slate-400">
               Available for opportunities
             </span>
           </div>
 
-          <div className="mb-6 h-48 w-48 overflow-hidden rounded-full transition-all duration-300 hover:scale-110">
-            <img src="/aaron-photo.jpg" alt="Aaron Stone" className="h-full w-full object-cover" />
+          <div className="mb-6 h-48 w-48 rounded-full transition-all duration-500 hover:scale-110" style={{ perspective: '400px' }}>
+            <div className="h-full w-full rounded-full overflow-hidden" style={{ boxShadow: '0 0 40px rgba(255,255,255,0.08), inset 0 -20px 40px rgba(0,0,0,0.4), inset 0 20px 30px rgba(255,255,255,0.05)', background: 'radial-gradient(circle at 35% 35%, rgba(255,255,255,0.08), transparent 60%)' }}>
+              <img src="/aaron-photo.jpg" alt="Aaron Stone" className="h-full w-full object-cover" style={{ mixBlendMode: 'normal' }} />
+            </div>
           </div>
 
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4">
-            <span className="neon-text-blue">Aaron Stone</span>
+            <span className="text-white" style={{ textShadow: '0 0 30px rgba(255,255,255,0.2)' }}>Aaron Stone</span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-muted-foreground mb-6 max-w-2xl">
+          <p className="text-xl md:text-2xl text-slate-400 mb-6 max-w-2xl">
             Software Engineer{" "}
-            <span className="neon-text-purple">&</span> Product Builder
+            <span className="text-slate-300">&amp;</span> Product Builder
           </p>
 
           <p className="text-muted-foreground max-w-xl leading-relaxed">
@@ -119,7 +121,7 @@ export default function HomePage() {
           </p>
 
           <div className="mt-6 flex items-center gap-4">
-            <a href="https://linkedin.com/in/aaron-stone-2b6994141" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 rounded-lg border border-primary/30 bg-primary/5 px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary/10">
+            <a href="https://linkedin.com/in/aaron-stone-2b6994141" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-white/10 hover:text-white">
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
               LinkedIn
             </a>
@@ -144,8 +146,8 @@ export default function HomePage() {
 
       {/* Project Grid */}
       <section>
-        <h2 className="text-lg font-mono font-semibold mb-6 text-muted-foreground">
-          <span className="neon-text-cyan">//</span> EXPLORE
+        <h2 className="text-lg font-mono font-semibold mb-6 text-slate-500">
+          <span className="text-white" style={{ textShadow: '0 0 10px rgba(255,255,255,0.3)' }}>//</span> EXPLORE
         </h2>
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -197,7 +199,7 @@ export default function HomePage() {
             key={stat.label}
             className="rounded-xl border border-border bg-card/50 p-6 text-center"
           >
-            <div className="text-3xl font-bold neon-text-blue">{stat.value}</div>
+            <div className="text-3xl font-bold text-white" style={{ textShadow: '0 0 15px rgba(255,255,255,0.2)' }}>{stat.value}</div>
             <div className="mt-1 text-sm text-muted-foreground font-mono">
               {stat.label}
             </div>
