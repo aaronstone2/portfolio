@@ -20,7 +20,7 @@ export default function FlowNodePage() {
         </div>
 
         <a
-          href="https://jira-ticket-validator-ui-react.vercel.app/"
+          href="https://flownode-ui-react.vercel.app/"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 rounded-lg bg-primary/10 px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary/20 neon-border-blue"
@@ -43,7 +43,7 @@ export default function FlowNodePage() {
         </div>
 
         <iframe
-          src="https://jira-ticket-validator-ui-react.vercel.app/"
+          src="https://flownode-ui-react.vercel.app/"
           className="relative z-10 h-full w-full border-0"
           title="FlowNode DAG Builder"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

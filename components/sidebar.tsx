@@ -12,15 +12,19 @@ import {
   Mail,
   Menu,
   X,
+  Activity,
+  BookOpen,
 } from "lucide-react"
 import { useState } from "react"
 
 const navItems = [
   { href: "/", label: "Home", icon: Home },
   { href: "/flownode", label: "FlowNode", icon: GitBranch },
+  { href: "/service-graph", label: "Service Graph", icon: Activity },
   { href: "/resume", label: "Resume", icon: FileText },
   { href: "/architecture", label: "Architecture", icon: Network },
   { href: "/projects", label: "Projects", icon: FolderKanban },
+  { href: "/thesis", label: "Thesis", icon: BookOpen },
   { href: "/contact", label: "Contact", icon: Mail },
 ]
 

@@ -22,6 +22,16 @@ const projects = [
     featured: true,
   },
   {
+    title: "Service Graph Visualizer",
+    description:
+      "Microservice dependency mapping and analysis tool with interactive graph UI. Features CLI analyzer, REST API server, and React UI with drag-and-drop service nodes, toxic injection, and load test visualization.",
+    techStack: ["React", "ReactFlow", "Node.js", "Drizzle ORM", "EdgeDB", "NX"],
+    link: "/service-graph",
+    github: "https://github.com/aaronstone2",
+    color: "cyan" as const,
+    featured: true,
+  },
+  {
     title: "Metro Graph",
     description:
       "Interactive transit network visualization tool that maps urban transportation systems. Features real-time updates, route optimization algorithms, and accessibility analysis for city planners.",

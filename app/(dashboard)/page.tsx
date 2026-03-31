@@ -38,6 +38,20 @@ const projectLinks = [
     color: "blue",
   },
   {
+    href: "/service-graph",
+    title: "Service Graph",
+    description: "Microservice Dependency Visualizer",
+    icon: GitBranch,
+    color: "cyan",
+  },
+  {
+    href: "/thesis",
+    title: "Thesis",
+    description: "3D VR Programming Research",
+    icon: FileText,
+    color: "purple",
+  },
+  {
     href: "/contact",
     title: "Contact",
     description: "Get in Touch",
