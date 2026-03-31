@@ -56,7 +56,7 @@ export default function ThesisPage() {
       ) : (
         <div className="flex-1">
           <iframe
-            src="https://flownode-ui-react.vercel.app/thesis"
+            src="https://flownode-ui-react.vercel.app/thesis?embed=1"
             className="h-full w-full border-0"
             title="Bubble Thesis Reader"
           />
@@ -65,3 +65,4 @@ export default function ThesisPage() {
     </div>
   )
 }
+

@@ -461,7 +461,7 @@ export default function ResumePage() {
             </div>
           </div>
           <iframe
-            src="https://flownode-ui-react.vercel.app/resume"
+            src="https://flownode-ui-react.vercel.app/resume?embed=1"
             className="relative z-10 h-full w-full border-0"
             title="Resume Node Graph"
           />
@@ -470,3 +470,4 @@ export default function ResumePage() {
     </div>
   )
 }
+

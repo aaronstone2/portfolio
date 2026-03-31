@@ -8,7 +8,7 @@ export default function ServiceGraphPage() {
         </div>
       </div>
       <iframe
-        src="https://flownode-ui-react.vercel.app/service-graph"
+        src="https://flownode-ui-react.vercel.app/service-graph?embed=1"
         className="relative z-10 h-full w-full border-0"
         title="Service Graph Visualizer"
         loading="lazy"
@@ -16,3 +16,4 @@ export default function ServiceGraphPage() {
     </div>
   )
 }
+

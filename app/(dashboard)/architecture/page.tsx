@@ -364,7 +364,7 @@ export default function ArchitecturePage() {
             </div>
           </div>
           <iframe
-            src="https://flownode-ui-react.vercel.app/architecture"
+            src="https://flownode-ui-react.vercel.app/architecture?embed=1"
             className="relative z-10 h-full w-full border-0"
             title="Architecture Node Graph"
           />
@@ -373,4 +373,5 @@ export default function ArchitecturePage() {
     </div>
   )
 }
+
 
