@@ -99,7 +99,7 @@ export default function HomePage() {
             </span>
           </div>
 
-          <div className="mb-6 h-48 w-48 rounded-full p-[3px] transition-all duration-300 hover:scale-105 cursor-pointer" style={{ background: 'linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045, #833ab4)', backgroundSize: '300% 300%', animation: 'igGradient 3s ease infinite' }}>
+          <div className="mb-6 h-48 w-48 rounded-full p-[3px] transition-all duration-300 hover:scale-[1.25] cursor-pointer" style={{ background: 'linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045, #833ab4)', backgroundSize: '300% 300%', animation: 'igGradient 3s ease infinite' }}>
             <div className="h-full w-full rounded-full overflow-hidden border-[3px] border-black">
               <img src="/aaron-photo.jpg" alt="Aaron Stone" className="h-full w-full object-cover" />
             </div>
