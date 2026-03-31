@@ -76,8 +76,8 @@ export function Sidebar() {
                 </div>
               </div>
               <style dangerouslySetInnerHTML={{ __html: `@keyframes sidebarPulse { 0%, 100% { box-shadow: 0 0 20px rgba(255,255,255,0.25), 0 0 40px rgba(255,255,255,0.08); } 50% { box-shadow: 0 0 40px rgba(255,255,255,0.45), 0 0 70px rgba(255,255,255,0.15); } }` }} />
-              <span className="font-mono text-xl font-bold tracking-tight text-white transition-all duration-300 hover:scale-110 cursor-pointer" style={{ textShadow: '0 0 15px rgba(255,255,255,0.3)' }}>
-                AARON.DEV
+              <span className="font-mono text-xl font-bold tracking-tight text-white transition-all duration-300 hover:scale-110 cursor-pointer" style={{ textShadow: '0 0 20px rgba(255,255,255,0.5), 0 0 40px rgba(255,255,255,0.2)' }}>
+                AARON.GRAPH
               </span>
             </Link>
           </div>
