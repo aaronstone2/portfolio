@@ -99,8 +99,8 @@ export default function HomePage() {
             </span>
           </div>
 
-          <div className="mb-6 h-48 w-48 overflow-hidden rounded-full shadow-[0_0_30px_rgba(255,255,255,0.1)] transition-all duration-300 hover:scale-110 hover:shadow-[0_0_50px_rgba(255,255,255,0.2)]">
-            <img src="/aaron-photo.jpg" alt="Aaron Stone" className="h-full w-full object-cover transition-transform duration-300 hover:scale-105" />
+          <div className="mb-6 h-48 w-48 overflow-hidden rounded-full transition-all duration-300 hover:scale-110">
+            <img src="/aaron-photo.jpg" alt="Aaron Stone" className="h-full w-full object-cover" />
           </div>
 
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4">
