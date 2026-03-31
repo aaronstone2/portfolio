@@ -108,8 +108,8 @@ export default function HomePage() {
           </div>
           <style dangerouslySetInnerHTML={{ __html: `@keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 35px rgba(255,255,255,0.25), 0 0 70px rgba(255,255,255,0.08); } 50% { box-shadow: 0 0 60px rgba(255,255,255,0.45), 0 0 120px rgba(255,255,255,0.15); } }` }} />
 
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4">
-            <span className="text-white" style={{ textShadow: '0 0 30px rgba(255,255,255,0.2)' }}>Aaron Stone</span>
+          <h1 className="text-4xl md:text-6xl font-light tracking-wide mb-4">
+            <span style={{ color: '#fff', textShadow: '0 0 7px #fff, 0 0 15px #fff, 0 0 30px #fff, 0 0 50px rgba(255,255,255,0.5), 0 0 80px rgba(255,255,255,0.3), 0 0 120px rgba(255,255,255,0.15)', WebkitTextStroke: '0.5px rgba(255,255,255,0.8)', letterSpacing: '0.08em' }}>Aaron Stone</span>
           </h1>
 
           <p className="text-xl md:text-2xl text-slate-400 mb-6 max-w-2xl">
