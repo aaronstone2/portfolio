@@ -56,7 +56,7 @@ const edges: Edge[] = [
 const nodeColors: Record<string, { bg: string; border: string; text: string; glow: string }> = {
   frontend: { bg: "bg-primary/20", border: "border-primary", text: "text-primary", glow: "rgba(59, 130, 246, 0.6)" },
   backend: { bg: "bg-secondary/20", border: "border-secondary", text: "text-secondary", glow: "rgba(168, 85, 247, 0.6)" },
-  database: { bg: "bg-accent/20", border: "border-accent", text: "text-accent", glow: "rgba(6, 182, 212, 0.6)" },
+  database: { bg: "bg-accent/20", border: "border-accent", text: "text-white", glow: "rgba(6, 182, 212, 0.6)" },
   service: { bg: "bg-emerald-500/20", border: "border-emerald-500", text: "text-emerald-400", glow: "rgba(16, 185, 129, 0.6)" },
   external: { bg: "bg-amber-500/20", border: "border-amber-500", text: "text-amber-400", glow: "rgba(245, 158, 11, 0.6)" },
 }
@@ -159,7 +159,7 @@ function ArchitectureCanvas() {
         </button>
         <button
           onClick={resetView}
-          className="ml-2 rounded-lg bg-accent/10 p-2 text-accent transition-colors hover:bg-accent/20 neon-border-cyan"
+          className="ml-2 rounded-lg bg-white/5 p-2 text-white transition-colors hover:bg-accent/20 border border-white/10"
         >
           <Maximize2 className="h-4 w-4" />
         </button>
@@ -273,8 +273,10 @@ function ArchitectureCanvas() {
                       return (
                         <div
                           key={i}
-                          className={`flex items-center gap-1.5 rounded px-2 py-1 mb-1 cursor-pointer transition-all duration-200 hover:scale-105 ${connColors.bg}`}
-                          style={{ border: `1px solid ${connColors.glow}33` }}
+                          className={`flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 mb-1.5 cursor-pointer transition-all duration-200 hover:scale-[1.15] active:scale-[1.25] ${connColors.bg}`}
+                          style={{ border: `1px solid ${connColors.glow}44`, boxShadow: 'none', transition: 'all 0.2s' }}
+                          onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = `0 0 15px ${connColors.glow}66` }}
+                          onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = 'none' }}
                           onClick={(e) => {
                             e.stopPropagation()
                             const target = nodes.find(n => n.id === connectedId)
@@ -286,7 +288,7 @@ function ArchitectureCanvas() {
                           }}
                         >
                           <span className="text-[10px] opacity-50">{direction}</span>
-                          <span className={`text-[10px] font-medium ${connColors.text}`}>{connectedNode?.label}</span>
+                          <span className={`text-[10px] font-semibold ${connColors.text}`}>{connectedNode?.label}</span>
                           {edge.label && <span className="text-[9px] opacity-40 ml-auto">{edge.label}</span>}
                         </div>
                       )
@@ -298,19 +300,21 @@ function ArchitectureCanvas() {
           })}
         </div>
 
-        {/* Legend */}
-        <div className="absolute bottom-4 left-4 rounded-lg border border-white/10 bg-card/90 p-3 backdrop-blur-sm">
-          <h3 className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Legend</h3>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+        {/* Legend as a node */}
+        <div className="absolute bottom-4 left-4 rounded-lg border-2 border-white/15 bg-black/80 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:scale-[1.08] hover:border-white/25" style={{ boxShadow: '0 0 15px rgba(255,255,255,0.05)' }}>
+          <div className="px-3 py-1.5 border-b border-white/10 bg-white/5">
+            <span className="text-[10px] font-semibold text-white" style={{ textShadow: '0 0 8px rgba(255,255,255,0.3)' }}>Legend</span>
+          </div>
+          <div className="px-3 py-2 space-y-1">
             {Object.entries(nodeColors).map(([type, colors]) => (
-              <div key={type} className="flex items-center gap-1.5">
-                <div className={`h-2.5 w-2.5 rounded border ${colors.bg} ${colors.border}`} />
-                <span className="text-[10px] capitalize text-muted-foreground">{type}</span>
+              <div key={type} className={`flex items-center gap-2 rounded px-2 py-1 transition-all duration-200 hover:scale-[1.1] cursor-default ${colors.bg}`}>
+                <div className={`h-2.5 w-2.5 rounded-full border ${colors.border}`} style={{ boxShadow: `0 0 6px ${colors.glow}` }} />
+                <span className={`text-[10px] font-medium capitalize ${colors.text}`}>{type}</span>
               </div>
             ))}
           </div>
-          <div className="mt-2 pt-2 border-t border-white/10 text-[9px] text-muted-foreground">
-            Click to expand · Drag to move
+          <div className="px-3 py-1.5 border-t border-white/10 bg-white/3">
+            <span className="text-[9px] text-slate-500">click · drag · zoom</span>
           </div>
         </div>
       </div>
@@ -332,8 +336,8 @@ export default function ArchitecturePage() {
         {/* Tab bar overlaid on the existing header area */}
         <div className="flex items-center justify-between border-b border-border bg-card/50 px-6 py-3">
           <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-accent/10 p-2 neon-border-cyan">
-              <Network className="h-5 w-5 text-accent" />
+            <div className="rounded-lg bg-white/5 p-2 border border-white/10">
+              <Network className="h-5 w-5 text-white" />
             </div>
             <div>
               <h1 className="text-xl font-semibold text-foreground">FlowNode System Architecture</h1>
@@ -346,7 +350,7 @@ export default function ArchitecturePage() {
                 key={mode.id}
                 onClick={() => setViewMode(mode.id)}
                 className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all ${
-                  viewMode === mode.id ? "bg-accent/20 text-accent shadow-sm" : "text-muted-foreground hover:text-foreground"
+                  viewMode === mode.id ? "bg-accent/20 text-white shadow-sm" : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 <mode.icon className="h-3.5 w-3.5" />
@@ -366,8 +370,8 @@ export default function ArchitecturePage() {
     <div className="flex h-screen flex-col overflow-hidden">
       <div className="flex items-center justify-between border-b border-border bg-card/50 px-6 py-3">
         <div className="flex items-center gap-3">
-          <div className="rounded-lg bg-accent/10 p-2 neon-border-cyan">
-            <Network className="h-5 w-5 text-accent" />
+          <div className="rounded-lg bg-white/5 p-2 border border-white/10">
+            <Network className="h-5 w-5 text-white" />
           </div>
           <div>
             <h1 className="text-xl font-semibold text-foreground">FlowNode System Architecture</h1>
@@ -380,7 +384,7 @@ export default function ArchitecturePage() {
               key={mode.id}
               onClick={() => setViewMode(mode.id)}
               className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all ${
-                viewMode === mode.id ? "bg-accent/20 text-accent shadow-sm" : "text-muted-foreground hover:text-foreground"
+                viewMode === mode.id ? "bg-accent/20 text-white shadow-sm" : "text-muted-foreground hover:text-foreground"
               }`}
             >
               <mode.icon className="h-3.5 w-3.5" />
@@ -405,3 +409,4 @@ export default function ArchitecturePage() {
     </div>
   )
 }
+

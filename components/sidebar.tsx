@@ -70,14 +70,14 @@ export function Sidebar() {
               className="flex items-center gap-3"
               onClick={() => setMobileMenuOpen(false)}
             >
-              <div className="h-16 w-16 rounded-full p-[2px] transition-all duration-300 hover:scale-[1.6] cursor-pointer" style={{ background: 'rgba(255,255,255,0.25)', boxShadow: '0 0 20px rgba(255,255,255,0.25), 0 0 40px rgba(255,255,255,0.08)', animation: 'sidebarPulse 2s ease-in-out infinite' }}>
+              <div className="h-16 w-16 rounded-full p-[2px] transition-all duration-300 hover:scale-[2.0] cursor-pointer" style={{ background: 'rgba(255,255,255,0.25)', boxShadow: '0 0 20px rgba(255,255,255,0.25), 0 0 40px rgba(255,255,255,0.08)', animation: 'sidebarPulse 2s ease-in-out infinite' }}>
                 <div className="h-full w-full rounded-full overflow-hidden border-[2px] border-[#0a0a1a]">
                   <img src="/aaron-photo.jpg" alt="Aaron Stone" className="h-full w-full object-cover" />
                 </div>
               </div>
               <style dangerouslySetInnerHTML={{ __html: `@keyframes sidebarPulse { 0%, 100% { box-shadow: 0 0 20px rgba(255,255,255,0.25), 0 0 40px rgba(255,255,255,0.08); } 50% { box-shadow: 0 0 40px rgba(255,255,255,0.45), 0 0 70px rgba(255,255,255,0.15); } }` }} />
-              <span className="font-mono text-xl font-bold tracking-tight text-white transition-all duration-300 hover:scale-110 cursor-pointer" style={{ textShadow: '0 0 20px rgba(255,255,255,0.5), 0 0 40px rgba(255,255,255,0.2)' }}>
-                AARON.STONE
+              <span className="font-mono text-2xl font-light tracking-wide transition-all duration-300 hover:scale-[1.2] cursor-pointer" style={{ color: '#fff', textShadow: '0 0 7px #fff, 0 0 15px #fff, 0 0 30px #fff, 0 0 50px rgba(255,255,255,0.5), 0 0 80px rgba(255,255,255,0.3)', letterSpacing: '0.15em', WebkitTextStroke: '0.5px rgba(255,255,255,0.8)' }}>
+                aaron.stone
               </span>
             </Link>
           </div>
