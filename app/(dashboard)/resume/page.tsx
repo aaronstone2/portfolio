@@ -1,7 +1,7 @@
 "use client"
 
-import { FileText, Download, Briefcase, GraduationCap, Code, Award, MapPin, Calendar, LayoutGrid, FileDown, GitBranch } from "lucide-react"
-import { useState } from "react"
+import { FileText, Download, Briefcase, GraduationCap, Code, Award, MapPin, Calendar, LayoutGrid, FileDown, GitBranch, ZoomIn, ZoomOut, Maximize2 } from "lucide-react"
+import { useState, useRef, useEffect } from "react"
 
 type ViewMode = "website" | "document" | "graph"
 
@@ -104,169 +104,253 @@ const skills = {
 }
 
 function WebsiteView() {
-  const [activeSection, setActiveSection] = useState<"experience" | "skills">("experience")
+  const [zoom, setZoom] = useState(1)
+  const [pan, setPan] = useState({ x: 0, y: 0 })
+  const [isDragging, setIsDragging] = useState(false)
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
   const [hoveredItem, setHoveredItem] = useState<number | null>(null)
+  const [selectedItem, setSelectedItem] = useState<number | null>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  const allItems = [...experience, ...education]
+  const selected = allItems.find(i => i.id === selectedItem)
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if ((e.target as HTMLElement).closest('[data-card]')) return
+    setIsDragging(true)
+    setDragStart({ x: e.clientX - pan.x, y: e.clientY - pan.y })
+  }
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (isDragging) setPan({ x: e.clientX - dragStart.x, y: e.clientY - dragStart.y })
+    }
+    const handleMouseUp = () => setIsDragging(false)
+    window.addEventListener("mousemove", handleMouseMove)
+    window.addEventListener("mouseup", handleMouseUp)
+    return () => { window.removeEventListener("mousemove", handleMouseMove); window.removeEventListener("mouseup", handleMouseUp) }
+  }, [isDragging, dragStart])
+
+  const handleWheel = (e: React.WheelEvent) => {
+    e.preventDefault()
+    setZoom(z => Math.max(0.3, Math.min(2, z - e.deltaY * 0.001)))
+  }
+
+  const resetView = () => { setZoom(1); setPan({ x: 0, y: 0 }) }
+
+  // Timeline layout: education first (leftmost), then experience in reverse chronological
+  const timelineItems = [...education, ...experience.slice().reverse()]
+  const cardWidth = 340
+  const cardGap = 40
+  const timelineY = 180
+
+  const roleColors: Record<number, string> = {
+    1: '#3b82f6', 2: '#a855f7', 3: '#22c55e', 4: '#06b6d4', 5: '#ec4899', 6: '#8b5cf6',
+  }
 
   return (
-    <div className="flex-1 overflow-y-auto p-6">
-      <div className="mb-4 flex items-center gap-3">
-        <button
-          onClick={() => setActiveSection("experience")}
-          className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
-            activeSection === "experience"
-              ? "bg-secondary/20 text-secondary neon-border-purple"
-              : "bg-card text-muted-foreground hover:bg-muted hover:text-foreground"
-          }`}
-        >
-          Experience
-        </button>
-        <button
-          onClick={() => setActiveSection("skills")}
-          className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
-            activeSection === "skills"
-              ? "bg-secondary/20 text-secondary neon-border-purple"
-              : "bg-card text-muted-foreground hover:bg-muted hover:text-foreground"
-          }`}
-        >
-          Skills
-        </button>
+    <div className="flex-1 flex flex-col overflow-hidden">
+      {/* Zoom controls */}
+      <div className="flex items-center justify-between border-b border-border bg-card/50 px-4 py-2">
+        <div className="flex items-center gap-3">
+          <Briefcase className="h-4 w-4 text-primary" />
+          <span className="text-sm text-muted-foreground font-mono">Career Timeline</span>
+          <span className="text-xs text-muted-foreground">— drag to pan, scroll to zoom</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <button onClick={() => setZoom(z => Math.max(0.3, z - 0.1))} className="rounded-lg bg-card p-1.5 text-muted-foreground hover:text-foreground"><ZoomOut className="h-4 w-4" /></button>
+          <span className="min-w-[3rem] text-center text-xs text-muted-foreground">{Math.round(zoom * 100)}%</span>
+          <button onClick={() => setZoom(z => Math.min(2, z + 0.1))} className="rounded-lg bg-card p-1.5 text-muted-foreground hover:text-foreground"><ZoomIn className="h-4 w-4" /></button>
+          <button onClick={resetView} className="rounded-lg bg-accent/10 p-1.5 text-accent hover:bg-accent/20 neon-border-cyan"><Maximize2 className="h-4 w-4" /></button>
+        </div>
       </div>
 
-      {activeSection === "experience" ? (
-        <div className="mx-auto max-w-4xl">
-          <div className="mb-8">
-            <div className="mb-6 flex items-center gap-2">
-              <Briefcase className="h-5 w-5 text-primary" />
-              <h2 className="text-lg font-semibold text-foreground">Work Experience</h2>
-            </div>
-            <div className="relative">
-              <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-primary via-secondary to-accent" />
-              <div className="space-y-6">
-                {experience.map((item) => (
+      {/* Pannable/zoomable canvas */}
+      <div
+        ref={containerRef}
+        className="relative flex-1 overflow-hidden cursor-grab active:cursor-grabbing"
+        onMouseDown={handleMouseDown}
+        onWheel={handleWheel}
+        style={{ backgroundImage: "radial-gradient(circle, rgba(59,130,246,0.08) 1px, transparent 1px)", backgroundSize: "30px 30px" }}
+      >
+        <div
+          style={{
+            transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
+            transformOrigin: "0 0",
+            position: "absolute",
+            top: 0,
+            left: 0,
+          }}
+        >
+          {/* Horizontal timeline line */}
+          <div
+            style={{
+              position: "absolute",
+              top: timelineY + 12,
+              left: 40,
+              width: timelineItems.length * (cardWidth + cardGap) - cardGap + 40,
+              height: 2,
+              background: "linear-gradient(90deg, rgba(168,85,247,0.6), rgba(59,130,246,0.6), rgba(6,182,212,0.6))",
+            }}
+          />
+
+          {/* Year markers */}
+          {timelineItems.map((item, i) => {
+            const x = 60 + i * (cardWidth + cardGap)
+            const year = item.period.split("–")[0].trim().split(" ").pop() || ""
+            return (
+              <div key={`year-${i}`} style={{ position: "absolute", left: x + cardWidth / 2 - 20, top: timelineY - 20 }}>
+                <span className="text-xs font-mono text-muted-foreground">{year}</span>
+              </div>
+            )
+          })}
+
+          {/* Cards */}
+          {timelineItems.map((item, i) => {
+            const x = 60 + i * (cardWidth + cardGap)
+            const isAbove = i % 2 === 0
+            const cardY = isAbove ? timelineY - 260 : timelineY + 40
+            const color = roleColors[item.id] || '#3b82f6'
+            const isHovered = hoveredItem === item.id
+            const isSelected = selectedItem === item.id
+
+            return (
+              <div key={item.id}>
+                {/* Connector line from timeline to card */}
+                <div
+                  style={{
+                    position: "absolute",
+                    left: x + cardWidth / 2,
+                    top: isAbove ? cardY + 230 : timelineY + 14,
+                    width: 2,
+                    height: isAbove ? timelineY - cardY - 230 + 10 : cardY - timelineY - 14,
+                    background: color,
+                    opacity: isHovered || isSelected ? 1 : 0.3,
+                    transition: "opacity 0.3s",
+                  }}
+                />
+
+                {/* Timeline dot */}
+                <div
+                  style={{
+                    position: "absolute",
+                    left: x + cardWidth / 2 - 8,
+                    top: timelineY + 4,
+                    width: 16,
+                    height: 16,
+                    borderRadius: "50%",
+                    border: `3px solid ${color}`,
+                    background: isHovered || isSelected ? color : "var(--background, #0a0a1a)",
+                    boxShadow: isHovered || isSelected ? `0 0 15px ${color}` : "none",
+                    transition: "all 0.3s",
+                    zIndex: 5,
+                  }}
+                />
+
+                {/* Card */}
+                <div
+                  data-card
+                  style={{
+                    position: "absolute",
+                    left: x,
+                    top: cardY,
+                    width: cardWidth,
+                    cursor: "pointer",
+                    transition: "all 0.3s",
+                    transform: isHovered ? "scale(1.03)" : "scale(1)",
+                    zIndex: isHovered || isSelected ? 10 : 1,
+                  }}
+                  onMouseEnter={() => setHoveredItem(item.id)}
+                  onMouseLeave={() => setHoveredItem(null)}
+                  onClick={() => setSelectedItem(isSelected ? null : item.id)}
+                >
                   <div
-                    key={item.id}
-                    className={`relative pl-16 transition-all duration-300 ${hoveredItem === item.id ? "scale-[1.02]" : ""}`}
-                    onMouseEnter={() => setHoveredItem(item.id)}
-                    onMouseLeave={() => setHoveredItem(null)}
+                    className="rounded-lg border bg-card/90 backdrop-blur-sm p-4"
+                    style={{
+                      borderColor: isHovered || isSelected ? color : "var(--border, rgba(255,255,255,0.1))",
+                      boxShadow: isHovered || isSelected ? `0 0 25px ${color}33` : "none",
+                    }}
                   >
-                    <div className={`absolute left-4 top-2 h-4 w-4 rounded-full border-2 transition-all duration-300 ${
-                      hoveredItem === item.id ? "border-primary bg-primary shadow-[0_0_15px_rgba(59,130,246,0.8)]" : "border-primary/50 bg-background"
-                    }`} />
-                    <div className={`rounded-lg border bg-card/50 p-5 transition-all duration-300 ${
-                      hoveredItem === item.id ? "border-primary/50 shadow-[0_0_20px_rgba(59,130,246,0.2)]" : "border-border"
-                    }`}>
-                      <div className="mb-3 flex flex-wrap items-start justify-between gap-2">
-                        <div>
-                          <h3 className="text-lg font-semibold text-foreground">{item.title}</h3>
-                          <p className="text-primary">{item.company}</p>
-                        </div>
-                        <div className="text-right text-sm text-muted-foreground">
-                          <div className="flex items-center gap-1"><Calendar className="h-3 w-3" />{item.period}</div>
-                          <div className="flex items-center gap-1"><MapPin className="h-3 w-3" />{item.location}</div>
-                        </div>
-                      </div>
-                      <ul className="mb-4 space-y-1 text-sm text-muted-foreground">
-                        {item.bullets.map((bullet, idx) => (
-                          <li key={idx} className="flex items-start gap-2">
-                            <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary/50" />
-                            {bullet}
-                          </li>
-                        ))}
-                      </ul>
-                      <div className="flex flex-wrap gap-2">
-                        {item.skills.map((skill) => (
-                          <span key={skill} className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">{skill}</span>
-                        ))}
-                      </div>
+                    <div className="flex items-center gap-2 mb-2">
+                      {item.type === "education" ? (
+                        <GraduationCap className="h-4 w-4 flex-shrink-0" style={{ color }} />
+                      ) : (
+                        <Briefcase className="h-4 w-4 flex-shrink-0" style={{ color }} />
+                      )}
+                      <span className="text-xs font-mono" style={{ color }}>{item.period}</span>
                     </div>
+                    <h3 className="text-sm font-semibold text-foreground leading-tight">{item.title}</h3>
+                    <p className="text-xs mt-1" style={{ color }}>{item.company}</p>
+                    <div className="flex items-center gap-1 mt-1.5 text-xs text-muted-foreground">
+                      <MapPin className="h-3 w-3" />{item.location}
+                    </div>
+
+                    {(isSelected || isHovered) && (
+                      <div className="mt-3 pt-3 border-t border-border">
+                        <ul className="space-y-1">
+                          {item.bullets.slice(0, isSelected ? undefined : 2).map((bullet, idx) => (
+                            <li key={idx} className="flex items-start gap-1.5 text-xs text-muted-foreground">
+                              <span className="mt-1 h-1 w-1 flex-shrink-0 rounded-full" style={{ background: color }} />
+                              {bullet}
+                            </li>
+                          ))}
+                        </ul>
+                        <div className="flex flex-wrap gap-1.5 mt-2">
+                          {item.skills.slice(0, isSelected ? undefined : 4).map((skill) => (
+                            <span key={skill} className="rounded-full px-2 py-0.5 text-[10px] font-medium" style={{ background: `${color}15`, color }}>
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+
+          {/* Skills section at the end */}
+          <div
+            data-card
+            style={{
+              position: "absolute",
+              left: 60 + timelineItems.length * (cardWidth + cardGap),
+              top: timelineY - 140,
+              width: 400,
+            }}
+          >
+            <div className="rounded-lg border border-accent/30 bg-card/90 backdrop-blur-sm p-5">
+              <div className="flex items-center gap-2 mb-4">
+                <Code className="h-5 w-5 text-accent" />
+                <h2 className="text-sm font-semibold uppercase tracking-wider text-accent">Technical Skills</h2>
+              </div>
+              {Object.entries(skills).map(([category, items]) => (
+                <div key={category} className="mb-3">
+                  <h3 className="text-xs font-semibold text-muted-foreground mb-1.5 capitalize">{category}</h3>
+                  <div className="flex flex-wrap gap-1.5">
+                    {items.map((skill) => (
+                      <span key={skill} className="rounded-full bg-accent/10 px-2 py-0.5 text-[10px] font-medium text-accent">{skill}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+              <div className="mt-4 pt-3 border-t border-border grid grid-cols-3 gap-2">
+                {[
+                  { value: "aaron@bubble.graphics", label: "Email" },
+                  { value: "857-231-1060", label: "Phone" },
+                  { value: "NYC Metro", label: "Location" },
+                ].map((c) => (
+                  <div key={c.label} className="text-center">
+                    <p className="text-[10px] font-medium text-foreground">{c.value}</p>
+                    <p className="text-[9px] text-muted-foreground">{c.label}</p>
                   </div>
                 ))}
               </div>
             </div>
           </div>
-
-          <div>
-            <div className="mb-6 flex items-center gap-2">
-              <GraduationCap className="h-5 w-5 text-secondary" />
-              <h2 className="text-lg font-semibold text-foreground">Education</h2>
-            </div>
-            <div className="relative">
-              <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-secondary to-transparent" />
-              {education.map((item) => (
-                <div key={item.id} className={`relative pl-16 transition-all duration-300 ${hoveredItem === item.id ? "scale-[1.02]" : ""}`}
-                  onMouseEnter={() => setHoveredItem(item.id)} onMouseLeave={() => setHoveredItem(null)}>
-                  <div className={`absolute left-4 top-2 h-4 w-4 rounded-full border-2 transition-all duration-300 ${
-                    hoveredItem === item.id ? "border-secondary bg-secondary shadow-[0_0_15px_rgba(168,85,247,0.8)]" : "border-secondary/50 bg-background"
-                  }`} />
-                  <div className={`rounded-lg border bg-card/50 p-5 transition-all duration-300 ${
-                    hoveredItem === item.id ? "border-secondary/50 shadow-[0_0_20px_rgba(168,85,247,0.2)]" : "border-border"
-                  }`}>
-                    <div className="mb-3 flex flex-wrap items-start justify-between gap-2">
-                      <div>
-                        <h3 className="text-lg font-semibold text-foreground">{item.title}</h3>
-                        <p className="text-secondary">{item.company}</p>
-                      </div>
-                      <div className="text-right text-sm text-muted-foreground">
-                        <div className="flex items-center gap-1"><Calendar className="h-3 w-3" />{item.period}</div>
-                        <div className="flex items-center gap-1"><MapPin className="h-3 w-3" />{item.location}</div>
-                      </div>
-                    </div>
-                    <ul className="mb-4 space-y-1 text-sm text-muted-foreground">
-                      {item.bullets.map((bullet, idx) => (
-                        <li key={idx} className="flex items-start gap-2">
-                          <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-secondary/50" />{bullet}
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="flex flex-wrap gap-2">
-                      {item.skills.map((skill) => (
-                        <span key={skill} className="rounded-full bg-secondary/10 px-3 py-1 text-xs font-medium text-secondary">{skill}</span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
-      ) : (
-        <div className="mx-auto max-w-4xl">
-          <div className="mb-6 flex items-center gap-2">
-            <Code className="h-5 w-5 text-accent" />
-            <h2 className="text-lg font-semibold text-foreground">Technical Skills</h2>
-          </div>
-          <div className="grid gap-6 md:grid-cols-2">
-            {Object.entries(skills).map(([category, items]) => (
-              <div key={category} className="rounded-lg border border-border bg-card/50 p-5 transition-all duration-300 hover:border-accent/50 hover:shadow-[0_0_20px_rgba(6,182,212,0.2)]">
-                <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-accent">{category}</h3>
-                <div className="flex flex-wrap gap-2">
-                  {items.map((skill) => (
-                    <span key={skill} className="rounded-full bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent transition-all duration-300 hover:bg-accent/20">{skill}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-8">
-            <div className="mb-6 flex items-center gap-2">
-              <Award className="h-5 w-5 text-primary" />
-              <h2 className="text-lg font-semibold text-foreground">Contact</h2>
-            </div>
-            <div className="grid gap-4 md:grid-cols-3">
-              {[
-                { value: "aaron@bubble.graphics", label: "Email" },
-                { value: "857-231-1060", label: "Phone" },
-                { value: "NYC Metro", label: "Location" },
-              ].map((item) => (
-                <div key={item.label} className="rounded-lg border border-border bg-card/50 p-4 text-center transition-all duration-300 hover:border-primary/50">
-                  <p className="text-sm font-medium text-foreground">{item.value}</p>
-                  <p className="text-xs text-muted-foreground">{item.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
+      </div>
     </div>
   )
 }
