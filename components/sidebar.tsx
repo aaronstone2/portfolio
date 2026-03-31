@@ -63,7 +63,6 @@ const navNodes: NavNode[] = [
       { href: "/subway", label: "Subway Map", icon: Train },
     ]
   },
-  { href: "/subway", label: "Subway", icon: Train },
   { href: "/contact", label: "Contact", icon: Mail },
 ]
 
