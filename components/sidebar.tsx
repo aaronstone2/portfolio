@@ -202,13 +202,10 @@ export function Sidebar() {
               style={{ border: '1px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.02)' }}
             >
               <div className="flex items-center gap-2 px-3 py-2">
-                <div className="h-2 w-2 rounded-full bg-white animate-pulse" style={{ boxShadow: '0 0 4px #fff, 0 0 8px #fff' }} />
-                <span className="text-xs font-medium text-white" style={{ textShadow: '0 0 6px rgba(255,255,255,0.3)' }}>Open to Work</span>
+                <div className="h-2 w-2 rounded-full bg-white" style={{ boxShadow: '0 0 4px #fff, 0 0 8px #fff' }} />
+                <span className="text-xs font-medium text-white" style={{ textShadow: '0 0 6px rgba(255,255,255,0.3)' }}>Metro New York Area</span>
               </div>
               <div className="mx-2 mb-2 rounded-md bg-black/30 p-1.5 space-y-0.5" style={{ border: '1px solid rgba(255,255,255,0.05)' }}>
-                <div className="flex items-center gap-2 text-[11px] text-slate-600 rounded px-2 py-1 hover:scale-[1.08] hover:text-white transition-all cursor-default">
-                  <Map className="h-3 w-3 flex-shrink-0" />NYC Fintech / Tech
-                </div>
                 <a href="https://linkedin.com/in/aaron-stone-2b6994141" target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-2 text-[11px] text-slate-600 rounded px-2 py-1 hover:scale-[1.08] hover:text-white transition-all">
                   <Globe className="h-3 w-3 flex-shrink-0" />LinkedIn
