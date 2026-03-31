@@ -230,9 +230,9 @@ function ArchitectureCanvas() {
             const isDragged = draggingNode === node.id
             
             let scale = 1
-            if (isClicked) scale = 1.35
-            else if (isDragged) scale = 1.15
-            else if (isHovered) scale = 1.1
+            if (isClicked) scale = 1.6
+            else if (isDragged) scale = 1.25
+            else if (isHovered) scale = 1.2
 
             return (
               <div
