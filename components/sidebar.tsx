@@ -359,10 +359,10 @@ function SidebarInner() {
       >
         <div className="flex h-full flex-col">
           {/* Logo */}
-          <div className="flex items-center border-b border-white/5 px-5 py-5">
-            <Link href="/" className="flex items-center gap-3" onClick={() => setMobileMenuOpen(false)}>
-              <div className="h-14 w-14 rounded-full p-[2px] transition-all duration-300 hover:scale-[2.0] cursor-pointer" style={{ background: 'rgba(255,255,255,0.25)', boxShadow: '0 0 20px rgba(255,255,255,0.25), 0 0 40px rgba(255,255,255,0.08)', animation: 'sidebarPulse 2s ease-in-out infinite' }}>
-                <div className="h-full w-full rounded-full overflow-hidden border-[2px] border-[#0a0a1a]">
+          <div className="flex items-center justify-center border-b border-white/5 px-5 py-6">
+            <Link href="/" className="flex flex-col items-center gap-3 w-full" onClick={() => setMobileMenuOpen(false)}>
+              <div className="h-36 w-36 rounded-full p-[2px] transition-all duration-500 hover:scale-[1.6] cursor-pointer origin-top-left" style={{ background: 'rgba(255,255,255,0.25)', boxShadow: '0 0 25px rgba(255,255,255,0.3), 0 0 50px rgba(255,255,255,0.1)', animation: 'sidebarPulse 2s ease-in-out infinite' }}>
+                <div className="h-full w-full rounded-full overflow-hidden border-[3px] border-[#0a0a1a]">
                   <img src="/aaron-photo.jpg" alt="Aaron Stone" className="h-full w-full object-cover" />
                 </div>
               </div>
