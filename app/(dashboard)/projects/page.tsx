@@ -1,6 +1,17 @@
+import type { Metadata } from "next"
 import { ExternalLink, Github } from "lucide-react"
 import { PageHeader } from "@/components/page-header"
 import { getProjects } from "@/lib/site-tree"
+
+export const metadata: Metadata = {
+  title: "Projects",
+  description: "Portfolio of Technical Work",
+  openGraph: {
+    title: "Projects | Aaron Stone",
+    description: "Portfolio of Technical Work",
+    type: "website",
+  },
+}
 
 const projects = getProjects()
 

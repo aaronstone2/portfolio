@@ -1,7 +1,18 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { PageHeader } from "@/components/page-header"
 import { getPage } from "@/lib/site-tree"
+
+export const metadata: Metadata = {
+  title: "Home | Aaron Stone",
+  description: "Portfolio Dashboard",
+  openGraph: {
+    title: "Home | Aaron Stone",
+    description: "Portfolio Dashboard",
+    type: "website",
+  },
+}
 
 const exploreLinks = ["/projects", "/resume", "/contact"]
 

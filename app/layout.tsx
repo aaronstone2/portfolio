@@ -8,11 +8,21 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] });
 const comfortaa = Comfortaa({ subsets: ["latin"], variable: "--font-comfortaa" });
 
 export const metadata: Metadata = {
-  title: 'Aaron Stone | Software Engineer & Product Builder',
-  description: 'Portfolio of Aaron Stone - Software Engineer specializing in visual programming interfaces, automation tools, and scalable system architecture.',
+  metadataBase: new URL('https://v0-aaronstone.vercel.app'),
+  title: {
+    default: 'Aaron Stone | Software Engineer & Product Builder',
+    template: '%s | Aaron Stone',
+  },
+  description: 'Portfolio of Aaron Stone — visual programming, automation, scalable architectures',
   generator: 'v0.app',
   keywords: ['software engineer', 'portfolio', 'React', 'TypeScript', 'Node.js', 'fintech'],
   authors: [{ name: 'Aaron Stone' }],
+  openGraph: {
+    title: 'Aaron Stone | Software Engineer & Product Builder',
+    description: 'Portfolio of Aaron Stone — visual programming, automation, scalable architectures',
+    type: 'website',
+    url: 'https://v0-aaronstone.vercel.app',
+  },
   icons: {
     icon: [
       {

@@ -1,5 +1,16 @@
+import type { Metadata } from "next"
 import { Mail, Phone, Github, MapPin, ExternalLink } from "lucide-react"
 import { PageHeader } from "@/components/page-header"
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description: "Get in Touch",
+  openGraph: {
+    title: "Contact | Aaron Stone",
+    description: "Get in Touch",
+    type: "website",
+  },
+}
 
 const contactInfo = [
   {
