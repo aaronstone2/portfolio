@@ -1,7 +1,8 @@
 "use client"
 
 import { FileText, Download, Briefcase, GraduationCap, Code, Award, MapPin, Calendar, LayoutGrid, FileDown, GitBranch, ZoomIn, ZoomOut, Maximize2 } from "lucide-react"
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, Suspense } from "react"
+import { useSearchParams } from "next/navigation"
 import { PageHeader } from "@/components/page-header"
 
 type ViewMode = "website" | "document" | "graph"
@@ -399,7 +400,26 @@ function WebsiteView() {
 }
 
 export default function ResumePage() {
-  const [viewMode, setViewMode] = useState<ViewMode>("website")
+  return (
+    <Suspense fallback={null}>
+      <ResumePageInner />
+    </Suspense>
+  )
+}
+
+function ResumePageInner() {
+  const searchParams = useSearchParams()
+  const [viewMode, setViewMode] = useState<ViewMode>(() => {
+    const v = searchParams.get('view')
+    if (v === 'website' || v === 'document' || v === 'graph') return v
+    return 'website'
+  })
+
+  // Sync with URL changes from sidebar navigation
+  useEffect(() => {
+    const v = searchParams.get('view')
+    if (v === 'website' || v === 'document' || v === 'graph') setViewMode(v)
+  }, [searchParams])
 
   const viewModes = [
     { id: "website" as ViewMode, label: "Timeline", icon: LayoutGrid },

@@ -130,6 +130,37 @@ function MiniIcon({ type }: { type: string }) {
           <line x1="18" y1="16" x2="13" y2="11" stroke={s} strokeWidth="0.5" opacity="0.3" />
         </svg>
       )
+    case "document":
+      return (
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <rect x="4" y="1" width="12" height="18" rx="1.5" stroke={s} strokeWidth="1.2" style={{ filter: `drop-shadow(0 0 2px ${g})` }} />
+          <line x1="7" y1="6" x2="13" y2="6" stroke={s} strokeWidth="0.8" opacity="0.6" />
+          <line x1="7" y1="9" x2="12" y2="9" stroke={s} strokeWidth="0.7" opacity="0.5" />
+          <line x1="7" y1="12" x2="13" y2="12" stroke={s} strokeWidth="0.6" opacity="0.4" />
+          <line x1="7" y1="15" x2="10" y2="15" stroke={s} strokeWidth="0.5" opacity="0.3" />
+        </svg>
+      )
+    case "timeline":
+      return (
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <line x1="2" y1="10" x2="18" y2="10" stroke={s} strokeWidth="1" />
+          <circle cx="5" cy="10" r="2" fill={s} style={{ filter: `drop-shadow(0 0 2px ${g})` }} />
+          <circle cx="10" cy="10" r="2" fill={s} style={{ filter: `drop-shadow(0 0 2px ${g})` }} />
+          <circle cx="15" cy="10" r="2" fill={s} style={{ filter: `drop-shadow(0 0 2px ${g})` }} />
+        </svg>
+      )
+    case "node-graph":
+      return (
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <line x1="6" y1="6" x2="10" y2="6" stroke={s} strokeWidth="0.8" />
+          <line x1="10" y1="6" x2="15" y2="4" stroke={s} strokeWidth="0.8" />
+          <line x1="10" y1="6" x2="15" y2="10" stroke={s} strokeWidth="0.8" />
+          <circle cx="4" cy="6" r="2.5" stroke={s} strokeWidth="1" style={{ filter: `drop-shadow(0 0 2px ${g})` }} />
+          <circle cx="10" cy="6" r="2" stroke={s} strokeWidth="1" />
+          <circle cx="16" cy="4" r="1.5" stroke={s} strokeWidth="1" />
+          <circle cx="16" cy="10" r="1.5" stroke={s} strokeWidth="1" />
+        </svg>
+      )
     default:
       return <div className="h-5 w-5" />
   }

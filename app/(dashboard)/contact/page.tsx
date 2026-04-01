@@ -44,19 +44,8 @@ export default function ContactPage() {
     <div className="min-h-screen">
       <PageHeader path="/contact" />
       <div className="p-6 md:p-10">
-      {/* Header */}
-      <section className="mb-12 pt-12 md:pt-0">
-        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5">
-          <span className="h-2 w-2 rounded-full bg-white animate-pulse" style={{ boxShadow: '0 0 8px rgba(255,255,255,0.6)' }} />
-          <span className="text-sm font-mono text-slate-400">
-            Let&apos;s Connect
-          </span>
-        </div>
-
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-          <span className="text-white" style={{ textShadow: '0 0 20px rgba(255,255,255,0.2)' }}>Contact</span>
-        </h1>
-
+      {/* Content */}
+      <section className="mb-12 pt-4 md:pt-0">
         <p className="text-slate-400 max-w-2xl">
           Currently exploring opportunities in NYC fintech and tech. Open to Solutions Engineer, Presales, PM, TPM, and SWE roles.
         </p>
