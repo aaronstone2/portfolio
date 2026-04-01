@@ -2,9 +2,7 @@
 
 import { Train, ZoomIn, ZoomOut, Maximize2 } from "lucide-react"
 import { useState, useRef, useEffect, useCallback } from "react"
-import { PAGE_META } from "@/lib/page-meta"
-
-const meta = PAGE_META["/subway"]
+import { PageHeader } from "@/components/page-header"
 
 interface Station {
   id: string
@@ -159,23 +157,14 @@ export default function SubwayPage() {
 
   return (
     <div className="flex h-screen flex-col overflow-hidden">
-      <header className="flex items-center justify-between border-b border-white/10 bg-card/50 px-6 py-3">
-        <div className="flex items-center gap-3">
-          <div className="rounded-lg bg-white/5 p-2 border border-white/10">
-            <Train className="h-5 w-5 text-white" style={{ filter: 'drop-shadow(0 0 4px rgba(255,255,255,0.5))' }} />
-          </div>
-          <div>
-            <h1 className="text-xl font-semibold text-white" style={{ textShadow: '0 0 10px rgba(255,255,255,0.2)' }}>{meta.title}</h1>
-            <p className="text-sm text-slate-500">{meta.subtitle}</p>
-          </div>
-        </div>
+      <PageHeader path="/subway">
         <div className="flex items-center gap-2">
           <button onClick={() => setZoom(z => Math.max(0.3, z - 0.1))} className="rounded-lg bg-white/5 p-2 text-slate-400 hover:text-white border border-white/10 transition-all hover:scale-110"><ZoomOut className="h-4 w-4" /></button>
           <span className="min-w-[3rem] text-center text-xs text-slate-500">{Math.round(zoom * 100)}%</span>
           <button onClick={() => setZoom(z => Math.min(3, z + 0.1))} className="rounded-lg bg-white/5 p-2 text-slate-400 hover:text-white border border-white/10 transition-all hover:scale-110"><ZoomIn className="h-4 w-4" /></button>
           <button onClick={() => { setZoom(0.7); setPan({ x: 50, y: 0 }); setSelectedStation(null) }} className="rounded-lg bg-white/5 p-2 text-white border border-white/10 transition-all hover:scale-110"><Maximize2 className="h-4 w-4" /></button>
         </div>
-      </header>
+      </PageHeader>
 
       <div
         ref={containerRef}

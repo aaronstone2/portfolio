@@ -1,4 +1,5 @@
 import { ExternalLink, Github } from "lucide-react"
+import { PageHeader } from "@/components/page-header"
 
 const projects = [
   {
@@ -76,7 +77,9 @@ const colorClasses = {
 
 export default function ProjectsPage() {
   return (
-    <div className="min-h-screen p-6 md:p-10">
+    <div className="min-h-screen">
+      <PageHeader path="/projects" />
+      <div className="p-6 md:p-10">
       {/* Header */}
       <section className="mb-12 pt-12 md:pt-0">
         <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5">
@@ -191,6 +194,7 @@ export default function ProjectsPage() {
           View GitHub Profile
         </a>
       </section>
+      </div>
     </div>
   )
 }

@@ -7,6 +7,7 @@ import {
   Mail,
   ArrowRight,
 } from "lucide-react"
+import { PageHeader } from "@/components/page-header"
 
 const projectLinks = [
   {
@@ -83,7 +84,9 @@ const colorClasses = {
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen p-6 md:p-10">
+    <div className="min-h-screen">
+      <PageHeader path="/" />
+      <div className="p-6 md:p-10">
       {/* Hero Section */}
       <section className="relative mb-16 pt-12 md:pt-0">
         <div className="absolute inset-0 overflow-hidden">
@@ -209,6 +212,7 @@ export default function HomePage() {
           </div>
         ))}
       </section>
+      </div>
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import { Mail, Phone, Github, MapPin, ExternalLink } from "lucide-react"
+import { PageHeader } from "@/components/page-header"
 
 const contactInfo = [
   {
@@ -29,7 +30,9 @@ const contactInfo = [
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen p-6 md:p-10">
+    <div className="min-h-screen">
+      <PageHeader path="/contact" />
+      <div className="p-6 md:p-10">
       {/* Header */}
       <section className="mb-12 pt-12 md:pt-0">
         <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5">
@@ -132,6 +135,7 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+      </div>
     </div>
   )
 }
