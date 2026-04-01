@@ -22,7 +22,7 @@ import {
   Layers,
   Globe,
 } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { PAGE_META, RESUME_VIEWS } from "@/lib/page-meta"
 
 interface NavChild {
@@ -255,14 +255,18 @@ const navNodes: NavNode[] = [
 function SubNode({ child, isActive, pathname, fullPath, onNav }: { child: NavChild; isActive: boolean; pathname: string; fullPath: string; onNav: () => void }) {
   const hasGrandchildren = child.children && child.children.length > 0
   const isGrandchildActive = hasGrandchildren && child.children!.some(gc => isNavActive(gc.href, pathname, fullPath))
-  const [expanded, setExpanded] = useState(isActive || isGrandchildActive)
+  const shouldExpand = isActive || !!isGrandchildActive
+  const [expanded, setExpanded] = useState(shouldExpand)
+
+  // Auto-expand when navigating to this node or a grandchild
+  useEffect(() => { if (shouldExpand) setExpanded(true) }, [shouldExpand])
 
   return (
     <div>
       <Link
         href={child.href}
-        onClick={(e) => {
-          if (hasGrandchildren) { e.preventDefault(); setExpanded(!expanded) }
+        onClick={() => {
+          if (hasGrandchildren) { setExpanded(!expanded) }
           onNav()
         }}
         className={cn(
@@ -334,7 +338,11 @@ function NavNodeWidget({ node, pathname, fullPath, onNav }: { node: NavNode; pat
     isNavActive(c.href, pathname, fullPath)
     || (c.children && c.children.some(gc => isNavActive(gc.href, pathname, fullPath)))
   )
-  const [expanded, setExpanded] = useState(isActive || isChildActive)
+  const shouldExpandNode = isActive || !!isChildActive
+  const [expanded, setExpanded] = useState(shouldExpandNode)
+
+  // Auto-expand when navigating to this node or a child/grandchild
+  useEffect(() => { if (shouldExpandNode) setExpanded(true) }, [shouldExpandNode])
 
   return (
     <div
