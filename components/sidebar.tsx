@@ -29,6 +29,7 @@ interface NavChild {
   label: string
   icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>
   graphic?: string
+  children?: NavChild[]  // grandchildren support
 }
 
 interface NavNode {
@@ -226,10 +227,17 @@ function MiniGraphic({ type, isActive }: { type: string; isActive: boolean }) {
 const navNodes: NavNode[] = [
   { href: "/", label: PAGE_META["/"].title, icon: Home, graphic: PAGE_META["/"].graphic },
   {
-    href: "/flownode", label: PAGE_META["/flownode"].title, icon: GitBranch, graphic: PAGE_META["/flownode"].graphic,
+    href: "/projects", label: PAGE_META["/projects"].title, icon: FolderKanban, graphic: PAGE_META["/projects"].graphic,
     children: [
-      { href: "/architecture", label: PAGE_META["/architecture"].title, icon: Network, graphic: PAGE_META["/architecture"].graphic },
-      { href: "/service-graph", label: PAGE_META["/service-graph"].title, icon: Activity, graphic: PAGE_META["/service-graph"].graphic },
+      {
+        href: "/flownode", label: PAGE_META["/flownode"].title, icon: GitBranch, graphic: PAGE_META["/flownode"].graphic,
+        children: [
+          { href: "/architecture", label: PAGE_META["/architecture"].title, icon: Network, graphic: PAGE_META["/architecture"].graphic },
+          { href: "/service-graph", label: PAGE_META["/service-graph"].title, icon: Activity, graphic: PAGE_META["/service-graph"].graphic },
+        ]
+      },
+      { href: "/thesis", label: PAGE_META["/thesis"].title, icon: BookOpen, graphic: PAGE_META["/thesis"].graphic },
+      { href: "/subway", label: PAGE_META["/subway"].title, icon: Train, graphic: PAGE_META["/subway"].graphic },
     ]
   },
   {
@@ -240,50 +248,91 @@ const navNodes: NavNode[] = [
       { href: "/resume?view=graph", label: RESUME_VIEWS.graph.label, icon: Share2, graphic: RESUME_VIEWS.graph.graphic },
     ]
   },
-  {
-    href: "/projects", label: PAGE_META["/projects"].title, icon: FolderKanban, graphic: PAGE_META["/projects"].graphic,
-    children: [
-      { href: "/flownode", label: PAGE_META["/flownode"].title, icon: GitBranch, graphic: PAGE_META["/flownode"].graphic },
-      { href: "/service-graph", label: PAGE_META["/service-graph"].title, icon: Activity, graphic: PAGE_META["/service-graph"].graphic },
-      { href: "/thesis", label: PAGE_META["/thesis"].title, icon: BookOpen, graphic: PAGE_META["/thesis"].graphic },
-      { href: "/subway", label: PAGE_META["/subway"].title, icon: Train, graphic: PAGE_META["/subway"].graphic },
-    ]
-  },
   { href: "/contact", label: PAGE_META["/contact"].title, icon: Mail, graphic: PAGE_META["/contact"].graphic },
 ]
 
-function SubNode({ child, isActive, onNav }: { child: NavChild; isActive: boolean; onNav: () => void }) {
+function SubNode({ child, isActive, pathname, onNav }: { child: NavChild; isActive: boolean; pathname: string; onNav: () => void }) {
+  const hasGrandchildren = child.children && child.children.length > 0
+  const isGrandchildActive = hasGrandchildren && child.children!.some(gc => pathname === gc.href || pathname.startsWith(gc.href.split('?')[0]))
+  const [expanded, setExpanded] = useState(isActive || isGrandchildActive)
+
   return (
-    <Link
-      href={child.href}
-      onClick={onNav}
-      className={cn(
-        "group flex items-center gap-2.5 rounded-md px-2 py-2 text-[11px] font-medium transition-all duration-200",
-        "hover:scale-[1.12] active:scale-[1.2]",
-        isActive ? "bg-white/8 text-white" : "text-slate-600 hover:text-white hover:bg-white/4",
+    <div>
+      <Link
+        href={child.href}
+        onClick={(e) => {
+          if (hasGrandchildren) { e.preventDefault(); setExpanded(!expanded) }
+          onNav()
+        }}
+        className={cn(
+          "group flex items-center gap-2.5 rounded-md px-2 py-2 text-[11px] font-medium transition-all duration-200",
+          "hover:scale-[1.12] active:scale-[1.2]",
+          (isActive || isGrandchildActive) ? "bg-white/8 text-white" : "text-slate-600 hover:text-white hover:bg-white/4",
+        )}
+        style={{
+          border: (isActive || isGrandchildActive) ? '1px solid rgba(255,255,255,0.12)' : '1px solid transparent',
+          boxShadow: (isActive || isGrandchildActive) ? '0 0 8px rgba(255,255,255,0.06)' : 'none',
+        }}
+      >
+        {child.graphic ? (
+          <MiniGraphic type={child.graphic} isActive={isActive || !!isGrandchildActive} />
+        ) : (
+          <child.icon
+            className={cn("h-3 w-3 flex-shrink-0", (isActive || isGrandchildActive) ? "text-white" : "text-slate-700")}
+            style={(isActive || isGrandchildActive) ? { filter: 'drop-shadow(0 0 3px rgba(255,255,255,0.5))' } : {}}
+          />
+        )}
+        <span>{child.label}</span>
+        {hasGrandchildren && (
+          <span className={cn("ml-auto text-[9px] text-slate-700 transition-transform duration-200", expanded && "rotate-180")}>▾</span>
+        )}
+      </Link>
+
+      {/* Grandchildren */}
+      {hasGrandchildren && expanded && (
+        <div className="ml-3 mt-0.5 rounded-md bg-black/20 p-1 space-y-0.5" style={{ border: '1px solid rgba(255,255,255,0.03)' }}>
+          {child.children!.map(gc => {
+            const gcActive = pathname === gc.href || pathname.startsWith(gc.href.split('?')[0])
+            return (
+              <Link
+                key={gc.href}
+                href={gc.href}
+                onClick={onNav}
+                className={cn(
+                  "group flex items-center gap-2 rounded-md px-2 py-1.5 text-[10px] font-medium transition-all duration-200",
+                  "hover:scale-[1.1] active:scale-[1.15]",
+                  gcActive ? "bg-white/8 text-white" : "text-slate-600 hover:text-white hover:bg-white/4",
+                )}
+                style={{
+                  border: gcActive ? '1px solid rgba(255,255,255,0.1)' : '1px solid transparent',
+                  boxShadow: gcActive ? '0 0 6px rgba(255,255,255,0.04)' : 'none',
+                }}
+              >
+                {gc.graphic ? (
+                  <MiniGraphic type={gc.graphic} isActive={gcActive} />
+                ) : (
+                  <gc.icon
+                    className={cn("h-2.5 w-2.5 flex-shrink-0", gcActive ? "text-white" : "text-slate-700")}
+                    style={gcActive ? { filter: 'drop-shadow(0 0 3px rgba(255,255,255,0.5))' } : {}}
+                  />
+                )}
+                <span>{gc.label}</span>
+              </Link>
+            )
+          })}
+        </div>
       )}
-      style={{
-        border: isActive ? '1px solid rgba(255,255,255,0.12)' : '1px solid transparent',
-        boxShadow: isActive ? '0 0 8px rgba(255,255,255,0.06)' : 'none',
-      }}
-    >
-      {child.graphic ? (
-        <MiniGraphic type={child.graphic} isActive={isActive} />
-      ) : (
-        <child.icon
-          className={cn("h-3 w-3 flex-shrink-0", isActive ? "text-white" : "text-slate-700")}
-          style={isActive ? { filter: 'drop-shadow(0 0 3px rgba(255,255,255,0.5))' } : {}}
-        />
-      )}
-      <span>{child.label}</span>
-    </Link>
+    </div>
   )
 }
 
 function NavNodeWidget({ node, pathname, onNav }: { node: NavNode; pathname: string; onNav: () => void }) {
   const isActive = pathname === node.href
   const hasChildren = node.children && node.children.length > 0
-  const isChildActive = hasChildren && node.children!.some(c => pathname === c.href || pathname.startsWith(c.href.split('?')[0]))
+  const isChildActive = hasChildren && node.children!.some(c =>
+    pathname === c.href || pathname.startsWith(c.href.split('?')[0])
+    || (c.children && c.children.some(gc => pathname === gc.href || pathname.startsWith(gc.href.split('?')[0])))
+  )
   const [expanded, setExpanded] = useState(isActive || isChildActive)
 
   return (
@@ -332,6 +381,7 @@ function NavNodeWidget({ node, pathname, onNav }: { node: NavNode; pathname: str
               key={child.href}
               child={child}
               isActive={pathname === child.href || pathname.startsWith(child.href.split('?')[0])}
+              pathname={pathname}
               onNav={onNav}
             />
           ))}
