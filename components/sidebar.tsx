@@ -361,7 +361,7 @@ function SidebarInner() {
           {/* Logo */}
           <div className="flex items-center justify-center border-b border-white/5 px-5 py-6">
             <Link href="/" className="flex flex-col items-center gap-3 w-full" onClick={() => setMobileMenuOpen(false)}>
-              <div className="h-36 w-36 rounded-full p-[2px] transition-all duration-500 hover:scale-[1.6] cursor-pointer origin-top-left" style={{ background: 'rgba(255,255,255,0.25)', boxShadow: '0 0 25px rgba(255,255,255,0.3), 0 0 50px rgba(255,255,255,0.1)', animation: 'sidebarPulse 2s ease-in-out infinite' }}>
+              <div className="h-52 w-52 rounded-full p-[3px] transition-all duration-500 hover:scale-[2.2] cursor-pointer origin-center z-50 relative" style={{ background: 'rgba(255,255,255,0.3)', boxShadow: '0 0 35px rgba(255,255,255,0.35), 0 0 70px rgba(255,255,255,0.12)', animation: 'sidebarPulse 2s ease-in-out infinite' }}>
                 <div className="h-full w-full rounded-full overflow-hidden border-[3px] border-[#0a0a1a]">
                   <img src="/aaron-photo.jpg" alt="Aaron Stone" className="h-full w-full object-cover" />
                 </div>
