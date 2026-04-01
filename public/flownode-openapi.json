@@ -1,0 +1,226 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "FlowNode API",
+    "description": "REST API for FlowNode — a visual DAG workflow automation builder. Manages release cycles, workflow execution, and integration with Jira, Slack, and Google Sheets.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Aaron Stone",
+      "email": "aaron@bubble.graphics"
+    }
+  },
+  "servers": [
+    { "url": "http://localhost:3000", "description": "Local development" }
+  ],
+  "paths": {
+    "/api/health": {
+      "get": {
+        "summary": "Health Check",
+        "description": "Returns server status and available services.",
+        "tags": ["System"],
+        "responses": {
+          "200": {
+            "description": "Server is healthy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string", "example": "ok" },
+                    "timestamp": { "type": "string", "format": "date-time" },
+                    "services": {
+                      "type": "object",
+                      "properties": {
+                        "releaseManagement": { "type": "string", "example": "available" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/release/current": {
+      "get": {
+        "summary": "Get Current Release",
+        "description": "Returns the current release version, metadata, and state.",
+        "tags": ["Release Management"],
+        "responses": {
+          "200": {
+            "description": "Current release info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "release": { "$ref": "#/components/schemas/Release" }
+                  }
+                }
+              }
+            }
+          },
+          "500": { "$ref": "#/components/responses/ServerError" }
+        }
+      }
+    },
+    "/api/release/increment": {
+      "post": {
+        "summary": "Increment Release Version",
+        "description": "Triggers a release version increment. Checks eligibility first, then performs the increment and logs the event.",
+        "tags": ["Release Management"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "mode": { "type": "string", "default": "ui", "description": "Increment trigger mode" },
+                  "triggeredBy": { "type": "string", "default": "ui-user", "description": "Who triggered the increment" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Release incremented successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "oldVersion": { "type": "string", "example": "2024.1.5" },
+                    "newVersion": { "type": "string", "example": "2024.1.6" },
+                    "message": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Increment not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean", "example": false },
+                    "error": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "500": { "$ref": "#/components/responses/ServerError" }
+        }
+      }
+    },
+    "/api/release/history": {
+      "get": {
+        "summary": "Get Release History",
+        "description": "Returns a list of past release increments with timestamps, versions, and who triggered them.",
+        "tags": ["Release Management"],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": { "type": "integer", "default": 10 },
+            "description": "Max number of history entries to return"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Release history",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "history": {
+                      "type": "array",
+                      "items": { "$ref": "#/components/schemas/ReleaseHistoryEntry" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": { "$ref": "#/components/responses/ServerError" }
+        }
+      }
+    },
+    "/api/release/can-increment": {
+      "get": {
+        "summary": "Check Increment Eligibility",
+        "description": "Checks whether a release increment is currently allowed based on schedule, cooldown, and validation state.",
+        "tags": ["Release Management"],
+        "responses": {
+          "200": {
+            "description": "Eligibility check result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "allowed": { "type": "boolean" },
+                    "reason": { "type": "string", "nullable": true }
+                  }
+                }
+              }
+            }
+          },
+          "500": { "$ref": "#/components/responses/ServerError" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Release": {
+        "type": "object",
+        "properties": {
+          "version": { "type": "string", "example": "2024.1.6" },
+          "releaseDate": { "type": "string", "format": "date-time" },
+          "status": { "type": "string", "enum": ["active", "pending", "released"] },
+          "tickets": { "type": "integer", "description": "Number of tickets in this release" }
+        }
+      },
+      "ReleaseHistoryEntry": {
+        "type": "object",
+        "properties": {
+          "oldVersion": { "type": "string" },
+          "newVersion": { "type": "string" },
+          "triggeredBy": { "type": "string" },
+          "mode": { "type": "string" },
+          "timestamp": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "responses": {
+      "ServerError": {
+        "description": "Internal server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": { "type": "boolean", "example": false },
+                "error": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    { "name": "System", "description": "Health and status endpoints" },
+    { "name": "Release Management", "description": "Release version lifecycle management" }
+  ]
+}

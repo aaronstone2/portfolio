@@ -60,6 +60,12 @@ export const SITE_TREE: SiteNode[] = [
             description: "Drag-and-drop service nodes, toxic injection simulation, K6 load test visualization, and real-time dependency graph analysis.",
             featured: true,
           },
+          {
+            href: "/api-docs",
+            title: "API Docs",
+            subtitle: "FlowNode OpenAPI Reference",
+            graphic: "document",
+          },
         ],
       },
       {
