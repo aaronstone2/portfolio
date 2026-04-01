@@ -204,6 +204,19 @@ function MiniGraphic({ type, isActive }: { type: string; isActive: boolean }) {
         </svg>
       )
 
+    case "mqtt":
+      // Mini signal bars with wireless arc
+      return (
+        <svg width="28" height="18" viewBox="0 0 28 18" className="flex-shrink-0">
+          <rect x="7" y="12" width="3" height="5" rx="0.5" fill={stroke} opacity="0.6" style={{ filter: `drop-shadow(0 0 2px ${glow})` }} />
+          <rect x="12" y="8" width="3" height="9" rx="0.5" fill={stroke} opacity="0.7" style={{ filter: `drop-shadow(0 0 2px ${glow})` }} />
+          <rect x="17" y="4" width="3" height="13" rx="0.5" fill={stroke} opacity="0.85" style={{ filter: `drop-shadow(0 0 2px ${glow})` }} />
+          <path d="M10 6 A6 6 0 0 1 20 6" fill="none" stroke={stroke} strokeWidth="1" opacity="0.5" />
+          <path d="M8 3.5 A9 9 0 0 1 22 3.5" fill="none" stroke={stroke} strokeWidth="0.8" opacity="0.35" />
+          <circle cx="15" cy="8" r="0.8" fill={dot} />
+        </svg>
+      )
+
     default:
       return null
   }

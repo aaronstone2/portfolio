@@ -86,6 +86,15 @@ export const SITE_TREE: SiteNode[] = [
         description: "Interactive NYC subway map built as a node graph with draggable stations, zoom controls, line coloring, and transfer detection.",
         featured: false,
       },
+      {
+        href: "/mqtt",
+        title: "MQTT Visualizer",
+        subtitle: "Shopfloor IoT Monitoring",
+        graphic: "mqtt",
+        techStack: ["React", "TypeScript", "MQTT", "SVG", "Real-time Data"],
+        description: "Real-time shopfloor monitoring with MQTT topic tree visualization, time-series charts, and interactive topology graph. Models manufacturing IoT data from stations and machines.",
+        featured: true,
+      },
     ],
   },
   {

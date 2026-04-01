@@ -161,6 +161,16 @@ function MiniIcon({ type }: { type: string }) {
           <circle cx="16" cy="10" r="1.5" stroke={s} strokeWidth="1" />
         </svg>
       )
+    case "mqtt":
+      return (
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <rect x="4" y="12" width="3" height="6" rx="0.5" stroke={s} strokeWidth="0.8" fill={`${s}22`} />
+          <rect x="8.5" y="8" width="3" height="10" rx="0.5" stroke={s} strokeWidth="0.8" fill={`${s}22`} />
+          <rect x="13" y="4" width="3" height="14" rx="0.5" stroke={s} strokeWidth="0.8" fill={`${s}22`} style={{ filter: `drop-shadow(0 0 2px ${g})` }} />
+          <path d="M7 5 A5 5 0 0 1 15 5" fill="none" stroke={s} strokeWidth="0.8" opacity="0.5" />
+          <path d="M5 3 A8 8 0 0 1 17 3" fill="none" stroke={s} strokeWidth="0.6" opacity="0.35" />
+        </svg>
+      )
     default:
       return <div className="h-5 w-5" />
   }
