@@ -1,6 +1,4 @@
-import { PAGE_META } from "@/lib/page-meta"
-
-const iconMap: Record<string, React.ReactNode> = {}
+import { getPage } from "@/lib/site-tree"
 
 interface PageHeaderProps {
   path: string
@@ -9,10 +7,10 @@ interface PageHeaderProps {
 
 /**
  * Consistent snackbar header used on EVERY page.
- * Pulls title + subtitle from PAGE_META so sidebar and header always match.
+ * Pulls title + subtitle from site-tree.ts so sidebar and header always match.
  */
 export function PageHeader({ path, children }: PageHeaderProps) {
-  const meta = PAGE_META[path]
+  const meta = getPage(path)
   if (!meta) return null
 
   return (

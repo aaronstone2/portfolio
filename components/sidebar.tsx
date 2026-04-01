@@ -23,23 +23,7 @@ import {
   Globe,
 } from "lucide-react"
 import { useState, useEffect } from "react"
-import { PAGE_META, RESUME_VIEWS } from "@/lib/page-meta"
-
-interface NavChild {
-  href: string
-  label: string
-  icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>
-  graphic?: string
-  children?: NavChild[]  // grandchildren support
-}
-
-interface NavNode {
-  href: string
-  label: string
-  icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>
-  children?: NavChild[]
-  graphic?: string
-}
+import { SITE_TREE, type SiteNode } from "@/lib/site-tree"
 
 /* ── Tiny simulated graphics for each nav item ── */
 function MiniGraphic({ type, isActive }: { type: string; isActive: boolean }) {
@@ -225,175 +209,103 @@ function MiniGraphic({ type, isActive }: { type: string; isActive: boolean }) {
   }
 }
 
-const navNodes: NavNode[] = [
-  { href: "/", label: PAGE_META["/"].title, icon: Home, graphic: PAGE_META["/"].graphic },
-  {
-    href: "/projects", label: PAGE_META["/projects"].title, icon: FolderKanban, graphic: PAGE_META["/projects"].graphic,
-    children: [
-      {
-        href: "/flownode", label: PAGE_META["/flownode"].title, icon: GitBranch, graphic: PAGE_META["/flownode"].graphic,
-        children: [
-          { href: "/architecture", label: PAGE_META["/architecture"].title, icon: Network, graphic: PAGE_META["/architecture"].graphic },
-          { href: "/service-graph", label: PAGE_META["/service-graph"].title, icon: Activity, graphic: PAGE_META["/service-graph"].graphic },
-        ]
-      },
-      { href: "/thesis", label: PAGE_META["/thesis"].title, icon: BookOpen, graphic: PAGE_META["/thesis"].graphic },
-      { href: "/subway", label: PAGE_META["/subway"].title, icon: Train, graphic: PAGE_META["/subway"].graphic },
-    ]
-  },
-  {
-    href: "/resume", label: PAGE_META["/resume"].title, icon: FileText, graphic: PAGE_META["/resume"].graphic,
-    children: [
-      { href: "/resume?view=website", label: RESUME_VIEWS.website.label, icon: Clock, graphic: RESUME_VIEWS.website.graphic },
-      { href: "/resume?view=document", label: RESUME_VIEWS.document.label, icon: FileDown, graphic: RESUME_VIEWS.document.graphic },
-      { href: "/resume?view=graph", label: RESUME_VIEWS.graph.label, icon: Share2, graphic: RESUME_VIEWS.graph.graphic },
-    ]
-  },
-  { href: "/contact", label: PAGE_META["/contact"].title, icon: Mail, graphic: PAGE_META["/contact"].graphic },
-]
+/* Nav is driven entirely by SITE_TREE — no duplication */
 
-function SubNode({ child, isActive, pathname, fullPath, onNav }: { child: NavChild; isActive: boolean; pathname: string; fullPath: string; onNav: () => void }) {
-  const hasGrandchildren = child.children && child.children.length > 0
-  const isGrandchildActive = hasGrandchildren && child.children!.some(gc => isNavActive(gc.href, pathname, fullPath))
-  const shouldExpand = isActive || !!isGrandchildActive
-  const [expanded, setExpanded] = useState(shouldExpand)
-
-  // Auto-expand when navigating to this node or a grandchild
-  useEffect(() => { if (shouldExpand) setExpanded(true) }, [shouldExpand])
-
-  return (
-    <div>
-      <Link
-        href={child.href}
-        onClick={() => {
-          if (hasGrandchildren) { setExpanded(!expanded) }
-          onNav()
-        }}
-        className={cn(
-          "group flex items-center gap-2.5 rounded-md px-2 py-2 text-[11px] font-medium transition-all duration-200",
-          "hover:scale-[1.12] active:scale-[1.2]",
-          (isActive || isGrandchildActive) ? "bg-white/8 text-white" : "text-slate-600 hover:text-white hover:bg-white/4",
-        )}
-        style={{
-          border: (isActive || isGrandchildActive) ? '1px solid rgba(255,255,255,0.12)' : '1px solid transparent',
-          boxShadow: (isActive || isGrandchildActive) ? '0 0 8px rgba(255,255,255,0.06)' : 'none',
-        }}
-      >
-        {child.graphic ? (
-          <MiniGraphic type={child.graphic} isActive={isActive || !!isGrandchildActive} />
-        ) : (
-          <child.icon
-            className={cn("h-3 w-3 flex-shrink-0", (isActive || isGrandchildActive) ? "text-white" : "text-slate-700")}
-            style={(isActive || isGrandchildActive) ? { filter: 'drop-shadow(0 0 3px rgba(255,255,255,0.5))' } : {}}
-          />
-        )}
-        <span>{child.label}</span>
-        {hasGrandchildren && (
-          <span className={cn("ml-auto text-[9px] text-slate-700 transition-transform duration-200", expanded && "rotate-180")}>▾</span>
-        )}
-      </Link>
-
-      {/* Grandchildren */}
-      {hasGrandchildren && expanded && (
-        <div className="ml-3 mt-0.5 rounded-md bg-black/20 p-1 space-y-0.5" style={{ border: '1px solid rgba(255,255,255,0.03)' }}>
-          {child.children!.map(gc => {
-            const gcActive = isNavActive(gc.href, pathname, fullPath)
-            return (
-              <Link
-                key={gc.href}
-                href={gc.href}
-                onClick={onNav}
-                className={cn(
-                  "group flex items-center gap-2 rounded-md px-2 py-1.5 text-[10px] font-medium transition-all duration-200",
-                  "hover:scale-[1.1] active:scale-[1.15]",
-                  gcActive ? "bg-white/8 text-white" : "text-slate-600 hover:text-white hover:bg-white/4",
-                )}
-                style={{
-                  border: gcActive ? '1px solid rgba(255,255,255,0.1)' : '1px solid transparent',
-                  boxShadow: gcActive ? '0 0 6px rgba(255,255,255,0.04)' : 'none',
-                }}
-              >
-                {gc.graphic ? (
-                  <MiniGraphic type={gc.graphic} isActive={gcActive} />
-                ) : (
-                  <gc.icon
-                    className={cn("h-2.5 w-2.5 flex-shrink-0", gcActive ? "text-white" : "text-slate-700")}
-                    style={gcActive ? { filter: 'drop-shadow(0 0 3px rgba(255,255,255,0.5))' } : {}}
-                  />
-                )}
-                <span>{gc.label}</span>
-              </Link>
-            )
-          })}
-        </div>
-      )}
-    </div>
-  )
+/** Check if ANY descendant is active */
+function isDescendantActive(node: SiteNode, pathname: string, fullPath: string): boolean {
+  if (isNavActive(node.href, pathname, fullPath)) return true
+  if (node.children) return node.children.some(c => isDescendantActive(c, pathname, fullPath))
+  return false
 }
 
-function NavNodeWidget({ node, pathname, fullPath, onNav }: { node: NavNode; pathname: string; fullPath: string; onNav: () => void }) {
+/** Recursive nav node — handles any depth of nesting */
+function TreeNode({ node, depth, pathname, fullPath, onNav }: { node: SiteNode; depth: number; pathname: string; fullPath: string; onNav: () => void }) {
   const isActive = isNavActive(node.href, pathname, fullPath)
   const hasChildren = node.children && node.children.length > 0
-  const isChildActive = hasChildren && node.children!.some(c =>
-    isNavActive(c.href, pathname, fullPath)
-    || (c.children && c.children.some(gc => isNavActive(gc.href, pathname, fullPath)))
-  )
-  const shouldExpandNode = isActive || !!isChildActive
-  const [expanded, setExpanded] = useState(shouldExpandNode)
+  const isChildActive = hasChildren && node.children!.some(c => isDescendantActive(c, pathname, fullPath))
+  const shouldExpand = isActive || !!isChildActive
+  const [expanded, setExpanded] = useState(shouldExpand)
 
-  // Auto-expand when navigating to this node or a child/grandchild
-  useEffect(() => { if (shouldExpandNode) setExpanded(true) }, [shouldExpandNode])
+  useEffect(() => { if (shouldExpand) setExpanded(true) }, [shouldExpand])
 
+  // Sizing based on depth
+  const isRoot = depth === 0
+  const textSize = isRoot ? "text-sm" : depth === 1 ? "text-[11px]" : "text-[10px]"
+  const py = isRoot ? "py-2.5" : "py-2"
+  const px = isRoot ? "px-3" : "px-2"
+  const gap = isRoot ? "gap-3" : "gap-2.5"
+
+  if (isRoot) {
+    // Top-level node — full card style
+    return (
+      <div
+        className={cn(
+          "rounded-lg mb-2 transition-all duration-200 overflow-hidden",
+          "hover:scale-[1.03]",
+          (isActive || isChildActive) ? "bg-white/4" : "hover:bg-white/2",
+        )}
+        style={{
+          border: (isActive || isChildActive || expanded) ? '1px solid rgba(255,255,255,0.1)' : '1px solid transparent',
+          boxShadow: (isActive || isChildActive) ? '0 0 12px rgba(255,255,255,0.05)' : 'none',
+        }}
+      >
+        <Link
+          href={node.href}
+          onClick={() => { if (hasChildren) setExpanded(!expanded); onNav() }}
+          className={cn(
+            "flex items-center", gap, px, py, "font-medium transition-all duration-200",
+            textSize,
+            (isActive || isChildActive) ? "text-white" : "text-slate-500 hover:text-white",
+          )}
+        >
+          <MiniGraphic type={node.graphic} isActive={isActive || !!isChildActive} />
+          <span>{node.title}</span>
+          {isActive && !hasChildren && (
+            <div className="ml-auto h-2 w-2 rounded-full bg-white" style={{ boxShadow: '0 0 6px #fff, 0 0 12px #fff' }} />
+          )}
+          {hasChildren && (
+            <span className={cn("ml-auto text-[10px] text-slate-700 transition-transform duration-200", expanded && "rotate-180")}>▾</span>
+          )}
+        </Link>
+
+        {hasChildren && expanded && (
+          <div className="mx-2 mb-2 rounded-md bg-black/30 p-1.5 space-y-0.5" style={{ border: '1px solid rgba(255,255,255,0.05)' }}>
+            {node.children!.map(child => (
+              <TreeNode key={child.href} node={child} depth={1} pathname={pathname} fullPath={fullPath} onNav={onNav} />
+            ))}
+          </div>
+        )}
+      </div>
+    )
+  }
+
+  // Nested node (child / grandchild / any depth)
   return (
-    <div
-      className={cn(
-        "rounded-lg mb-2 transition-all duration-200 overflow-hidden",
-        "hover:scale-[1.03]",
-        (isActive || isChildActive) ? "bg-white/4" : "hover:bg-white/2",
-      )}
-      style={{
-        border: (isActive || isChildActive || expanded) ? '1px solid rgba(255,255,255,0.1)' : '1px solid transparent',
-        boxShadow: (isActive || isChildActive) ? '0 0 12px rgba(255,255,255,0.05)' : 'none',
-      }}
-    >
-      {/* Parent node header */}
+    <div>
       <Link
         href={node.href}
         onClick={() => { if (hasChildren) setExpanded(!expanded); onNav() }}
         className={cn(
-          "flex items-center gap-3 px-3 py-2.5 text-sm font-medium transition-all duration-200",
-          (isActive || isChildActive) ? "text-white" : "text-slate-500 hover:text-white",
+          "group flex items-center", gap, "rounded-md", px, py, textSize, "font-medium transition-all duration-200",
+          "hover:scale-[1.12] active:scale-[1.2]",
+          (isActive || isChildActive) ? "bg-white/8 text-white" : "text-slate-600 hover:text-white hover:bg-white/4",
         )}
+        style={{
+          border: (isActive || isChildActive) ? '1px solid rgba(255,255,255,0.12)' : '1px solid transparent',
+          boxShadow: (isActive || isChildActive) ? '0 0 8px rgba(255,255,255,0.06)' : 'none',
+        }}
       >
-        {node.graphic ? (
-          <MiniGraphic type={node.graphic} isActive={isActive || !!isChildActive} />
-        ) : (
-          <node.icon
-            className={cn("h-5 w-5 flex-shrink-0", (isActive || isChildActive) ? "text-white" : "text-slate-600")}
-            style={(isActive || isChildActive) ? { filter: 'drop-shadow(0 0 5px rgba(255,255,255,0.6))' } : {}}
-          />
-        )}
-        <span>{node.label}</span>
-        {isActive && !hasChildren && (
-          <div className="ml-auto h-2 w-2 rounded-full bg-white" style={{ boxShadow: '0 0 6px #fff, 0 0 12px #fff' }} />
-        )}
+        <MiniGraphic type={node.graphic} isActive={isActive || !!isChildActive} />
+        <span>{node.title}</span>
         {hasChildren && (
-          <span className={cn("ml-auto text-[10px] text-slate-700 transition-transform duration-200", expanded && "rotate-180")}>▾</span>
+          <span className={cn("ml-auto text-[9px] text-slate-700 transition-transform duration-200", expanded && "rotate-180")}>▾</span>
         )}
       </Link>
 
-      {/* Children container — visually nested inside parent */}
       {hasChildren && expanded && (
-        <div className="mx-2 mb-2 rounded-md bg-black/30 p-1.5 space-y-0.5" style={{ border: '1px solid rgba(255,255,255,0.05)' }}>
+        <div className="ml-3 mt-0.5 rounded-md bg-black/20 p-1 space-y-0.5" style={{ border: '1px solid rgba(255,255,255,0.03)' }}>
           {node.children!.map(child => (
-            <SubNode
-              key={child.href}
-              child={child}
-              isActive={isNavActive(child.href, pathname, fullPath)}
-              pathname={pathname}
-              fullPath={fullPath}
-              onNav={onNav}
-            />
+            <TreeNode key={child.href} node={child} depth={depth + 1} pathname={pathname} fullPath={fullPath} onNav={onNav} />
           ))}
         </div>
       )}
@@ -463,8 +375,8 @@ function SidebarInner() {
 
           {/* Node Tree */}
           <nav className="flex-1 overflow-y-auto px-3 py-3">
-            {navNodes.map(node => (
-              <NavNodeWidget key={node.href} node={node} pathname={pathname} fullPath={fullPath} onNav={() => setMobileMenuOpen(false)} />
+            {SITE_TREE.map(node => (
+              <TreeNode key={node.href} node={node} depth={0} pathname={pathname} fullPath={fullPath} onNav={() => setMobileMenuOpen(false)} />
             ))}
           </nav>
 

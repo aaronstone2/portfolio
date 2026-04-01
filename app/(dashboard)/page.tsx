@@ -1,13 +1,9 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { PageHeader } from "@/components/page-header"
-import { PAGE_META } from "@/lib/page-meta"
+import { getPage } from "@/lib/site-tree"
 
-const exploreLinks = [
-  { href: "/projects", color: "blue" },
-  { href: "/resume", color: "purple" },
-  { href: "/contact", color: "cyan" },
-]
+const exploreLinks = ["/projects", "/resume", "/contact"]
 
 export default function HomePage() {
   return (
@@ -76,8 +72,8 @@ export default function HomePage() {
           </h2>
 
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {exploreLinks.map(({ href, color }) => {
-              const meta = PAGE_META[href]
+            {exploreLinks.map((href) => {
+              const meta = getPage(href)
               if (!meta) return null
               return (
                 <Link
