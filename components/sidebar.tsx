@@ -1,8 +1,9 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useSearchParams } from "next/navigation"
 import { cn } from "@/lib/utils"
+import { Suspense } from "react"
 import {
   Home,
   GitBranch,
@@ -251,9 +252,9 @@ const navNodes: NavNode[] = [
   { href: "/contact", label: PAGE_META["/contact"].title, icon: Mail, graphic: PAGE_META["/contact"].graphic },
 ]
 
-function SubNode({ child, isActive, pathname, onNav }: { child: NavChild; isActive: boolean; pathname: string; onNav: () => void }) {
+function SubNode({ child, isActive, pathname, fullPath, onNav }: { child: NavChild; isActive: boolean; pathname: string; fullPath: string; onNav: () => void }) {
   const hasGrandchildren = child.children && child.children.length > 0
-  const isGrandchildActive = hasGrandchildren && child.children!.some(gc => pathname === gc.href || pathname.startsWith(gc.href.split('?')[0]))
+  const isGrandchildActive = hasGrandchildren && child.children!.some(gc => isNavActive(gc.href, pathname, fullPath))
   const [expanded, setExpanded] = useState(isActive || isGrandchildActive)
 
   return (
@@ -292,7 +293,7 @@ function SubNode({ child, isActive, pathname, onNav }: { child: NavChild; isActi
       {hasGrandchildren && expanded && (
         <div className="ml-3 mt-0.5 rounded-md bg-black/20 p-1 space-y-0.5" style={{ border: '1px solid rgba(255,255,255,0.03)' }}>
           {child.children!.map(gc => {
-            const gcActive = pathname === gc.href || pathname.startsWith(gc.href.split('?')[0])
+            const gcActive = isNavActive(gc.href, pathname, fullPath)
             return (
               <Link
                 key={gc.href}
@@ -326,12 +327,12 @@ function SubNode({ child, isActive, pathname, onNav }: { child: NavChild; isActi
   )
 }
 
-function NavNodeWidget({ node, pathname, onNav }: { node: NavNode; pathname: string; onNav: () => void }) {
-  const isActive = pathname === node.href
+function NavNodeWidget({ node, pathname, fullPath, onNav }: { node: NavNode; pathname: string; fullPath: string; onNav: () => void }) {
+  const isActive = isNavActive(node.href, pathname, fullPath)
   const hasChildren = node.children && node.children.length > 0
   const isChildActive = hasChildren && node.children!.some(c =>
-    pathname === c.href || pathname.startsWith(c.href.split('?')[0])
-    || (c.children && c.children.some(gc => pathname === gc.href || pathname.startsWith(gc.href.split('?')[0])))
+    isNavActive(c.href, pathname, fullPath)
+    || (c.children && c.children.some(gc => isNavActive(gc.href, pathname, fullPath)))
   )
   const [expanded, setExpanded] = useState(isActive || isChildActive)
 
@@ -380,8 +381,9 @@ function NavNodeWidget({ node, pathname, onNav }: { node: NavNode; pathname: str
             <SubNode
               key={child.href}
               child={child}
-              isActive={pathname === child.href || pathname.startsWith(child.href.split('?')[0])}
+              isActive={isNavActive(child.href, pathname, fullPath)}
               pathname={pathname}
+              fullPath={fullPath}
               onNav={onNav}
             />
           ))}
@@ -391,8 +393,28 @@ function NavNodeWidget({ node, pathname, onNav }: { node: NavNode; pathname: str
   )
 }
 
+/** Check if a nav href matches the current location (handles query params) */
+function isNavActive(href: string, pathname: string, fullPath: string): boolean {
+  if (href.includes('?')) {
+    // Has query params — must match exactly
+    return fullPath === href
+  }
+  // No query params — match pathname exactly
+  return pathname === href
+}
+
 export function Sidebar() {
+  return (
+    <Suspense fallback={null}>
+      <SidebarInner />
+    </Suspense>
+  )
+}
+
+function SidebarInner() {
   const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const fullPath = searchParams.toString() ? `${pathname}?${searchParams.toString()}` : pathname
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
@@ -434,7 +456,7 @@ export function Sidebar() {
           {/* Node Tree */}
           <nav className="flex-1 overflow-y-auto px-3 py-3">
             {navNodes.map(node => (
-              <NavNodeWidget key={node.href} node={node} pathname={pathname} onNav={() => setMobileMenuOpen(false)} />
+              <NavNodeWidget key={node.href} node={node} pathname={pathname} fullPath={fullPath} onNav={() => setMobileMenuOpen(false)} />
             ))}
           </nav>
 
