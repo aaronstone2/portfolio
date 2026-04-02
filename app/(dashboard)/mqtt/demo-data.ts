@@ -161,3 +161,41 @@ export const chartColors = [
   '#3b82f6', '#ef4444', '#22c55e', '#eab308', '#a855f7',
   '#06b6d4', '#f97316', '#ec4899',
 ]
+
+/* ── Extended metadata for Architecture / Dataflow pages ── */
+
+export const brokerConfig = {
+  host: 'broker.floor-alpha.local',
+  port: 1883,
+  protocol: 'mqtt' as const,
+  clientId: 'dashboard-viz-01',
+}
+
+export const subscriptionPatterns = [
+  { pattern: 'shopfloor/floor-alpha/#', qos: 0, description: 'All floor-alpha messages (wildcard)' },
+  { pattern: 'shopfloor/floor-alpha/+/+/temperature', qos: 1, description: 'All machine temperatures' },
+  { pattern: 'shopfloor/floor-alpha/+/+/oee', qos: 1, description: 'All machine OEE values' },
+  { pattern: 'shopfloor/floor-alpha/+/+/status', qos: 2, description: 'All machine status (exactly-once)' },
+  { pattern: 'shopfloor/floor-alpha/assembly-line-1/#', qos: 0, description: 'Assembly Line 1 full feed' },
+  { pattern: 'shopfloor/floor-alpha/cnc-bay/#', qos: 0, description: 'CNC Bay full feed' },
+  { pattern: 'shopfloor/floor-alpha/quality-control/#', qos: 0, description: 'Quality Control full feed' },
+]
+
+export interface AttributeMeta {
+  color: string
+  updateFrequencyMs: number
+  qos: number
+  retain: boolean
+}
+
+export const attributeMetadata: Record<string, AttributeMeta> = {
+  temperature:       { color: '#ef4444', updateFrequencyMs: 2000,  qos: 1, retain: true },
+  cycle_time:        { color: '#f97316', updateFrequencyMs: 5000,  qos: 0, retain: false },
+  throughput:        { color: '#3b82f6', updateFrequencyMs: 10000, qos: 0, retain: false },
+  oee:               { color: '#22c55e', updateFrequencyMs: 15000, qos: 1, retain: true },
+  vibration:         { color: '#a855f7', updateFrequencyMs: 1000,  qos: 0, retain: false },
+  power_consumption: { color: '#eab308', updateFrequencyMs: 5000,  qos: 0, retain: true },
+  status:            { color: '#06b6d4', updateFrequencyMs: 30000, qos: 2, retain: true },
+}
+
+export const topicLevels = ['Broker', 'Shopfloor', 'Station', 'Machine', 'Attribute'] as const

@@ -1,6 +1,7 @@
 "use client"
 
-import { useState, useRef, useEffect, useCallback } from "react"
+import { useState, useRef, useEffect, useCallback, Suspense } from "react"
+import { useSearchParams } from "next/navigation"
 import { PageHeader } from "@/components/page-header"
 import { TreesIcon, BarChart3, Network, ChevronRight, ChevronDown } from "lucide-react"
 import {
@@ -593,34 +594,51 @@ const tabs: { id: TabId; label: string; icon: typeof TreesIcon }[] = [
   { id: 'graph', label: 'Graph', icon: Network },
 ]
 
-export default function MqttPage() {
+function MqttPageContent() {
+  const searchParams = useSearchParams()
+  const isEmbed = searchParams.get('embed') === '1'
   const [activeTab, setActiveTab] = useState<TabId>("tree")
 
+  const tabBar = (
+    <div className="flex items-center rounded-lg border border-white/10 bg-white/5 p-0.5">
+      {tabs.map((tab) => (
+        <button
+          key={tab.id}
+          onClick={() => setActiveTab(tab.id)}
+          className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all ${
+            activeTab === tab.id
+              ? "bg-white/10 text-white"
+              : "text-slate-500 hover:text-slate-300"
+          }`}
+          style={activeTab === tab.id ? { boxShadow: '0 0 10px rgba(255,255,255,0.08)', textShadow: '0 0 8px rgba(255,255,255,0.3)' } : {}}
+        >
+          <tab.icon className="h-3.5 w-3.5" />
+          {tab.label}
+        </button>
+      ))}
+    </div>
+  )
+
   return (
-    <div className="flex h-screen flex-col overflow-hidden">
-      <PageHeader path="/mqtt">
-        <div className="flex items-center rounded-lg border border-white/10 bg-white/5 p-0.5">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all ${
-                activeTab === tab.id
-                  ? "bg-white/10 text-white"
-                  : "text-slate-500 hover:text-slate-300"
-              }`}
-              style={activeTab === tab.id ? { boxShadow: '0 0 10px rgba(255,255,255,0.08)', textShadow: '0 0 8px rgba(255,255,255,0.3)' } : {}}
-            >
-              <tab.icon className="h-3.5 w-3.5" />
-              {tab.label}
-            </button>
-          ))}
+    <div className={isEmbed ? "flex h-screen w-screen flex-col overflow-hidden" : "flex h-screen flex-col overflow-hidden"}>
+      {!isEmbed && <PageHeader path="/mqtt">{tabBar}</PageHeader>}
+      {isEmbed && (
+        <div className="flex items-center justify-center border-b border-white/10 bg-black/50 px-4 py-2 flex-shrink-0">
+          {tabBar}
         </div>
-      </PageHeader>
+      )}
 
       {activeTab === 'tree' && <TreeView />}
       {activeTab === 'charts' && <ChartsView />}
       {activeTab === 'graph' && <GraphView />}
     </div>
+  )
+}
+
+export default function MqttPage() {
+  return (
+    <Suspense fallback={null}>
+      <MqttPageContent />
+    </Suspense>
   )
 }

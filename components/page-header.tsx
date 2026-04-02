@@ -171,6 +171,41 @@ function MiniIcon({ type }: { type: string }) {
           <path d="M5 3 A8 8 0 0 1 17 3" fill="none" stroke={s} strokeWidth="0.6" opacity="0.35" />
         </svg>
       )
+    case "mqtt-architecture":
+      return (
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <rect x="2" y="2" width="16" height="16" rx="1.5" stroke={s} strokeWidth="1" style={{ filter: `drop-shadow(0 0 2px ${g})` }} />
+          <rect x="4.5" y="5" width="11" height="10" rx="1" stroke={s} strokeWidth="0.8" opacity="0.6" />
+          <rect x="7" y="7.5" width="6" height="5" rx="0.5" stroke={s} strokeWidth="0.6" opacity="0.4" />
+          <circle cx="10" cy="10" r="1" fill={s} />
+        </svg>
+      )
+    case "mqtt-shopfloor":
+      return (
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <rect x="1" y="1" width="18" height="18" rx="2" stroke={s} strokeWidth="1" style={{ filter: `drop-shadow(0 0 2px ${g})` }} />
+          <rect x="3" y="3" width="6" height="6" rx="1" stroke={s} strokeWidth="0.7" opacity="0.5" />
+          <rect x="11" y="3" width="6" height="6" rx="1" stroke={s} strokeWidth="0.7" opacity="0.5" />
+          <rect x="3" y="11" width="14" height="6" rx="1" stroke={s} strokeWidth="0.7" opacity="0.5" />
+          <circle cx="6" cy="6" r="1" fill={s} style={{ filter: `drop-shadow(0 0 2px ${g})` }} />
+          <circle cx="14" cy="6" r="1" fill={s} opacity="0.5" />
+          <circle cx="10" cy="14" r="1" fill={s} opacity="0.5" />
+        </svg>
+      )
+    case "mqtt-dataflow":
+      return (
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <line x1="3" y1="6" x2="10" y2="10" stroke={s} strokeWidth="0.8" opacity="0.5" />
+          <line x1="3" y1="14" x2="10" y2="10" stroke={s} strokeWidth="0.8" opacity="0.5" />
+          <line x1="10" y1="10" x2="17" y2="6" stroke={s} strokeWidth="0.8" opacity="0.5" />
+          <line x1="10" y1="10" x2="17" y2="14" stroke={s} strokeWidth="0.8" opacity="0.5" />
+          <circle cx="3" cy="6" r="2" stroke={s} strokeWidth="0.8" />
+          <circle cx="3" cy="14" r="2" stroke={s} strokeWidth="0.8" />
+          <circle cx="10" cy="10" r="2.5" stroke={s} strokeWidth="1" style={{ filter: `drop-shadow(0 0 2px ${g})` }} />
+          <circle cx="17" cy="6" r="2" stroke={s} strokeWidth="0.8" />
+          <circle cx="17" cy="14" r="2" stroke={s} strokeWidth="0.8" />
+        </svg>
+      )
     default:
       return <div className="h-5 w-5" />
   }

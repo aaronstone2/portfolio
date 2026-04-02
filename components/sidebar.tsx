@@ -217,6 +217,51 @@ function MiniGraphic({ type, isActive }: { type: string; isActive: boolean }) {
         </svg>
       )
 
+    case "mqtt-architecture":
+      // Mini nested brackets / JSON structure
+      return (
+        <svg width="28" height="18" viewBox="0 0 28 18" className="flex-shrink-0">
+          <rect x="3" y="2" width="22" height="14" rx="1.5" fill="none" stroke={stroke} strokeWidth="0.8" style={{ filter: `drop-shadow(0 0 2px ${glow})` }} />
+          <rect x="6" y="5" width="16" height="8" rx="1" fill="none" stroke={stroke} strokeWidth="0.6" opacity="0.6" />
+          <rect x="9" y="7" width="10" height="4" rx="0.5" fill="none" stroke={stroke} strokeWidth="0.5" opacity="0.4" />
+          <circle cx="14" cy="9" r="1" fill={dot} />
+          <line x1="5" y1="9" x2="9" y2="9" stroke={stroke} strokeWidth="0.5" strokeDasharray="1 1" opacity="0.4" />
+        </svg>
+      )
+
+    case "mqtt-shopfloor":
+      // Mini factory floor layout with glass panels
+      return (
+        <svg width="28" height="18" viewBox="0 0 28 18" className="flex-shrink-0">
+          <rect x="2" y="1" width="24" height="16" rx="2" fill="none" stroke={stroke} strokeWidth="0.8" style={{ filter: `drop-shadow(0 0 2px ${glow})` }} />
+          <rect x="4" y="3" width="8" height="5" rx="1" fill="none" stroke={stroke} strokeWidth="0.6" opacity="0.5" />
+          <rect x="14" y="3" width="10" height="5" rx="1" fill="none" stroke={stroke} strokeWidth="0.6" opacity="0.5" />
+          <rect x="4" y="10" width="20" height="5" rx="1" fill="none" stroke={stroke} strokeWidth="0.6" opacity="0.5" />
+          <circle cx="7" cy="5.5" r="1" fill={dot} style={{ filter: `drop-shadow(0 0 2px ${glow})` }} />
+          <circle cx="18" cy="5.5" r="1" fill={dot} opacity="0.6" />
+          <circle cx="10" cy="12.5" r="1" fill={dot} opacity="0.6" />
+          <circle cx="18" cy="12.5" r="1" fill={dot} style={{ filter: `drop-shadow(0 0 2px ${glow})` }} />
+        </svg>
+      )
+
+    case "mqtt-dataflow":
+      // Mini left-to-right flow with animated dots
+      return (
+        <svg width="28" height="18" viewBox="0 0 28 18" className="flex-shrink-0">
+          <line x1="4" y1="5" x2="14" y2="9" stroke={stroke} strokeWidth="0.8" opacity="0.5" />
+          <line x1="4" y1="13" x2="14" y2="9" stroke={stroke} strokeWidth="0.8" opacity="0.5" />
+          <line x1="14" y1="9" x2="24" y2="5" stroke={stroke} strokeWidth="0.8" opacity="0.5" />
+          <line x1="14" y1="9" x2="24" y2="13" stroke={stroke} strokeWidth="0.8" opacity="0.5" />
+          <circle cx="4" cy="5" r="2" fill="none" stroke={stroke} strokeWidth="0.8" />
+          <circle cx="4" cy="13" r="2" fill="none" stroke={stroke} strokeWidth="0.8" />
+          <circle cx="14" cy="9" r="2.5" fill="none" stroke={stroke} strokeWidth="1" style={{ filter: `drop-shadow(0 0 2px ${glow})` }} />
+          <circle cx="24" cy="5" r="2" fill="none" stroke={stroke} strokeWidth="0.8" />
+          <circle cx="24" cy="13" r="2" fill="none" stroke={stroke} strokeWidth="0.8" />
+          <circle cx="9" cy="7" r="0.8" fill={dot} />
+          <circle cx="19" cy="7" r="0.8" fill={dot} />
+        </svg>
+      )
+
     default:
       return null
   }

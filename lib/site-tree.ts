@@ -94,6 +94,26 @@ export const SITE_TREE: SiteNode[] = [
         techStack: ["React", "TypeScript", "MQTT", "SVG", "Real-time Data"],
         description: "Real-time shopfloor monitoring with MQTT topic tree visualization, time-series charts, and interactive topology graph. Models manufacturing IoT data from stations and machines.",
         featured: true,
+        children: [
+          {
+            href: "/mqtt/architecture",
+            title: "Architecture",
+            subtitle: "MQTT JSON Nesting View",
+            graphic: "mqtt-architecture",
+          },
+          {
+            href: "/mqtt/shopfloor",
+            title: "Shopfloor",
+            subtitle: "Visual Shopfloor (Liquid Glass)",
+            graphic: "mqtt-shopfloor",
+          },
+          {
+            href: "/mqtt/dataflow",
+            title: "Data Flow",
+            subtitle: "Edge Animation Pipeline",
+            graphic: "mqtt-dataflow",
+          },
+        ],
       },
     ],
   },
