@@ -14,18 +14,18 @@ export function PageHeader({ path, children }: PageHeaderProps) {
   if (!meta) return null
 
   return (
-    <header className="flex items-center justify-between border-b border-white/10 bg-card/50 px-6 py-3 flex-shrink-0">
-      <div className="flex items-center gap-3">
-        <div className="rounded-lg bg-white/5 p-2 border border-white/10">
+    <header className="flex items-center justify-between gap-3 border-b border-white/10 bg-card/50 pl-16 pr-4 py-3 sm:px-6 sm:py-3 flex-shrink-0 flex-wrap md:flex-nowrap">
+      <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+        <div className="rounded-lg bg-white/5 p-2 border border-white/10 flex-shrink-0">
           <MiniIcon type={meta.graphic} />
         </div>
-        <div>
-          <h1 className="text-xl font-semibold text-white" style={{ textShadow: '0 0 10px rgba(255,255,255,0.2)' }}>{meta.title}</h1>
-          <p className="text-sm text-slate-500">{meta.subtitle}</p>
+        <div className="min-w-0">
+          <h1 className="text-base sm:text-xl font-semibold text-white truncate" style={{ textShadow: '0 0 10px rgba(255,255,255,0.2)' }}>{meta.title}</h1>
+          <p className="text-xs sm:text-sm text-slate-500 truncate">{meta.subtitle}</p>
         </div>
       </div>
       {children && (
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
           {children}
         </div>
       )}

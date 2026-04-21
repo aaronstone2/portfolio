@@ -34,8 +34,8 @@ export default function HomePage() {
               <span className="text-sm font-mono text-slate-400">Available for opportunities</span>
             </div>
 
-            <div className="mt-8 mb-10 flex justify-center" style={{ padding: '40px' }}>
-              <div className="h-64 w-64 rounded-full p-[3px] transition-all duration-300 hover:scale-[1.35] cursor-pointer" style={{ background: 'rgba(255,255,255,0.25)', boxShadow: '0 0 35px rgba(255,255,255,0.25), 0 0 70px rgba(255,255,255,0.08)', animation: 'pulseGlow 2s ease-in-out infinite' }}>
+            <div className="mt-6 sm:mt-8 mb-8 sm:mb-10 flex justify-center p-4 sm:p-10">
+              <div className="h-40 w-40 sm:h-56 sm:w-56 md:h-64 md:w-64 rounded-full p-[3px] transition-all duration-300 hover:scale-[1.35] cursor-pointer" style={{ background: 'rgba(255,255,255,0.25)', boxShadow: '0 0 35px rgba(255,255,255,0.25), 0 0 70px rgba(255,255,255,0.08)', animation: 'pulseGlow 2s ease-in-out infinite' }}>
                 <div className="h-full w-full rounded-full overflow-hidden border-[3px] border-black">
                   <img src="/aaron-photo.jpg" alt="Aaron Stone" className="h-full w-full object-cover" />
                 </div>
@@ -43,11 +43,11 @@ export default function HomePage() {
             </div>
             <style dangerouslySetInnerHTML={{ __html: `@keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 35px rgba(255,255,255,0.25), 0 0 70px rgba(255,255,255,0.08); } 50% { box-shadow: 0 0 60px rgba(255,255,255,0.45), 0 0 120px rgba(255,255,255,0.15); } }` }} />
 
-            <h1 className="text-4xl md:text-6xl font-light tracking-wide mb-4">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-light tracking-wide mb-3 sm:mb-4">
               <span style={{ color: '#fff', textShadow: '0 0 7px #fff, 0 0 15px #fff, 0 0 30px #fff, 0 0 50px rgba(255,255,255,0.5), 0 0 80px rgba(255,255,255,0.3), 0 0 120px rgba(255,255,255,0.15)', WebkitTextStroke: '0.5px rgba(255,255,255,0.8)', letterSpacing: '0.08em' }}>Aaron Stone</span>
             </h1>
 
-            <p className="text-xl md:text-2xl text-slate-400 mb-6 max-w-2xl">
+            <p className="text-lg sm:text-xl md:text-2xl text-slate-400 mb-4 sm:mb-6 max-w-2xl">
               Software Engineer <span className="text-slate-300">&amp;</span> Product Builder
             </p>
 
@@ -105,16 +105,16 @@ export default function HomePage() {
         </section>
 
         {/* Stats */}
-        <section className="mt-16 grid gap-4 md:grid-cols-4">
+        <section className="mt-12 sm:mt-16 grid gap-3 sm:gap-4 grid-cols-2 md:grid-cols-4">
           {[
             { label: "Years Experience", value: "5+" },
             { label: "Projects Shipped", value: "20+" },
             { label: "Technologies", value: "15+" },
             { label: "Coffee Consumed", value: "∞" },
           ].map((stat) => (
-            <div key={stat.label} className="rounded-xl border border-border bg-card/50 p-6 text-center">
-              <div className="text-3xl font-bold text-white" style={{ textShadow: '0 0 15px rgba(255,255,255,0.2)' }}>{stat.value}</div>
-              <div className="mt-1 text-sm text-muted-foreground font-mono">{stat.label}</div>
+            <div key={stat.label} className="rounded-xl border border-border bg-card/50 p-4 sm:p-6 text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-white" style={{ textShadow: '0 0 15px rgba(255,255,255,0.2)' }}>{stat.value}</div>
+              <div className="mt-1 text-xs sm:text-sm text-muted-foreground font-mono">{stat.label}</div>
             </div>
           ))}
         </section>

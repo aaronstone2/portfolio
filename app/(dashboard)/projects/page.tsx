@@ -19,13 +19,13 @@ export default function ProjectsPage() {
   return (
     <div className="min-h-screen">
       <PageHeader path="/projects" />
-      <div className="p-6 md:p-10">
+      <div className="p-4 sm:p-6 md:p-10">
         {/* Projects Grid — driven entirely by site-tree.ts */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project) => (
             <article
               key={project.href}
-              className="group relative flex flex-col rounded-xl bg-card p-6 transition-all duration-300 hover:scale-[1.08] active:scale-[1.15] cursor-pointer border border-white/10 hover:border-white/25"
+              className="group relative flex flex-col rounded-xl bg-card p-4 sm:p-6 transition-all duration-300 md:hover:scale-[1.08] active:scale-[1.02] cursor-pointer border border-white/10 hover:border-white/25"
             >
               {project.featured && (
                 <div className="absolute -top-3 -right-3 rounded-full bg-white/10 px-3 py-1 text-xs font-mono font-medium text-white border border-white/20">
