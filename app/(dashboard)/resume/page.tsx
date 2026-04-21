@@ -10,74 +10,57 @@ type ViewMode = "website" | "document" | "graph"
 const experience = [
   {
     id: 1,
-    title: "Software Engineer — DevX Team",
+    title: "TPM | SRE",
     company: "Tulip Interfaces",
     location: "Boston, MA",
-    period: "Jan 2026 – Present",
+    period: "Jun 2025 – Apr 2026",
     bullets: [
-      "Architected load testing infrastructure using K6 and Ironhorse frameworks for full product coverage",
-      "Built synthetic data generation pipelines modeling real customer usage patterns across enterprise deployments",
-      "Rebuilt API client libraries and comprehensive test suites, improving developer velocity and test reliability"
+      "FY 2026 Tulip Grow Award — cited across CSMs, engineering, product, and leadership as the go-to for tough technical + customer-facing problems and cross-functional leadership.",
+      "Led resolution of the most critical incidents in company history — multi-customer cluster outages, production-crippling MongoDB bottlenecks, and regressions on Tulip's largest enterprise accounts — as escalation point across SRE, engineering, and C-suite.",
+      "Architected a generalized load-testing framework for 100+ API endpoints across 5+ backend services, adopted by 5+ engineering teams with automated runs and live Grafana + Loki dashboards.",
     ],
-    skills: ["JavaScript", "TypeScript", "K6", "Node.js"],
-    type: "work"
+    skills: ["K6", "Grafana", "Loki", "MongoDB", "Performance Engineering"],
+    type: "work",
   },
   {
     id: 2,
-    title: "TPM / Software Engineer",
+    title: "Technical Support Engineer",
     company: "Tulip Interfaces",
     location: "Boston, MA",
-    period: "Jul – Dec 2025",
+    period: "Apr 2023 – May 2025",
     bullets: [
-      "Built FlowNode: visual DAG automation builder with 20+ custom node types (React, ReactFlow, TypeScript)",
-      "Integrated Jira, Slack, and Google Sheets APIs for cross-platform workflow orchestration",
-      "Managed LTS 15 release cycle: coordinated 6 engineering teams across 200+ Jira tickets"
+      "Led resolution of multi-customer cluster outages and MongoDB performance bottlenecks under C-level directive — owning bug reproduction, RCA, customer comms, and remediation with Engineering + Product.",
+      "Operated as combined SWE + Support on escalations (custom MongoDB scripts, Loki queries) while partnering closely with CSMs across Product, Engineering, and Support.",
+      "Designed and shipped a drag-and-drop visual MongoDB interface that replaced mongosh internally; led UX research for internal support-automation tooling including AI-assisted workflows.",
     ],
-    skills: ["React", "TypeScript", "ReactFlow", "D3.js", "MUI", "Jira API", "Slack API"],
-    type: "work"
+    skills: ["MongoDB", "JavaScript", "mongosh", "Loki", "UX Research"],
+    type: "work",
   },
   {
     id: 3,
-    title: "Senior Escalation Engineer",
+    title: "Product Support Engineer",
     company: "Tulip Interfaces",
     location: "Boston, MA",
-    period: "Oct 2023 – Dec 2025",
+    period: "Nov 2021 – Apr 2023",
     bullets: [
-      "Managed $10M–20M+ ARR enterprise accounts: Generac, Milwaukee Tool, DMG Mori, Tiffany & Co.",
-      "Primary engineering liaison bridging Customer Success and Engineering organizations (50+ engineers)",
-      "Drove proactive issue resolution across $70M ARR customer base, directly reducing enterprise churn"
+      "Delivered Tier-2/3 support across a complex manufacturing + biotech SaaS platform, building trusted relationships with CSMs, engineers, and customers that carried into every later role.",
+      "Built internal documentation and debugging tooling that shortened new-hire onboarding and bug-investigation time.",
     ],
-    skills: ["MongoDB", "JavaScript", "mongosh", "Loki", "debugging"],
-    type: "work"
+    skills: ["Zendesk", "Jira", "Technical Troubleshooting"],
+    type: "work",
   },
   {
     id: 4,
-    title: "Customer Support Engineer I → II",
-    company: "Tulip Interfaces",
-    location: "Boston, MA",
-    period: "Nov 2021 – Oct 2023",
-    bullets: [
-      "Scaled support engineering team from 3 to 8 engineers while maintaining response quality",
-      "Resolved complex application logic, connector integration, and performance issues",
-      "Promoted through 3 tiers to highest escalation level within 2 years"
-    ],
-    skills: ["Zendesk", "Jira", "Technical Troubleshooting"],
-    type: "work"
-  },
-  {
-    id: 5,
-    title: "Founder & CEO — Head of Product & Design",
+    title: "Founder & Product Architect",
     company: "Bubble Holographic Systems",
     location: "Remote",
     period: "2017 – Present",
     bullets: [
-      "Designing 3D visual programming language with recursive namespace system (Bubbles, Slots, Wave Graphs)",
-      "Authored 78-page Honors Thesis at Brandeis University on VR programming interfaces",
-      "Building premium 3D creative marketplace with visual code library (Biblo Codebase)",
-      "Managing engineering partner on compiler and runtime implementation"
+      "Building a 3D graphics system and no-code spatial builder; originated as my Brandeis CS Honors Thesis.",
+      "Selected for SparkTank.",
     ],
     skills: ["3D Graphics", "Visual Programming", "Product Design"],
-    type: "work"
+    type: "work",
   },
 ]
 
