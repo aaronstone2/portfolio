@@ -213,3 +213,27 @@
   );
   pointer-events: none;
 }
+
+/* Touch devices: disable hover-triggered scale transforms so buttons and
+   cards don't jump mid-tap. The `hover` state fires on tap on iOS/Android,
+   causing annoying bounce on every click. Keep `active:scale` for explicit
+   tap feedback — that's fine. */
+@media (hover: none) {
+  .hover\:scale-105:hover,
+  .hover\:scale-110:hover,
+  .hover\:scale-125:hover,
+  .hover\:scale-150:hover,
+  .hover\:scale-\[1\.02\]:hover,
+  .hover\:scale-\[1\.03\]:hover,
+  .hover\:scale-\[1\.05\]:hover,
+  .hover\:scale-\[1\.08\]:hover,
+  .hover\:scale-\[1\.1\]:hover,
+  .hover\:scale-\[1\.15\]:hover,
+  .hover\:scale-\[1\.2\]:hover,
+  .hover\:scale-\[1\.25\]:hover,
+  .hover\:scale-\[1\.3\]:hover,
+  .hover\:scale-\[1\.35\]:hover,
+  .hover\:scale-\[2\.0\]:hover {
+    transform: none !important;
+  }
+}
