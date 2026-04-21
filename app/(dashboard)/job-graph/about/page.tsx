@@ -41,7 +41,7 @@ const FEATURES = [
     body: "Pure-function preflight scans for {{...}} leaks, word-count bounds, missing sections, missing name/email/phone, duplicate bullets, missing greeting/sign-off, and missing company name in the cover letter. Findings at block severity hard-gate submission.",
   },
   {
-    title: "Built on MiniMongo — my own visual MongoDB explorer",
+    title: "Built on a custom visual MongoDB explorer",
     body: "Custom RPC framework over HTTP + WebSocket, React Flow canvas, Zod-validated procedures, theme-aware inline styles over CSS variables. The job scraper is the first domain on top of a generic Scraper<T> / Entity / Edge substrate.",
   },
 ]
@@ -66,10 +66,10 @@ export default function JobGraphPage() {
         <section>
           <h1 className="text-2xl sm:text-3xl font-semibold text-white mb-2">Job Graph</h1>
           <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
-            A semantic knowledge graph built on top of MiniMongo (a visual MongoDB explorer and
-            custom RPC framework I wrote) that scrapes and indexes tens of thousands of job
-            postings, extracts keywords on every JD, and ships an AI-reviewed resume-tailoring
-            editor with drag-to-reorder interactions.
+            A semantic knowledge graph built on top of a custom visual MongoDB explorer and
+            RPC framework that scrapes and indexes tens of thousands of job postings, extracts
+            keywords on every JD, and ships an AI-reviewed resume-tailoring editor with
+            drag-to-reorder interactions.
           </p>
         </section>
 

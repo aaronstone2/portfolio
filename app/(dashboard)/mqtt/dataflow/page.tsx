@@ -19,17 +19,16 @@ function DataflowContent() {
   }
 
   return (
-    <div className="space-y-6">
-      <PageHeader
-        title="Data Flow"
-        description="End-to-end MQTT pipeline: Broker → On-Prem CH → Connector → Machines → Tables → App"
-      />
-      <iframe
-        src="https://uns-explorer.vercel.app/widgets/flow"
-        className="w-full border-0 rounded-lg"
-        style={{ height: 'calc(100vh - 180px)' }}
-        allow="fullscreen"
-      />
+    <div className="flex h-screen flex-col overflow-hidden">
+      <PageHeader path="/mqtt/dataflow" />
+      <div className="flex-1 relative">
+        <iframe
+          src="https://uns-explorer.vercel.app/widgets/flow"
+          className="absolute inset-0 w-full h-full border-0"
+          allow="fullscreen"
+          title="Data Flow"
+        />
+      </div>
     </div>
   )
 }

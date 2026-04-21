@@ -166,6 +166,34 @@ function WebsiteView() {
     setZoom(z => Math.max(0.3, Math.min(2, z - e.deltaY * 0.001)))
   }
 
+  // Touch pan + pinch-zoom so the timeline is usable on phones.
+  const pinchRef = useRef<{ dist: number; zoom: number } | null>(null)
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if ((e.target as HTMLElement).closest('[data-card]')) return
+    if (e.touches.length === 1) {
+      const t = e.touches[0]!
+      setIsDragging(true)
+      setDragStart({ x: t.clientX - pan.x, y: t.clientY - pan.y })
+    } else if (e.touches.length === 2) {
+      const a = e.touches[0]!, b = e.touches[1]!
+      pinchRef.current = { dist: Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY), zoom }
+      setIsDragging(false)
+    }
+  }
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length === 1 && isDragging) {
+      const t = e.touches[0]!
+      setPan({ x: t.clientX - dragStart.x, y: t.clientY - dragStart.y })
+    } else if (e.touches.length === 2 && pinchRef.current) {
+      const a = e.touches[0]!, b = e.touches[1]!
+      const dist = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY)
+      setZoom(Math.max(0.3, Math.min(2, pinchRef.current.zoom * (dist / pinchRef.current.dist))))
+    }
+  }
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (e.touches.length === 0) { setIsDragging(false); pinchRef.current = null }
+  }
+
   const resetView = () => { setZoom(1); setPan({ x: 0, y: 0 }) }
 
   // Timeline layout: education first (leftmost), then experience in reverse chronological
@@ -202,7 +230,10 @@ function WebsiteView() {
         className="relative flex-1 overflow-hidden cursor-grab active:cursor-grabbing"
         onMouseDown={handleMouseDown}
         onWheel={handleWheel}
-        style={{ backgroundImage: "radial-gradient(circle, rgba(59,130,246,0.08) 1px, transparent 1px)", backgroundSize: "30px 30px" }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        style={{ backgroundImage: "radial-gradient(circle, rgba(59,130,246,0.08) 1px, transparent 1px)", backgroundSize: "30px 30px", touchAction: 'none' }}
       >
         <div
           style={{

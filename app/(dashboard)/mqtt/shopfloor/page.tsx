@@ -19,17 +19,16 @@ function ShopfloorContent() {
   }
 
   return (
-    <div className="space-y-6">
-      <PageHeader
-        title="Shopfloor Monitor"
-        description="Live machine status, attributes, and sparklines across the stamping line"
-      />
-      <iframe
-        src="https://uns-explorer.vercel.app/widgets/monitor"
-        className="w-full border-0 rounded-lg"
-        style={{ height: 'calc(100vh - 180px)' }}
-        allow="fullscreen"
-      />
+    <div className="flex h-screen flex-col overflow-hidden">
+      <PageHeader path="/mqtt/shopfloor" />
+      <div className="flex-1 relative">
+        <iframe
+          src="https://uns-explorer.vercel.app/widgets/monitor"
+          className="absolute inset-0 w-full h-full border-0"
+          allow="fullscreen"
+          title="Shopfloor Monitor"
+        />
+      </div>
     </div>
   )
 }

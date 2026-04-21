@@ -19,17 +19,16 @@ function ArchitectureContent() {
   }
 
   return (
-    <div className="space-y-6">
-      <PageHeader
-        title="Architecture"
-        description="ReactFlow namespace graph with ISA-95 hierarchy, live data, and path unpacking"
-      />
-      <iframe
-        src="https://uns-explorer.vercel.app/explorer-react"
-        className="w-full border-0 rounded-lg"
-        style={{ height: 'calc(100vh - 180px)' }}
-        allow="fullscreen"
-      />
+    <div className="flex h-screen flex-col overflow-hidden">
+      <PageHeader path="/mqtt/architecture" />
+      <div className="flex-1 relative">
+        <iframe
+          src="https://uns-explorer.vercel.app/explorer-react"
+          className="absolute inset-0 w-full h-full border-0"
+          allow="fullscreen"
+          title="MQTT Architecture"
+        />
+      </div>
     </div>
   )
 }
