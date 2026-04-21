@@ -262,6 +262,23 @@ function MiniGraphic({ type, isActive }: { type: string; isActive: boolean }) {
         </svg>
       )
 
+    case "job-graph":
+      // Job Graph — clustered nodes with an outgoing edge (knowledge graph motif)
+      return (
+        <svg width="28" height="18" viewBox="0 0 28 18" className="flex-shrink-0">
+          <line x1="7" y1="9" x2="14" y2="4" stroke={stroke} strokeWidth="0.8" opacity="0.6" />
+          <line x1="7" y1="9" x2="14" y2="14" stroke={stroke} strokeWidth="0.8" opacity="0.6" />
+          <line x1="14" y1="4" x2="21" y2="9" stroke={stroke} strokeWidth="0.8" opacity="0.6" />
+          <line x1="14" y1="14" x2="21" y2="9" stroke={stroke} strokeWidth="0.8" opacity="0.6" />
+          <circle cx="7" cy="9" r="2.5" fill="none" stroke={stroke} strokeWidth="1" style={{ filter: `drop-shadow(0 0 2px ${glow})` }} />
+          <circle cx="14" cy="4" r="1.8" fill="none" stroke={stroke} strokeWidth="0.8" />
+          <circle cx="14" cy="14" r="1.8" fill="none" stroke={stroke} strokeWidth="0.8" />
+          <circle cx="21" cy="9" r="2.5" fill="none" stroke={stroke} strokeWidth="1" style={{ filter: `drop-shadow(0 0 2px ${glow})` }} />
+          <circle cx="14" cy="4" r="0.8" fill={dot} />
+          <circle cx="14" cy="14" r="0.8" fill={dot} />
+        </svg>
+      )
+
     default:
       return null
   }

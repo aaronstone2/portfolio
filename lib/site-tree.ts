@@ -78,6 +78,16 @@ export const SITE_TREE: SiteNode[] = [
         featured: true,
       },
       {
+        href: "/job-graph",
+        title: "Job Graph",
+        subtitle: "Semantic Knowledge Graph over 21k+ Job Postings",
+        graphic: "job-graph",
+        github: "https://github.com/aaronstone2/job-graph",
+        techStack: ["TypeScript", "React Flow", "MongoDB", "Zod", "Express", "Claude API"],
+        description: "Scrapes 21,000+ job postings across 79 companies and 5 ATSes (Greenhouse, Lever, Ashby, Workday, SmartRecruiters), extracts keywords + skills from every JD, and ships an AI-reviewed resume-tailoring editor with drag-to-reorder interactions. Built on MiniMongo, my own visual MongoDB explorer.",
+        featured: true,
+      },
+      {
         href: "/subway",
         title: "Subway Map",
         subtitle: "Interactive Node Graph",

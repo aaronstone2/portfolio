@@ -206,6 +206,19 @@ function MiniIcon({ type }: { type: string }) {
           <circle cx="17" cy="14" r="2" stroke={s} strokeWidth="0.8" />
         </svg>
       )
+    case "job-graph":
+      return (
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <line x1="5" y1="10" x2="10" y2="4" stroke={s} strokeWidth="0.8" opacity="0.6" />
+          <line x1="5" y1="10" x2="10" y2="16" stroke={s} strokeWidth="0.8" opacity="0.6" />
+          <line x1="10" y1="4" x2="15" y2="10" stroke={s} strokeWidth="0.8" opacity="0.6" />
+          <line x1="10" y1="16" x2="15" y2="10" stroke={s} strokeWidth="0.8" opacity="0.6" />
+          <circle cx="5" cy="10" r="2.2" stroke={s} strokeWidth="1" style={{ filter: `drop-shadow(0 0 2px ${g})` }} />
+          <circle cx="10" cy="4" r="1.5" stroke={s} strokeWidth="0.8" />
+          <circle cx="10" cy="16" r="1.5" stroke={s} strokeWidth="0.8" />
+          <circle cx="15" cy="10" r="2.2" stroke={s} strokeWidth="1" style={{ filter: `drop-shadow(0 0 2px ${g})` }} />
+        </svg>
+      )
     default:
       return <div className="h-5 w-5" />
   }
