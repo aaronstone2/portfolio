@@ -43,16 +43,16 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen">
       <PageHeader path="/contact" />
-      <div className="p-6 md:p-10">
+      <div className="p-4 sm:p-6 md:p-10">
       {/* Content */}
-      <section className="mb-12 pt-4 md:pt-0">
-        <p className="text-slate-400 max-w-2xl">
+      <section className="mb-8 sm:mb-12 pt-2 md:pt-0">
+        <p className="text-sm sm:text-base text-slate-400 max-w-2xl">
           Currently exploring opportunities in NYC fintech and tech. Open to Solutions Engineer, Presales, PM, TPM, and SWE roles.
         </p>
       </section>
 
       {/* Contact Cards */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-12">
+      <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mb-8 sm:mb-12">
         {contactInfo.map((item) => {
           const Wrapper = item.href ? "a" : "div"
           const wrapperProps = item.href
