@@ -12,30 +12,32 @@ export default function ServiceGraphPage() {
   return (
     <div className="flex h-screen flex-col overflow-hidden">
       <PageHeader path="/service-graph">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           {/* Tab Switcher */}
           <div className="flex items-center rounded-lg border border-white/10 bg-white/5 p-0.5">
             <button
               onClick={() => setActiveTab("demo")}
-              className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all ${
+              className={`flex items-center gap-1.5 rounded-md px-2 py-1.5 sm:px-3 text-xs font-medium transition-all ${
                 activeTab === "demo"
                   ? "bg-white/10 text-white"
                   : "text-slate-500 hover:text-slate-300"
               }`}
+              aria-label="Live demo"
             >
               <Monitor className="h-3.5 w-3.5" />
-              Live Demo
+              <span className="hidden sm:inline">Live Demo</span>
             </button>
             <button
               onClick={() => setActiveTab("details")}
-              className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all ${
+              className={`flex items-center gap-1.5 rounded-md px-2 py-1.5 sm:px-3 text-xs font-medium transition-all ${
                 activeTab === "details"
                   ? "bg-white/10 text-white"
                   : "text-slate-500 hover:text-slate-300"
               }`}
+              aria-label="Details"
             >
               <BookOpen className="h-3.5 w-3.5" />
-              Details
+              <span className="hidden sm:inline">Details</span>
             </button>
           </div>
 
@@ -43,10 +45,11 @@ export default function ServiceGraphPage() {
             href="https://github.com/aaronstone2/kraken-unchained"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 rounded-lg bg-white/5 px-3 py-1.5 text-xs font-medium text-slate-400 border border-white/10 transition-all hover:text-white hover:scale-[1.05] hover:bg-white/10"
+            className="flex items-center gap-1.5 rounded-lg bg-white/5 px-2 py-1.5 sm:px-3 text-xs font-medium text-slate-400 border border-white/10 transition-all hover:text-white md:hover:scale-[1.05] hover:bg-white/10"
+            aria-label="Source on GitHub"
           >
             <ExternalLink className="h-3.5 w-3.5" />
-            Source
+            <span className="hidden sm:inline">Source</span>
           </a>
         </div>
       </PageHeader>

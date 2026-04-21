@@ -144,6 +144,37 @@ export default function SubwayPage() {
     setZoom(z => Math.max(0.3, Math.min(3, z - e.deltaY * 0.001)))
   }
 
+  // Touch pan + pinch-zoom. Single-finger drag pans the map; two-finger
+  // pinch scales it proportional to the distance change.
+  const pinchRef = useRef<{ dist: number; zoom: number } | null>(null)
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if ((e.target as HTMLElement).closest('[data-station]')) return
+    if (e.touches.length === 1) {
+      const t = e.touches[0]!
+      setIsDragging(true)
+      setDragStart({ x: t.clientX - pan.x, y: t.clientY - pan.y })
+    } else if (e.touches.length === 2) {
+      const a = e.touches[0]!, b = e.touches[1]!
+      const dist = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY)
+      pinchRef.current = { dist, zoom }
+      setIsDragging(false)
+    }
+  }
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length === 1 && isDragging) {
+      const t = e.touches[0]!
+      setPan({ x: t.clientX - dragStart.x, y: t.clientY - dragStart.y })
+    } else if (e.touches.length === 2 && pinchRef.current) {
+      const a = e.touches[0]!, b = e.touches[1]!
+      const dist = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY)
+      const next = pinchRef.current.zoom * (dist / pinchRef.current.dist)
+      setZoom(Math.max(0.3, Math.min(3, next)))
+    }
+  }
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (e.touches.length === 0) { setIsDragging(false); pinchRef.current = null }
+  }
+
   const handleStationClick = (station: Station) => {
     if (selectedStation?.id === station.id) {
       setSelectedStation(null)
@@ -169,9 +200,12 @@ export default function SubwayPage() {
       <div
         ref={containerRef}
         className="relative flex-1 overflow-hidden cursor-grab active:cursor-grabbing"
-        style={{ background: '#000' }}
+        style={{ background: '#000', touchAction: 'none' }}
         onMouseDown={handleMouseDown}
         onWheel={handleWheel}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         <svg
           className="absolute inset-0"

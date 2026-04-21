@@ -435,25 +435,27 @@ function ResumePageInner() {
             <button
               key={mode.id}
               onClick={() => setViewMode(mode.id)}
-              className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all duration-200 hover:scale-[1.05] ${
+              className={`flex items-center gap-1.5 rounded-md px-2 py-1.5 sm:px-3 text-xs font-medium transition-all duration-200 md:hover:scale-[1.05] ${
                 viewMode === mode.id
                   ? "bg-white/10 text-white"
                   : "text-slate-600 hover:text-white"
               }`}
               style={viewMode === mode.id ? { boxShadow: '0 0 10px rgba(255,255,255,0.1)', textShadow: '0 0 8px rgba(255,255,255,0.3)' } : {}}
+              aria-label={mode.label}
             >
               <mode.icon className="h-3.5 w-3.5" />
-              {mode.label}
+              <span className="hidden sm:inline">{mode.label}</span>
             </button>
           ))}
         </div>
         <a
           href="/AaronStone_Resume.pdf"
           download
-          className="flex items-center gap-2 rounded-lg bg-white/5 border border-white/10 px-3 py-1.5 text-xs font-medium text-slate-400 transition-all hover:text-white hover:scale-[1.05] hover:bg-white/10"
+          className="flex items-center gap-1.5 sm:gap-2 rounded-lg bg-white/5 border border-white/10 px-2 py-1.5 sm:px-3 text-xs font-medium text-slate-400 transition-all hover:text-white md:hover:scale-[1.05] hover:bg-white/10"
+          aria-label="Download resume PDF"
         >
           <Download className="h-3.5 w-3.5" />
-          PDF
+          <span className="hidden sm:inline">PDF</span>
         </a>
       </PageHeader>
 

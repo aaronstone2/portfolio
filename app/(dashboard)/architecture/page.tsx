@@ -135,6 +135,35 @@ function ArchitectureCanvas() {
     setNodePositions(Object.fromEntries(nodes.map(n => [n.id, { x: n.x, y: n.y }])))
   }
 
+  // Touch pan + pinch-zoom (single finger = pan, two fingers = pinch).
+  // Node dragging via touch is not supported — tap = select.
+  const pinchRef = useRef<{ dist: number; zoom: number } | null>(null)
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if ((e.target as HTMLElement).closest('[data-node]')) return
+    if (e.touches.length === 1) {
+      const t = e.touches[0]!
+      setIsDragging(true)
+      setDragStart({ x: t.clientX - pan.x, y: t.clientY - pan.y })
+    } else if (e.touches.length === 2) {
+      const a = e.touches[0]!, b = e.touches[1]!
+      pinchRef.current = { dist: Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY), zoom }
+      setIsDragging(false)
+    }
+  }
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length === 1 && isDragging) {
+      const t = e.touches[0]!
+      setPan({ x: t.clientX - dragStart.x, y: t.clientY - dragStart.y })
+    } else if (e.touches.length === 2 && pinchRef.current) {
+      const a = e.touches[0]!, b = e.touches[1]!
+      const dist = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY)
+      setZoom(Math.max(0.5, Math.min(2, pinchRef.current.zoom * (dist / pinchRef.current.dist))))
+    }
+  }
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (e.touches.length === 0) { setIsDragging(false); pinchRef.current = null }
+  }
+
   const getNodePosition = (nodeId: string) => {
     return nodePositions[nodeId] || { x: 0, y: 0 }
   }
@@ -167,11 +196,14 @@ function ArchitectureCanvas() {
       </div>
 
       {/* Graph Container */}
-      <div 
+      <div
         ref={containerRef}
         className="relative flex-1 overflow-hidden bg-background cursor-grab active:cursor-grabbing"
         onMouseDown={handleMouseDown}
-        style={{ backgroundImage: "radial-gradient(circle, rgba(59, 130, 246, 0.1) 1px, transparent 1px)", backgroundSize: "30px 30px" }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        style={{ backgroundImage: "radial-gradient(circle, rgba(59, 130, 246, 0.1) 1px, transparent 1px)", backgroundSize: "30px 30px", touchAction: 'none' }}
       >
         <svg
           className="absolute inset-0 h-full w-full"
