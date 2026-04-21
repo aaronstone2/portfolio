@@ -426,6 +426,9 @@ function ResumePageInner() {
   const [viewMode, setViewMode] = useState<ViewMode>(() => {
     const v = searchParams.get('view')
     if (v === 'website' || v === 'document' || v === 'graph') return v
+    // Default to 'document' on mobile since the Timeline view is
+    // hard to use on narrow screens; desktop gets the full Timeline.
+    if (typeof window !== "undefined" && window.innerWidth < 768) return 'document'
     return 'website'
   })
 
