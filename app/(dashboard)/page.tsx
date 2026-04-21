@@ -20,9 +20,9 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       <PageHeader path="/" />
-      <div className="p-6 md:p-10">
+      <div className="p-4 sm:p-6 md:p-10">
         {/* Hero Section */}
-        <section className="relative mb-16 pt-12 md:pt-0">
+        <section className="relative mb-10 sm:mb-16 pt-6 md:pt-0">
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-primary/5 blur-3xl" />
             <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-secondary/5 blur-3xl" />
