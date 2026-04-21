@@ -97,6 +97,26 @@ export const SITE_TREE: SiteNode[] = [
         featured: false,
       },
       {
+        href: "/quant-insider",
+        title: "Quant Insider",
+        subtitle: "Dependency Graph for Public Markets",
+        graphic: "service-graph",
+        github: "https://github.com/aaronstone2/quant-insider",
+        techStack: [
+          "TypeScript",
+          "Fastify",
+          "Prisma",
+          "Postgres",
+          "BullMQ",
+          "React Flow",
+          "Vanilla Extract",
+          "Vite",
+        ],
+        description:
+          "Portfolio intelligence SaaS for skilled retail traders. Detects rolling-over positions (the SMCI-Oct-2024 class of signal), maps supply-chain + TNIC peer networks as a directed graph, and surfaces Congressional + opportunistic-insider signals. Built on Cohen-Frazzini lead-lag, Cohen-Malloy-Pomorski routine/opportunistic filter, and Hoberg-Phillips 10-K cosine-similarity.",
+        featured: true,
+      },
+      {
         href: "/mqtt",
         title: "MQTT Visualizer",
         subtitle: "Shopfloor IoT Monitoring",
