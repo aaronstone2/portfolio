@@ -71,28 +71,28 @@ export default function ServiceGraphPage() {
         </div>
       ) : (
         <div className="flex-1 overflow-auto">
-          <div className="max-w-4xl mx-auto p-8 space-y-8">
+          <div className="max-w-4xl mx-auto p-4 sm:p-6 md:p-8 space-y-6 sm:space-y-8">
             {/* Hero */}
-            <div className="rounded-2xl border-2 border-white/10 bg-white/[0.02] p-8">
+            <div className="rounded-2xl border-2 border-white/10 bg-white/[0.02] p-5 sm:p-8">
               <div className="flex items-center gap-3 mb-4">
-                <div className="rounded-xl bg-white/5 p-3 border border-white/10">
-                  <Layers className="h-6 w-6 text-white" />
+                <div className="rounded-xl bg-white/5 p-2 sm:p-3 border border-white/10 flex-shrink-0">
+                  <Layers className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                 </div>
-                <div>
-                  <h2 className="text-2xl font-bold text-white" style={{ textShadow: '0 0 20px rgba(255,255,255,0.2)' }}>
+                <div className="min-w-0">
+                  <h2 className="text-xl sm:text-2xl font-bold text-white truncate" style={{ textShadow: '0 0 20px rgba(255,255,255,0.2)' }}>
                     Service Graph Visualizer
                   </h2>
-                  <p className="text-sm text-slate-500">kraken-unchained — NX Monorepo</p>
+                  <p className="text-xs sm:text-sm text-slate-500 truncate">kraken-unchained — NX Monorepo</p>
                 </div>
               </div>
-              <p className="text-slate-400 leading-relaxed max-w-2xl">
+              <p className="text-sm sm:text-base text-slate-400 leading-relaxed max-w-2xl">
                 Full-stack service dependency visualization tool built as an NX monorepo. Features a drag-and-drop ReactFlow canvas
                 with a NodePalette sidebar, real-time dependency graph analysis, toxic injection simulation, and K6 load test visualization.
               </p>
             </div>
 
             {/* Architecture Cards */}
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
               {[
                 {
                   icon: GitBranch,

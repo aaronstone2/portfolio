@@ -211,16 +211,16 @@ function WebsiteView() {
       <style dangerouslySetInnerHTML={{ __html: `@keyframes dotPulse { 0%, 100% { box-shadow: 0 0 25px rgba(255,255,255,0.5); } 50% { box-shadow: 0 0 45px rgba(255,255,255,0.8), 0 0 80px rgba(255,255,255,0.3); } }` }} />
       {/* Zoom controls */}
       <div className="flex items-center justify-between border-b border-border bg-card/50 px-4 py-2">
-        <div className="flex items-center gap-3">
-          <Briefcase className="h-4 w-4 text-primary" />
-          <span className="text-sm text-muted-foreground font-mono">Career Timeline</span>
-          <span className="text-xs text-muted-foreground">— drag to pan, scroll to zoom</span>
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+          <Briefcase className="h-4 w-4 text-primary flex-shrink-0" />
+          <span className="text-xs sm:text-sm text-muted-foreground font-mono truncate">Career Timeline</span>
+          <span className="hidden md:inline text-xs text-muted-foreground">— drag to pan, scroll to zoom</span>
         </div>
-        <div className="flex items-center gap-2">
-          <button onClick={() => setZoom(z => Math.max(0.3, z - 0.1))} className="rounded-lg bg-card p-1.5 text-muted-foreground hover:text-foreground"><ZoomOut className="h-4 w-4" /></button>
-          <span className="min-w-[3rem] text-center text-xs text-muted-foreground">{Math.round(zoom * 100)}%</span>
-          <button onClick={() => setZoom(z => Math.min(2, z + 0.1))} className="rounded-lg bg-card p-1.5 text-muted-foreground hover:text-foreground"><ZoomIn className="h-4 w-4" /></button>
-          <button onClick={resetView} className="rounded-lg bg-accent/10 p-1.5 text-accent hover:bg-accent/20 neon-border-cyan"><Maximize2 className="h-4 w-4" /></button>
+        <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
+          <button onClick={() => setZoom(z => Math.max(0.3, z - 0.1))} className="rounded-lg bg-card p-1.5 text-muted-foreground hover:text-foreground" aria-label="Zoom out"><ZoomOut className="h-4 w-4" /></button>
+          <span className="min-w-[2.5rem] sm:min-w-[3rem] text-center text-xs text-muted-foreground">{Math.round(zoom * 100)}%</span>
+          <button onClick={() => setZoom(z => Math.min(2, z + 0.1))} className="rounded-lg bg-card p-1.5 text-muted-foreground hover:text-foreground" aria-label="Zoom in"><ZoomIn className="h-4 w-4" /></button>
+          <button onClick={resetView} className="rounded-lg bg-accent/10 p-1.5 text-accent hover:bg-accent/20 neon-border-cyan" aria-label="Reset view"><Maximize2 className="h-4 w-4" /></button>
         </div>
       </div>
 

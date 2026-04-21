@@ -15,32 +15,35 @@ export default function ThesisPage() {
         <div className="flex items-center rounded-lg border border-white/10 bg-black/50 p-1">
           <button
             onClick={() => setViewMode("document")}
-            className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all duration-200 hover:scale-[1.05] ${
+            className={`flex items-center gap-1.5 rounded-md px-2 py-1.5 sm:px-3 text-xs font-medium transition-all duration-200 md:hover:scale-[1.05] ${
               viewMode === "document" ? "bg-white/10 text-white" : "text-slate-600 hover:text-white"
             }`}
             style={viewMode === "document" ? { boxShadow: '0 0 10px rgba(255,255,255,0.1)', textShadow: '0 0 8px rgba(255,255,255,0.3)' } : {}}
+            aria-label="PDF"
           >
             <FileDown className="h-3.5 w-3.5" />
-            PDF
+            <span className="hidden sm:inline">PDF</span>
           </button>
           <button
             onClick={() => setViewMode("reader")}
-            className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all duration-200 hover:scale-[1.05] ${
+            className={`flex items-center gap-1.5 rounded-md px-2 py-1.5 sm:px-3 text-xs font-medium transition-all duration-200 md:hover:scale-[1.05] ${
               viewMode === "reader" ? "bg-white/10 text-white" : "text-slate-600 hover:text-white"
             }`}
             style={viewMode === "reader" ? { boxShadow: '0 0 10px rgba(255,255,255,0.1)', textShadow: '0 0 8px rgba(255,255,255,0.3)' } : {}}
+            aria-label="Reader"
           >
             <BookOpen className="h-3.5 w-3.5" />
-            Reader
+            <span className="hidden sm:inline">Reader</span>
           </button>
         </div>
         <a
           href="/StoneThesis2021.pdf"
           download
-          className="flex items-center gap-2 rounded-lg bg-white/5 border border-white/10 px-3 py-1.5 text-xs font-medium text-slate-400 transition-all hover:text-white hover:scale-[1.05] hover:bg-white/10"
+          className="flex items-center gap-1.5 sm:gap-2 rounded-lg bg-white/5 border border-white/10 px-2 py-1.5 sm:px-3 text-xs font-medium text-slate-400 transition-all hover:text-white md:hover:scale-[1.05] hover:bg-white/10"
+          aria-label="Download thesis PDF"
         >
           <Download className="h-3.5 w-3.5" />
-          Download
+          <span className="hidden sm:inline">Download</span>
         </a>
       </PageHeader>
 

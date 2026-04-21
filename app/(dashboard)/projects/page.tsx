@@ -69,7 +69,7 @@ export default function ProjectsPage() {
         </div>
 
         {/* Open Source Section */}
-        <section className="mt-16 rounded-xl border border-border bg-card/50 p-8">
+        <section className="mt-12 sm:mt-16 rounded-xl border border-border bg-card/50 p-5 sm:p-8">
           <h2 className="text-lg font-semibold mb-4 text-foreground">
             <span className="text-white" style={{ textShadow: '0 0 10px rgba(255,255,255,0.3)' }}>//</span> Open Source
           </h2>

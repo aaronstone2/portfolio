@@ -92,7 +92,7 @@ export default function ContactPage() {
 
       {/* Get in Touch Section */}
       <section className="max-w-xl">
-        <div className="rounded-xl border border-white/10 bg-card p-8">
+        <div className="rounded-xl border border-white/10 bg-card p-5 sm:p-8">
           <h2 className="text-lg font-semibold mb-4 text-white">
             <span style={{ textShadow: '0 0 10px rgba(255,255,255,0.3)' }}>//</span> Get in Touch
           </h2>
