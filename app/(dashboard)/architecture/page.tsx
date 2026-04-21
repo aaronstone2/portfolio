@@ -171,25 +171,28 @@ function ArchitectureCanvas() {
   return (
     <div className="flex h-full flex-col overflow-hidden">
       {/* Zoom Controls */}
-      <div className="flex items-center justify-end gap-2 border-b border-border bg-card/50 px-4 py-2">
+      <div className="flex items-center justify-end gap-1 sm:gap-2 border-b border-border bg-card/50 px-3 sm:px-4 py-2">
         <button
           onClick={() => setZoom(z => Math.max(0.5, z - 0.1))}
-          className="rounded-lg bg-card p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          className="rounded-lg bg-card p-1.5 sm:p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          aria-label="Zoom out"
         >
           <ZoomOut className="h-4 w-4" />
         </button>
-        <span className="min-w-[4rem] text-center text-sm text-muted-foreground">
+        <span className="min-w-[3rem] sm:min-w-[4rem] text-center text-xs sm:text-sm text-muted-foreground">
           {Math.round(zoom * 100)}%
         </span>
         <button
           onClick={() => setZoom(z => Math.min(2, z + 0.1))}
-          className="rounded-lg bg-card p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          className="rounded-lg bg-card p-1.5 sm:p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          aria-label="Zoom in"
         >
           <ZoomIn className="h-4 w-4" />
         </button>
         <button
           onClick={resetView}
-          className="ml-2 rounded-lg bg-white/5 p-2 text-white transition-colors hover:bg-accent/20 border border-white/10"
+          className="ml-1 sm:ml-2 rounded-lg bg-white/5 p-1.5 sm:p-2 text-white transition-colors hover:bg-accent/20 border border-white/10"
+          aria-label="Reset view"
         >
           <Maximize2 className="h-4 w-4" />
         </button>
@@ -371,13 +374,14 @@ export default function ArchitecturePage() {
             <button
               key={mode.id}
               onClick={() => setViewMode(mode.id)}
-              className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all duration-200 hover:scale-[1.05] ${
+              className={`flex items-center gap-1.5 rounded-md px-2 py-1.5 sm:px-3 text-xs font-medium transition-all duration-200 hover:scale-[1.05] ${
                 viewMode === mode.id ? "bg-white/10 text-white" : "text-slate-600 hover:text-white"
               }`}
               style={viewMode === mode.id ? { boxShadow: '0 0 10px rgba(255,255,255,0.1)', textShadow: '0 0 8px rgba(255,255,255,0.3)' } : {}}
+              aria-label={mode.label}
             >
               <mode.icon className="h-3.5 w-3.5" />
-              {mode.label}
+              <span className="hidden sm:inline">{mode.label}</span>
             </button>
           ))}
         </div>

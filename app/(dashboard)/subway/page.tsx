@@ -189,11 +189,11 @@ export default function SubwayPage() {
   return (
     <div className="flex h-screen flex-col overflow-hidden">
       <PageHeader path="/subway">
-        <div className="flex items-center gap-2">
-          <button onClick={() => setZoom(z => Math.max(0.3, z - 0.1))} className="rounded-lg bg-white/5 p-2 text-slate-400 hover:text-white border border-white/10 transition-all hover:scale-110"><ZoomOut className="h-4 w-4" /></button>
-          <span className="min-w-[3rem] text-center text-xs text-slate-500">{Math.round(zoom * 100)}%</span>
-          <button onClick={() => setZoom(z => Math.min(3, z + 0.1))} className="rounded-lg bg-white/5 p-2 text-slate-400 hover:text-white border border-white/10 transition-all hover:scale-110"><ZoomIn className="h-4 w-4" /></button>
-          <button onClick={() => { setZoom(0.7); setPan({ x: 50, y: 0 }); setSelectedStation(null) }} className="rounded-lg bg-white/5 p-2 text-white border border-white/10 transition-all hover:scale-110"><Maximize2 className="h-4 w-4" /></button>
+        <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
+          <button onClick={() => setZoom(z => Math.max(0.3, z - 0.1))} className="rounded-lg bg-white/5 p-1.5 sm:p-2 text-slate-400 hover:text-white border border-white/10 transition-all hover:scale-110" aria-label="Zoom out"><ZoomOut className="h-4 w-4" /></button>
+          <span className="min-w-[2.5rem] sm:min-w-[3rem] text-center text-xs text-slate-500">{Math.round(zoom * 100)}%</span>
+          <button onClick={() => setZoom(z => Math.min(3, z + 0.1))} className="rounded-lg bg-white/5 p-1.5 sm:p-2 text-slate-400 hover:text-white border border-white/10 transition-all hover:scale-110" aria-label="Zoom in"><ZoomIn className="h-4 w-4" /></button>
+          <button onClick={() => { setZoom(0.7); setPan({ x: 50, y: 0 }); setSelectedStation(null) }} className="rounded-lg bg-white/5 p-1.5 sm:p-2 text-white border border-white/10 transition-all hover:scale-110" aria-label="Reset view"><Maximize2 className="h-4 w-4" /></button>
         </div>
       </PageHeader>
 
@@ -285,7 +285,7 @@ export default function SubwayPage() {
 
         {/* Selected station info */}
         {selectedStation && (
-          <div className="absolute top-4 right-4 rounded-lg border-2 border-white/15 bg-black/90 backdrop-blur-sm overflow-hidden" style={{ boxShadow: '0 0 20px rgba(255,255,255,0.1)' }}>
+          <div className="absolute top-2 right-2 sm:top-4 sm:right-4 max-w-[calc(100vw-1rem)] sm:max-w-xs rounded-lg border-2 border-white/15 bg-black/90 backdrop-blur-sm overflow-hidden" style={{ boxShadow: '0 0 20px rgba(255,255,255,0.1)' }}>
             <div className="px-4 py-2 border-b border-white/10 bg-white/5">
               <span className="text-sm font-semibold text-white" style={{ textShadow: '0 0 8px rgba(255,255,255,0.3)' }}>{selectedStation.name}</span>
             </div>
