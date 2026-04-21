@@ -337,7 +337,7 @@ function ArchitectureCanvas() {
         </div>
 
         {/* Legend as a node */}
-        <div className="absolute bottom-4 left-4 rounded-lg border-2 border-white/15 bg-black/80 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:scale-[1.08] hover:border-white/25" style={{ boxShadow: '0 0 15px rgba(255,255,255,0.05)' }}>
+        <div className="absolute bottom-2 left-2 sm:bottom-4 sm:left-4 max-w-[calc(100vw-1rem)] rounded-lg border-2 border-white/15 bg-black/80 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:scale-[1.08] hover:border-white/25" style={{ boxShadow: '0 0 15px rgba(255,255,255,0.05)' }}>
           <div className="px-3 py-1.5 border-b border-white/10 bg-white/5">
             <span className="text-[10px] font-semibold text-white" style={{ textShadow: '0 0 8px rgba(255,255,255,0.3)' }}>Legend</span>
           </div>
