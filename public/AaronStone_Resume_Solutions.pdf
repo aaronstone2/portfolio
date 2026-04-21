@@ -10,7 +10,7 @@
 endobj
 4 0 obj
 <<
-/Length 10307
+/Length 10141
 >>
 stream
 0.200025 w
@@ -19,8 +19,8 @@ BT
 /F2 18 Tf
 20.6999999999999993 TL
 0 g
-161.82000000000005 740. Td
-(Aaron Stone | Builder | TPM | SRE) Tj
+129.4200000000000443 740. Td
+(Aaron Stone | Builder | Solution Architect) Tj
 ET
 BT
 /F1 8.5 Tf
@@ -59,28 +59,28 @@ BT
 10.3499999999999996 TL
 0 g
 36. 672.5699999999999363 Td
-(TPM / SRE with a deep engineering + support background. Grew with Tulip from $20M – $75M ARR as support engineering scaled 3 –) Tj
+(Solution Architect with an engineering + frontline-support background. Grew with Tulip from $20M – $75M ARR as support engineering) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
 36. 662.3099999999999454 Td
-(13 \(US-only – global\). Led the company's most critical incidents — cluster outages, MongoDB bottlenecks, RCAs — with customer) Tj
+(scaled 3 – 13 \(US-only – global\). Led the company's most critical incidents — cluster outages, production-crippling MongoDB) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
 36. 652.0499999999999545 Td
-(comms under C-level directive. Builds visual debug tools, load-testing frameworks, and DX systems that simplify complex technical) Tj
+(bottlenecks — with customer comms under C-level directive. Live debugging, API integration, load-testing frameworks, and reproducible) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
 36. 641.7899999999999636 Td
-(workflows.) Tj
+(diagnostic tooling for customers and internal teams.) Tj
 ET
 BT
 /F2 11 Tf
@@ -98,305 +98,312 @@ BT
 10.3499999999999996 TL
 0 g
 36. 606.6900000000000546 Td
-(Technical: MongoDB, SQL, Mongosh, GraphQL, TypeScript, JavaScript, Python, Node.js, PostgreSQL, Docker, K6 Load Testing,) Tj
+(Skills: Customer Architecture Design, Demo Building, Live Debugging, POCs, Reproducible Demos, Integration Design, API) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
 36. 596.4300000000000637 Td
-(Performance Engineering, Grafana, Loki, Distributed Tracing, Data Structures & Algorithms, Developer Experience, Claude Code,) Tj
+(Integrations, Technical Workshops, Enterprise Account Support, Stakeholder Alignment, Executive Communication, Implementation) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
 36. 586.1700000000000728 Td
-(Anthropic SDK, Jira API, Slack API, Google Sheets API, GitHub Actions, Git, CI/CD, Vite, Vercel, TypeScript, React, MongoDB, Grafana) Tj
+(Partnership, Cross-functional Leadership, Incident Response, Root Cause Analysis, Escalation Management, Customer Onboarding,) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
 36. 575.9100000000000819 Td
-(Frontend & Product: React, Next.js, ReactFlow, D3.js, MUI, Tailwind CSS, UX/UI Design, Figma, Design Thinking, Product Design,) Tj
+(agile, TypeScript, React) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
 36. 565.6500000000000909 Td
-(Product Development) Tj
+(Technical: MongoDB, SQL, TypeScript, Python, Node.js, React, Docker, Grafana, Loki, Performance Engineering, Claude Code,) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
 36. 555.3900000000001 Td
-(Workflow & Leadership: Cross-functional Leadership, Incident Management, Root Cause Analysis, Team Leadership, Research, Tier-3) Tj
-ET
-BT
-/F1 9 Tf
-10.3499999999999996 TL
-0 g
-36. 545.1300000000001091 Td
-(Support, Internal Tools, System Debugging, agile) Tj
+(Anthropic SDK, Git, GitHub Actions, MongoDB) Tj
 ET
 BT
 /F2 11 Tf
 12.6499999999999986 TL
 0 g
-36. 525.7200000000000273 Td
+36. 535.9800000000000182 Td
 (EXPERIENCE) Tj
 ET
 0.75 w
-36. 522.7200000000000273 m
-576. 522.7200000000000273 l
+36. 532.9800000000000182 m
+576. 532.9800000000000182 l
 S
 BT
 /F2 13 Tf
 14.9499999999999993 TL
 0 g
-36. 503.0300000000000864 Td
+36. 513.2900000000000773 Td
 (Tulip Interfaces) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-496.9800000000000182 503.0300000000000864 Td
+496.9800000000000182 513.2900000000000773 Td
 (Nov 2021 – Present) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-36. 492.2100000000000932 Td
+36. 502.4700000000000841 Td
 (Joined as support engineer #3; grew with Tulip from $20M – $75M ARR as support engineering scaled 3 – 13 \(US-only – global\); led the) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-36. 481.9500000000001023 Td
+36. 492.2100000000000932 Td
 (company's most critical incidents across support and SRE.) Tj
 ET
 BT
 /F2 10 Tf
 11.5 TL
 0 g
-36. 467.5400000000001342 Td
+36. 477.8000000000001251 Td
 (TPM | SRE) Tj
 ET
 BT
 /F3 10 Tf
 11.5 TL
 0 g
-483.8999999999999773 467.5400000000001342 Td
+483.8999999999999773 477.8000000000001251 Td
 (Jun 2025 – Apr 2026) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-36. 457.1400000000001569 Td
+36. 467.4000000000001478 Td
 (•) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-50. 457.1400000000001569 Td
+50. 467.4000000000001478 Td
 (FY 2026 Tulip Grow Award — cited across CSMs, engineering, product, and leadership as the go-to for tough technical +) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-50. 446.880000000000166 Td
+50. 457.1400000000001569 Td
 (customer-facing problems and cross-functional leadership.) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-36. 436.6200000000001751 Td
+36. 446.880000000000166 Td
 (•) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-50. 436.6200000000001751 Td
+50. 446.880000000000166 Td
 (Led resolution of the most critical incidents in company history — multi-customer cluster outages, production-crippling MongoDB) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-50. 426.3600000000001842 Td
+50. 436.6200000000001751 Td
 (bottlenecks, and regressions on Tulip's largest enterprise accounts — as escalation point across SRE, engineering, and C-suite.) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-36. 416.1000000000001933 Td
+36. 426.3600000000001842 Td
 (•) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-50. 416.1000000000001933 Td
+50. 426.3600000000001842 Td
 (Architected a generalized load-testing framework for 100+ API endpoints across 5+ backend services, adopted by 5+ engineering) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-50. 405.8400000000002024 Td
+50. 416.1000000000001933 Td
 (teams with automated runs and live Grafana + Loki dashboards.) Tj
 ET
 BT
 /F2 10 Tf
 11.5 TL
 0 g
-36. 391.4300000000002342 Td
+36. 401.6900000000002251 Td
 (Technical Support Engineer) Tj
 ET
 BT
 /F3 10 Tf
 11.5 TL
 0 g
-481.0999999999999659 391.4300000000002342 Td
+481.0999999999999659 401.6900000000002251 Td
 (Apr 2023 – May 2025) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-36. 381.0300000000002569 Td
+36. 391.2900000000002478 Td
 (•) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-50. 381.0300000000002569 Td
+50. 391.2900000000002478 Td
 (Led resolution of multi-customer cluster outages and MongoDB performance bottlenecks under C-level directive — owning bug) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-50. 370.770000000000266 Td
+50. 381.0300000000002569 Td
 (reproduction, RCA, customer comms, and remediation with Engineering + Product.) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-36. 360.5100000000002751 Td
+36. 370.770000000000266 Td
 (•) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-50. 360.5100000000002751 Td
+50. 370.770000000000266 Td
 (Operated as combined SWE + Support on escalations \(custom MongoDB scripts, Loki queries\) while partnering closely with CSMs) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-50. 350.2500000000002842 Td
+50. 360.5100000000002751 Td
 (across Product, Engineering, and Support.) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-36. 339.9900000000002933 Td
+36. 350.2500000000002842 Td
 (•) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-50. 339.9900000000002933 Td
+50. 350.2500000000002842 Td
 (Designed and shipped a drag-and-drop visual MongoDB interface that replaced mongosh internally; led UX research for internal) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-50. 329.7300000000003024 Td
+50. 339.9900000000002933 Td
 (support-automation tooling including AI-assisted workflows.) Tj
 ET
 BT
 /F2 10 Tf
 11.5 TL
 0 g
-36. 315.3200000000003342 Td
+36. 325.5800000000003251 Td
 (Product Support Engineer) Tj
 ET
 BT
 /F3 10 Tf
 11.5 TL
 0 g
-482.1999999999999886 315.3200000000003342 Td
+482.1999999999999886 325.5800000000003251 Td
 (Nov 2021 – Apr 2023) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-36. 304.920000000000357 Td
+36. 315.1800000000003479 Td
 (•) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-50. 304.920000000000357 Td
+50. 315.1800000000003479 Td
 (Delivered Tier-2/3 support across a complex manufacturing + biotech SaaS platform, building trusted relationships with CSMs,) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-50. 294.6600000000003661 Td
+50. 304.920000000000357 Td
 (engineers, and customers that carried into every later role.) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-36. 284.4000000000003752 Td
+36. 294.6600000000003661 Td
 (•) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-50. 284.4000000000003752 Td
+50. 294.6600000000003661 Td
 (Built internal documentation and debugging tooling that shortened new-hire onboarding and bug-investigation time.) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-36. 270.9900000000003502 Td
+36. 281.2500000000003979 Td
 (Bubble Holographic Systems 2017 – Present) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-36. 260.7300000000003593 Td
+36. 270.9900000000003502 Td
 (Founder & Product Architect) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0 g
+36. 260.7300000000003593 Td
+(•) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0 g
+50. 260.7300000000003593 Td
+(Building a 3D graphics system and no-code spatial builder; originated as my Brandeis CS Honors Thesis.) Tj
 ET
 BT
 /F1 9 Tf
@@ -410,46 +417,46 @@ BT
 10.3499999999999996 TL
 0 g
 50. 250.4700000000003683 Td
-(Building a 3D graphics system and no-code spatial builder; originated as my Brandeis CS Honors Thesis.) Tj
-ET
-BT
-/F1 9 Tf
-10.3499999999999996 TL
-0 g
-36. 240.2100000000003774 Td
-(•) Tj
-ET
-BT
-/F1 9 Tf
-10.3499999999999996 TL
-0 g
-50. 240.2100000000003774 Td
 (Selected for SparkTank.) Tj
 ET
 BT
 /F2 11 Tf
 12.6499999999999986 TL
 0 g
-36. 220.8000000000004093 Td
+36. 231.0600000000004002 Td
 (EDUCATION) Tj
 ET
 0.75 w
-36. 217.8000000000004093 m
-576. 217.8000000000004093 l
+36. 228.0600000000004002 m
+576. 228.0600000000004002 l
 S
 BT
 /F2 10 Tf
 11.5 TL
 0 g
-36. 204.1100000000004684 Td
+36. 214.3700000000004593 Td
 (Brandeis University — BA, Computer Science) Tj
 ET
 BT
 /F3 10 Tf
 11.5 TL
 0 g
-520.8999999999999773 204.1100000000004684 Td
+520.8999999999999773 214.3700000000004593 Td
 (2017 – 2021) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0 g
+36. 203.970000000000482 Td
+(•) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0 g
+50. 203.970000000000482 Td
+(Computer Science Honors | Dean's List '20–'21) Tj
 ET
 BT
 /F1 9 Tf
@@ -463,94 +470,80 @@ BT
 10.3499999999999996 TL
 0 g
 50. 193.7100000000004911 Td
-(Computer Science Honors | Dean's List '20–'21) Tj
-ET
-BT
-/F1 9 Tf
-10.3499999999999996 TL
-0 g
-36. 183.4500000000005002 Td
-(•) Tj
-ET
-BT
-/F1 9 Tf
-10.3499999999999996 TL
-0 g
-50. 183.4500000000005002 Td
 (Thesis: "Bubble: An Interface for Programming in Three-Dimensional Virtual Reality Environments.") Tj
 ET
 BT
 /F2 11 Tf
 12.6499999999999986 TL
 0 g
-36. 164.0400000000005321 Td
+36. 174.300000000000523 Td
 (PROJECTS) Tj
 ET
 0.75 w
-36. 161.0400000000005321 m
-576. 161.0400000000005321 l
+36. 171.300000000000523 m
+576. 171.300000000000523 l
 S
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-36. 148.3500000000005912 Td
+36. 158.6100000000005821 Td
 (Job Graph — semantic knowledge graph over 21,000+ job postings from 79 companies; scrapers across five ATSes, AI-reviewed) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-36. 138.0900000000006003 Td
+36. 148.3500000000005912 Td
 (resume-tailoring editor, built on my own visual MongoDB explorer \(MiniMongo\). TypeScript, React Flow, MongoDB.) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-36. 124.6800000000006321 Td
+36. 134.940000000000623 Td
 (Stock Tool — automated trading platform \(40-package TypeScript monorepo, hexagonal architecture\); backtest-gated release pipeline) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-36. 114.4200000000006412 Td
+36. 124.6800000000006321 Td
 (lifted Sharpe 1.46 – 2.42 and cut max drawdown 6x, with sub-minute signal-to-trade alerting. TypeScript, Node.js, React, PostgreSQL,) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-36. 104.1600000000006503 Td
+36. 114.4200000000006412 Td
 (Redis.) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-36. 90.7500000000006821 Td
+36. 101.010000000000673 Td
 (Kraken Unchained — microservice dependency-analysis tool injecting faults and simulated load against a service graph to surface) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-36. 80.4900000000006912 Td
+36. 90.7500000000006821 Td
 (resilience issues before production. Python, D3.js, Docker.) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-36. 67.080000000000723 Td
+36. 77.340000000000714 Td
 (FlowNode — open-source visual DAG workflow builder with an extensible node architecture powering drag-and-drop automation.) Tj
 ET
 BT
 /F1 9 Tf
 10.3499999999999996 TL
 0 g
-36. 56.8200000000007321 Td
+36. 67.080000000000723 Td
 (TypeScript, React Flow.) Tj
 ET
 endstream
@@ -739,33 +732,33 @@ endobj
 xref
 0 21
 0000000000 65535 f 
-0000010480 00000 n 
-0000012297 00000 n 
+0000010314 00000 n 
+0000012131 00000 n 
 0000000015 00000 n 
 0000000120 00000 n 
-0000010537 00000 n 
-0000010662 00000 n 
-0000010792 00000 n 
-0000010925 00000 n 
-0000011062 00000 n 
-0000011185 00000 n 
-0000011314 00000 n 
-0000011446 00000 n 
-0000011582 00000 n 
-0000011710 00000 n 
-0000011837 00000 n 
-0000011966 00000 n 
-0000012099 00000 n 
-0000012201 00000 n 
-0000012545 00000 n 
-0000012631 00000 n 
+0000010371 00000 n 
+0000010496 00000 n 
+0000010626 00000 n 
+0000010759 00000 n 
+0000010896 00000 n 
+0000011019 00000 n 
+0000011148 00000 n 
+0000011280 00000 n 
+0000011416 00000 n 
+0000011544 00000 n 
+0000011671 00000 n 
+0000011800 00000 n 
+0000011933 00000 n 
+0000012035 00000 n 
+0000012379 00000 n 
+0000012465 00000 n 
 trailer
 <<
 /Size 21
 /Root 20 0 R
 /Info 19 0 R
-/ID [ <5E565C0A1EF2D8DD42D7ADF9C29B7690> <5E565C0A1EF2D8DD42D7ADF9C29B7690> ]
+/ID [ <E026984FFDE8D12FC447A8B50A7BAD84> <E026984FFDE8D12FC447A8B50A7BAD84> ]
 >>
 startxref
-12735
+12569
 %%EOF
