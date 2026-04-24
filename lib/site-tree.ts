@@ -69,15 +69,6 @@ export const SITE_TREE: SiteNode[] = [
         featured: true,
       },
       {
-        href: "/thesis",
-        title: "Bubble / Thesis",
-        subtitle: "3D VR Programming Language",
-        graphic: "thesis",
-        techStack: ["3D Graphics", "VR", "Visual Programming", "Language Design", "Scene Graphs"],
-        description: "3D visual programming language where code structures are navigable spheres in virtual reality. 78-page Honors Thesis from Brandeis University.",
-        featured: true,
-      },
-      {
         href: "/job-graph",
         title: "Job Graph",
         subtitle: "Semantic Knowledge Graph over 21k+ Job Postings",
@@ -113,7 +104,7 @@ export const SITE_TREE: SiteNode[] = [
           "Vite",
         ],
         description:
-          "Portfolio intelligence SaaS for skilled retail traders. Detects rolling-over positions (the SMCI-Oct-2024 class of signal), maps supply-chain + TNIC peer networks as a directed graph, and surfaces Congressional + opportunistic-insider signals. Built on Cohen-Frazzini lead-lag, Cohen-Malloy-Pomorski routine/opportunistic filter, and Hoberg-Phillips 10-K cosine-similarity.",
+          "Quantitative finance platform combining hexagonal-architecture TypeScript, multi-signal alpha discovery, and walk-forward validation across market regimes. Detects pattern-trading opportunities, maps corporate supply-chain networks as a directed graph, and surfaces insider + Congressional-trading signals. Strict-mode type system, property-based tests, and a Deflated Sharpe Ratio gate on every scorer.",
         featured: true,
       },
       {

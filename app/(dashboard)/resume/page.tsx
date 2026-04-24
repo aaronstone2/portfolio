@@ -16,10 +16,12 @@ const experience = [
     period: "Jun 2025 – Apr 2026",
     bullets: [
       "FY 2026 Tulip Grow Award — cited across CSMs, engineering, product, and leadership as the go-to for tough technical + customer-facing problems and cross-functional leadership.",
-      "Led resolution of the most critical incidents in company history — multi-customer cluster outages, production-crippling MongoDB bottlenecks, and regressions on Tulip's largest enterprise accounts — as escalation point across SRE, engineering, and C-suite.",
+      "Highest level of technical + customer escalation for a 10-person team — drove RCA deep-dives, ran incident-management Slack channels, and presented cross-customer findings company-wide (CSMs, Support, SWE, Sales) during existential downtime crises for Fortune 500 accounts: AstraZeneca, Eli Lilly, Mitsubishi, Tiffany, Cartier, Milwaukee Tool, DMG Mori, VEKA, Laerdal, Formlabs, Bloom Energy, Plug Power, Generac, Pratt Miller.",
+      "Led resolution of the most critical incidents in company history — multi-customer cluster outages and production-crippling MongoDB bottlenecks — running live RCAs from C-level customer to C-suite Tulip.",
       "Architected a generalized load-testing framework for 100+ API endpoints across 5+ backend services, adopted by 5+ engineering teams with automated runs and live Grafana + Loki dashboards.",
+      "Built a Release Management validation tool (FlowNode) that parses Jira + Slack APIs with automation tooling and runs on scheduled GitHub Actions to validate the contents of each new release.",
     ],
-    skills: ["K6", "Grafana", "Loki", "MongoDB", "Performance Engineering"],
+    skills: ["K6", "Grafana", "Loki", "MongoDB", "Performance Engineering", "Release Management"],
     type: "work",
   },
   {
@@ -29,7 +31,8 @@ const experience = [
     location: "Boston, MA",
     period: "Apr 2023 – May 2025",
     bullets: [
-      "Led resolution of multi-customer cluster outages and MongoDB performance bottlenecks under C-level directive — owning bug reproduction, RCA, customer comms, and remediation with Engineering + Product.",
+      "Led resolution of multi-customer cluster outages and MongoDB performance bottlenecks — owning bug reproduction, RCA, customer comms, and remediation with Engineering + Product.",
+      "Executed live bug fixes on customer calls — dictating exact commands and code to on-site Process + Controls Engineers to restore production at enterprise accounts.",
       "Operated as combined SWE + Support on escalations (custom MongoDB scripts, Loki queries) while partnering closely with CSMs across Product, Engineering, and Support.",
       "Designed and shipped a drag-and-drop visual MongoDB interface that replaced mongosh internally; led UX research for internal support-automation tooling including AI-assisted workflows.",
     ],
@@ -395,9 +398,9 @@ function WebsiteView() {
               ))}
               <div className="mt-4 pt-3 border-t border-border grid grid-cols-3 gap-2">
                 {[
-                  { value: "aaron@bubble.graphics", label: "Email" },
+                  { value: "aaron.stone.ai@gmail.com", label: "Email" },
                   { value: "857-231-1060", label: "Phone" },
-                  { value: "NYC Metro", label: "Location" },
+                  { value: "NYC Metro Area", label: "Location" },
                 ].map((c) => (
                   <div key={c.label} className="text-center">
                     <p className="text-[10px] font-medium text-foreground">{c.value}</p>

@@ -16,8 +16,8 @@ const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "aaron@bubble.graphics",
-    href: "mailto:aaron@bubble.graphics",
+    value: "aaron.stone.ai@gmail.com",
+    href: "mailto:aaron.stone.ai@gmail.com",
   },
   {
     icon: Phone,
@@ -34,7 +34,7 @@ const contactInfo = [
   {
     icon: MapPin,
     label: "Location",
-    value: "NYC Metro",
+    value: "New York City Metro Area",
     href: null,
   },
 ]
@@ -102,7 +102,7 @@ export default function ContactPage() {
           </p>
 
           <a
-            href="mailto:aaron@bubble.graphics"
+            href="mailto:aaron.stone.ai@gmail.com"
             className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-medium text-black bg-white transition-all duration-300 hover:scale-110 active:scale-[1.2]"
             style={{ boxShadow: '0 0 20px rgba(255,255,255,0.2)' }}
           >
