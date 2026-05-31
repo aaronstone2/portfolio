@@ -139,32 +139,6 @@ export const SITE_TREE: SiteNode[] = [
     ],
   },
   {
-    href: "/resume",
-    title: "Resume",
-    subtitle: "Interactive Career Flow",
-    graphic: "resume",
-    children: [
-      {
-        href: "/resume?view=website",
-        title: "Timeline",
-        subtitle: "Career Timeline View",
-        graphic: "timeline",
-      },
-      {
-        href: "/resume?view=document",
-        title: "Document",
-        subtitle: "Traditional Resume Format",
-        graphic: "document",
-      },
-      {
-        href: "/resume?view=graph",
-        title: "Node Graph",
-        subtitle: "Interactive Career Graph",
-        graphic: "node-graph",
-      },
-    ],
-  },
-  {
     href: "/contact",
     title: "Contact",
     subtitle: "Get in Touch",

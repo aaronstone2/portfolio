@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
 }
 
-const exploreLinks = ["/projects", "/resume", "/contact"]
+const exploreLinks = ["/projects", "/contact"]
 
 export default function HomePage() {
   return (
@@ -29,11 +29,6 @@ export default function HomePage() {
           </div>
 
           <div className="relative">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5">
-              <span className="h-2 w-2 rounded-full bg-white animate-pulse" style={{ boxShadow: '0 0 8px rgba(255,255,255,0.6)' }} />
-              <span className="text-sm font-mono text-slate-400">Available for opportunities</span>
-            </div>
-
             <div className="mt-6 sm:mt-8 mb-8 sm:mb-10 flex justify-center p-4 sm:p-10">
               <div className="h-40 w-40 sm:h-56 sm:w-56 md:h-64 md:w-64 rounded-full p-[3px] transition-all duration-300 hover:scale-[1.35] cursor-pointer" style={{ background: 'rgba(255,255,255,0.25)', boxShadow: '0 0 35px rgba(255,255,255,0.25), 0 0 70px rgba(255,255,255,0.08)', animation: 'pulseGlow 2s ease-in-out infinite' }}>
                 <div className="h-full w-full rounded-full overflow-hidden border-[3px] border-black">
@@ -48,7 +43,7 @@ export default function HomePage() {
             </h1>
 
             <p className="text-lg sm:text-xl md:text-2xl text-slate-400 mb-4 sm:mb-6 max-w-2xl">
-              Software Engineer <span className="text-slate-300">&amp;</span> Product Builder
+              Forward Deployed Engineer
             </p>
 
             <p className="text-muted-foreground max-w-xl leading-relaxed">
